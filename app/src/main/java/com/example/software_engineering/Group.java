@@ -1,4 +1,6 @@
 package com.example.software_engineering;
 
-public class Group {
+import java.io.Serializable;
+
+public class Group implements Serializable {
 }

@@ -11,11 +11,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Network extends AsyncTask<String, Void, String> {
+public class Network extends AsyncTask<String, Void, String> implements Serializable {
     protected boolean finish;
     protected String User_name;
     protected String data;

@@ -1,6 +1,8 @@
 package com.example.software_engineering;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.solver.GoalRow;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -17,14 +19,17 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private User U;
+    private Schedule S;
+    private Group G;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        U = new User();
-
+       // U = new User();
+        U = (User) getIntent().getSerializableExtra("User");
+        System.out.println("User Name in MainActivity : " + U.UserName_Output());
         //U.execute();
-        U.Network_DataArrangement("Login","ID","PW");
-        System.out.println("User Execute");
+        //U.Network_DataArrangement("Login","ID","PW");
+        //System.out.println("User Execute");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,10 +91,14 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
+        if (id == R.id.nav_Schedule) {
+            Intent intentToSchedule = new Intent(MainActivity.this, Schedule.class);
+            intentToSchedule.putExtra("Schedule",S);
+            startActivity(intentToSchedule);
+        } else if (id == R.id.nav_Group) {
+            Intent intentToGroup = new Intent(MainActivity.this, Group.class);
+            intentToGroup.putExtra("Group",G);
+            startActivity(intentToGroup);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

@@ -1,4 +1,6 @@
 package com.example.software_engineering;
 
-public class Schedule {
+import java.io.Serializable;
+
+public class Schedule implements Serializable {
 }
