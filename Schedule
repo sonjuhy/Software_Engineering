@@ -1,0 +1,51 @@
+public class Schedule {
+
+    private String Name;
+    private String Group_name;
+    private  int Time;
+    private  int Sound;
+    private  int Vibration;
+    private  double Place_x;
+    private  double Place_y;
+
+    public Schedule(){
+
+    }
+
+    void Schedule_input(String Name_input , int Sound_input, int Vibration_input, int Time_input , double x_input , double y_input){
+        this.Name = Name_input;
+        this.Sound = Sound_input;
+        this.Vibration = Vibration_input;
+        this.Time = Time_input;
+        this.Place_x = x_input;
+        this.Place_y = y_input;
+    }
+    void Place_input(double x_input , double y_input){
+        this.Place_x = x_input;
+        this.Place_y = y_input;
+    }
+    void Time_input(int Time_input){
+        this.Time = Time_input;
+    }
+    void Group_input(String Group_input) {
+        this.Group_name = Group_input;
+    }
+    String ScheduleName_output(){
+        return this.Name;
+    }
+    String GroupName_output(){
+        return this.Group_name;
+    }
+    int ScheduleTIme_output(){
+        return this.Time;
+    }
+    int ScheduleSound_output(){
+        return this.Sound;
+    }
+    double PlaceX_output(){
+        return this.Place_x;
+    }
+    double PlaceY_output(){
+        return this.Place_y;
+    }
+}
