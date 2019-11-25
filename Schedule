@@ -5,6 +5,7 @@ public class Schedule {
     private  int Time;
     private  int Sound;
     private  int Vibration;
+    private  int AlarmRepeatCount;
     private  double Place_x;
     private  double Place_y;
 
@@ -12,11 +13,12 @@ public class Schedule {
 
     }
 
-    void Schedule_input(String Name_input , int Sound_input, int Vibration_input, int Time_input , double x_input , double y_input){
+    void Schedule_input(String Name_input , int Sound_input, int Vibration_input, int Time_input ,int AlarmRepeatCount_input, double x_input , double y_input){
         this.Name = Name_input;
         this.Sound = Sound_input;
         this.Vibration = Vibration_input;
         this.Time = Time_input;
+        this.AlarmRepeatCount = AlarmRepeatCount_input;
         this.Place_x = x_input;
         this.Place_y = y_input;
     }
@@ -36,11 +38,17 @@ public class Schedule {
     String GroupName_output(){
         return this.Group_name;
     }
-    int ScheduleTIme_output(){
+    int ScheduleTime_output(){
         return this.Time;
     }
     int ScheduleSound_output(){
         return this.Sound;
+    }
+    int ScheduleVivration_output(){
+        return this.Vibration;
+    }
+    int AlarmRepeatCount_output(){
+        return this.AlarmRepeatCount;
     }
     double PlaceX_output(){
         return this.Place_x;
