@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <Button
-        android:id="@+id/SignIn_button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="SignIn_button"
-        app:layout_constraintBaseline_toBaselineOf="@+id/SignUp_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/SignUp_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="204dp"
-        android:text="SignUp_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SignIn_button" />
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="#000000"
+        android:textSize="36sp" />
 
     <EditText
         android:id="@+id/ID_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="87dp"
-        android:layout_marginTop="179dp"
         android:ems="10"
         android:inputType="text"
-        android:text="ID"
+        android:singleLine="true"
+        android:text="@string/prompt_id"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,21 +32,38 @@
         android:id="@+id/PW_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="PW"
+        android:singleLine="true"
+        android:text="@string/prompt_password"
         app:layout_constraintStart_toStartOf="@+id/ID_editText"
         app:layout_constraintTop_toBottomOf="@+id/ID_editText" />
 
     <CheckBox
         android:id="@+id/AutoLogin_checkBox"
-        android:layout_width="197dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="87dp"
-        android:layout_marginBottom="68dp"
-        android:text="AutoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/autologin"
         app:layout_constraintBottom_toTopOf="@+id/SignIn_button"
         app:layout_constraintStart_toStartOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/SignIn_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/action_sign_in"
+        app:layout_constraintBaseline_toBaselineOf="@+id/SignUp_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/SignUp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/action_sign_up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/SignIn_button" />
+
+</LinearLayout>
