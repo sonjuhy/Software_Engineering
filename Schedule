@@ -44,7 +44,7 @@ public class Schedule {
     int ScheduleSound_output(){
         return this.Sound;
     }
-    int ScheduleVivration_output(){
+    int ScheduleVibration_output(){
         return this.Vibration;
     }
     int AlarmRepeatCount_output(){
@@ -57,3 +57,4 @@ public class Schedule {
         return this.Place_y;
     }
 }
+
