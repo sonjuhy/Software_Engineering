@@ -21,4 +21,7 @@
         completions."
     </string>
     <string name="autologin">AutoLogin</string>
+    <string name="group_layout_title">그룹</string>
+    <string name="group_pNum">명</string>
+    <string name="group_name">Group Name</string>
 </resources>
