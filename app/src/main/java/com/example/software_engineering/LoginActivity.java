@@ -84,10 +84,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
         SignUp.setOnClickListener(new OnClickListener() {//Make new Account
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(LoginActivity.this, SignUp.class);
+                startActivity(intent);
             }
         });
     }
