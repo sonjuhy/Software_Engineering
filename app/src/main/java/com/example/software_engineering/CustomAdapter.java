@@ -23,11 +23,35 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             super(itemView);
             this.name = itemView.findViewById(R.id.group_name);
             this.num = itemView.findViewById(R.id.group_pNum);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        // 리스너 객체의 메서드 호출.
+                        if(listener!=null){
+                            listener.onItemClick(view,pos);
+                        }
+                    }
+                }
+            });
         }
     }
 
     public CustomAdapter(ArrayList<Group> list) {
         this.list = list;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View v,int pos);
+    }
+
+    //리스너 객체 참조를 저장하는 변수
+    private OnItemClickListener listener = null;
+
+    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 
     @NonNull
