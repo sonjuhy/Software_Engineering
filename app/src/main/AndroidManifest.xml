@@ -16,10 +16,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
         <activity android:name=".GroupSubActivity"></activity>
-        <activity android:name=".ScheduleSubActivity" />
         <activity android:name=".GroupMainActivity" />
         <activity android:name=".ScheduleMainActivity" />
-        <activity android:name=".SignUp"/>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">

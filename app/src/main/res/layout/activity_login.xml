@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context=".LoginActivity">
 
     <TextView
@@ -43,7 +44,7 @@
         android:id="@+id/AutoLogin_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/autologin"
+        android:text="자동 로그인"
         app:layout_constraintBottom_toTopOf="@+id/SignIn_button"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -52,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/action_sign_in"
+        android:text="로그인"
         app:layout_constraintBaseline_toBaselineOf="@+id/SignUp_button"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -61,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/action_sign_up"
+        android:text="회원가입"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/SignIn_button" />
