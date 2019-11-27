@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity
        // U = new User();
         U = (User) getIntent().getSerializableExtra("User");
         System.out.println("User Name in MainActivity : " + U.UserName_Output());
-        U.Network_DataArrangement("Login","ID","1234");
-
         //U.execute();
         //U.Network_DataArrangement("Login","ID","PW");
         //System.out.println("User Execute");
@@ -91,15 +89,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
+    @Override //메인화면 오른쪽위 점3개 버튼
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             case R.id.action_settings:
                 return true;
-            case R.id.add_schedule:
-                Intent intent_add = new Intent(MainActivity.this, ScheduleMainActivity.class);
-                startActivity(intent_add);
+
             default:
                 return super.onOptionsItemSelected(item);
         }
