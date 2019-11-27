@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
             intentToSchedule.putExtra("Schedule",S);
             startActivity(intentToSchedule);
         } else if (id == R.id.nav_Group) {
-            Intent intentToGroup = new Intent(MainActivity.this, Group.class);
+            Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
             startActivity(intentToGroup);
         } else if (id == R.id.nav_slideshow) {
