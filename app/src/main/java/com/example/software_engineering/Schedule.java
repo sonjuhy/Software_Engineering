@@ -122,5 +122,8 @@ public class Schedule implements Serializable {
     double PlaceX_output(){
         return this.Place_x;
     }
+    double PlaceY_output(){
+        return this.Place_y;
+    }
 
 }

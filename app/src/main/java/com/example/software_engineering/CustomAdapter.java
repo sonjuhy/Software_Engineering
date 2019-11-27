@@ -46,8 +46,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         customViewHolder.name.setGravity(Gravity.CENTER_VERTICAL);
         customViewHolder.num.setGravity(Gravity.CENTER_VERTICAL|Gravity.RIGHT);
 
-        customViewHolder.name.setText(list.get(i).getGroup_name());
-        customViewHolder.num.setText(Integer.toString(list.get(i).getPeople_number()));
+        customViewHolder.name.setText(list.get(i).GroupName_output());
+        customViewHolder.num.setText(Integer.toString(list.get(i).PeopleNumber_output()));
     }
 
     @Override
