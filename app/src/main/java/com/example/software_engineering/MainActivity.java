@@ -89,15 +89,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
+    @Override //메인화면 오른쪽위 점3개 버튼
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             case R.id.action_settings:
                 return true;
-            case R.id.add_schedule:
-                Intent intent_add = new Intent(MainActivity.this, ScheduleMainActivity.class);
-                startActivity(intent_add);
+
             default:
                 return super.onOptionsItemSelected(item);
         }

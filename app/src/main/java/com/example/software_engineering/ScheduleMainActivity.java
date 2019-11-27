@@ -13,6 +13,8 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+
+
 import java.util.*;
 
 public class ScheduleMainActivity extends AppCompatActivity {
@@ -53,9 +55,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-
-
-
         Button date_button = findViewById(R.id.date_button); //스케쥴 날짜창 추가
         date_button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -69,6 +68,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showTime();
+            }
+        });
+
+        Button exit_schedule = findViewById(R.id.exit_button);
+        exit_schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+             finish();
             }
         });
     }
