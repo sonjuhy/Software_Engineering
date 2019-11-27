@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 return true;
 
+            case R.id.add_schedule:
+                Intent intent_add = new Intent(MainActivity.this, ScheduleMainActivity.class);
+                startActivity(intent_add);
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -118,11 +122,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
