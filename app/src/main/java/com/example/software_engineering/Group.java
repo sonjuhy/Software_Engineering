@@ -11,16 +11,16 @@ public class Group implements Serializable {
     //private ArrayList<User> U;  //User List
     //private ArrayList<Schedule> S;  //Schedule List
 
-    public Group(String Group_name, int People_number) {
-        this.GroupName = Group_name;
-        this.PeopleNumber = People_number;
+    public Group(String GroupName, int PeopleNumber) {
+        this.GroupName = GroupName;
+        this.PeopleNumber = PeopleNumber;
     }
 
-    public void GroupName_input(String group_name) {
-        this.GroupName = group_name;
+    public void GroupName_input(String GroupName) {
+        this.GroupName = GroupName;
     }
-    public void PeopleNumber_input(int people_number) {
-        this.PeopleNumber = people_number;
+    public void PeopleNumber_input(int PeopleNumber) {
+        this.PeopleNumber = PeopleNumber;
     }
     public void GroupColor_input(int GroupColor){
         this.GroupColor = GroupColor;
