@@ -7,10 +7,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -25,6 +28,9 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     private String[] arr_String;//0 = php, 1 = data
     private ArrayList<String> tmp_String;
 
+    private HttpURLConnection httpURLConnection;
+    private OutputStream wr;
+    private InputStream inputStream;
     Network(){
         finish = false;
         User_name = null;
@@ -37,7 +43,7 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     public void Input_data(String... _param){
         arr_String = new String[_param.length];
         arr_String = _param;
-        if(arr_String.length > 2){
+        if(arr_String.length > 1){
             data = arr_String[1];
         }
         for(int i=0;i<_param.length;i++){
@@ -47,30 +53,29 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        this.url = "http://sonjuhy.iptime.org/test.php";
+        this.url = "http://sonjuhy.iptime.org/SE/Login_Check.php";
         //this.url = "http://sonjuhy.iptime.org/"+arr_String[0]+".php";
         System.out.println("onPre Success");
-        for(int i=0;i<5;i++){
-            System.out.println("Network Class : "+i);
-        }
     }
 
     @Override
     protected String doInBackground(String... strings) {
-        HttpURLConnection httpURLConnection = null;
-
         try {
             URL url = new URL(this.url);
             httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setReadTimeout(5000);
             httpURLConnection.setConnectTimeout(5000);
             httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDefaultUseCaches(false);
             httpURLConnection.setDoInput(true);
             httpURLConnection.setDoOutput(true);
             httpURLConnection.connect();
 
+            System.out.println("Network class data : "+data);
+
             if(data != null) {
-                OutputStream wr = httpURLConnection.getOutputStream();
+                System.out.println("Working here");
+                wr = httpURLConnection.getOutputStream();
                 wr.write(data.getBytes("UTF-8"));
                 wr.flush();
                 wr.close();
@@ -78,7 +83,6 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
 
             int responseStatusCode = httpURLConnection.getResponseCode();
 
-            InputStream inputStream;
             if(responseStatusCode == HttpURLConnection.HTTP_OK){
                 inputStream = httpURLConnection.getInputStream();
                 System.out.println("Response OK");
@@ -112,16 +116,5 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         System.out.println("onPost : " + s);
-
-        /*if(s != null && arr_String != null){
-            System.out.println("arr_String[0] : " + arr_String[0]);
-            if(arr_String[0].equals("Login_Check")){
-                User_name = s;
-            }
-            else{
-                data = s;
-            }
-        }
-        finish = true;*/
     }
 }

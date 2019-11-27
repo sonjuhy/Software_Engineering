@@ -71,13 +71,21 @@ public class ScheduleMainActivity extends AppCompatActivity {
             }
         });
 
-        Button exit_schedule = findViewById(R.id.exit_button);
+        Button mapbutton = findViewById(R.id.Map_button);
+        mapbutton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(ScheduleMainActivity.this, MapsActivity.class);
+                startActivity(map);
+            }
+        });
+        /*Button exit_schedule = findViewById(R.id.exit_button);
         exit_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
              finish();
             }
-        });
+        });*/
     }
 
 

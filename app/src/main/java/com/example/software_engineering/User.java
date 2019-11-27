@@ -30,8 +30,9 @@ public class User implements Serializable {//implements Serializable for using i
     User(){
         n = new Network();
     }
-    private void Network_Access() {
+    private void Network_Access(String Action) {
         n = new Network();//for Using Network without AsyncTask error
+        n.Input_data(Action, Network_data);//Sending Data & kind of command to Network Class
         try {
             Network_data = n.execute().get(); //execute Network and take return value to Network_data
         } catch (ExecutionException e) {
@@ -53,25 +54,25 @@ public class User implements Serializable {//implements Serializable for using i
                 case "Login"://Login part
                     try {//Make and Fit a style data to send Network Class & Server
                         Network_data = URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(_param[1],"UTF-8");
-                        Network_data += URLEncoder.encode("PW","UTF-8") + "=" + URLEncoder.encode(_param[2],"UTF-8");
+                        Network_data += "&" + URLEncoder.encode("PW","UTF-8") + "=" + URLEncoder.encode(_param[2],"UTF-8");
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    n.Input_data("Login_Check",Network_data);//Sending Data & kind of command to Network Class
-                    Network_Access();//Running Network
+                    Network_Access("Login");//Running Network
                     if(Network_data.equals(false)){ //Login Failed
                         System.out.println("Login Failed");
                         return false;
                     }
-                    else {//Login Success
-                        n.Input_data("Login_DownLoad");//request communicating for Download User data from Server
-                        Network_Access();//Running Network
-                        Get_UserData(Network_data, n.User_name);//translate JSonData from Server to Java and Save Data
+                    else { //Login Success
+                        //n.Input_data("Login_DownLoad");//request communicating for Download User data from Server
+                        //Network_Access();//Running Network
+                        //Get_UserData(Network_data, n.User_name);//translate JSonData from Server to Java and Save Data
+                        System.out.println("Load Name : " + this.Name);
                     }
                     break;
                 case "Get_Data"://Download User data part
-                    n.Input_data("Get_UserData");//Sending command to Network Class
-                    Network_Access();//Running Network
+                    //n.Input_data("Get_UserData");//Sending command to Network Class
+                    Network_Access("Get_UserData");//Running Network
                     Get_UserData(Network_data, this.Name);//translate JSonData from Server to Java and Save Data
                     break;
                 case "Upload_Data"://Upload User data to Server
@@ -84,8 +85,8 @@ public class User implements Serializable {//implements Serializable for using i
                     catch(UnsupportedEncodingException e){
                         e.printStackTrace();
                     }
-                    n.Input_data("UpLoad_UserData",Network_data);//Sending Data & kind of command to Network Class
-                    Network_Access();
+                   // n.Input_data("UpLoad_UserData",Network_data);//Sending Data & kind of command to Network Class
+                    Network_Access("UpLoad_UserData");
                     break;
             }
         }

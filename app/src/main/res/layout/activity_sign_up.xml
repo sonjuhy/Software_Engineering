@@ -41,7 +41,7 @@
                 android:id="@+id/id_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/check" />
+                />
 
         </TableRow>
 
@@ -138,7 +138,7 @@
                 android:id="@+id/phone_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/check" />
+                />
         </TableRow>
 
     </TableLayout>

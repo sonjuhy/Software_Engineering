@@ -25,4 +25,5 @@
     <string name="group_pNum">명</string>
     <string name="group_name">Group Name</string>
     <string name="check">중복 체크</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
