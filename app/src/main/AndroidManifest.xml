@@ -23,6 +23,7 @@
         <activity android:name=".GroupSubActivity"></activity>
         <activity android:name=".GroupMainActivity" />
         <activity android:name=".ScheduleMainActivity" />
+        <activity android:name=".SignUp" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
