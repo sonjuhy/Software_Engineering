@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#ffffff"
-                android:text="$시 $분"/>
+                android:text="$월 $일"/>
 
 
         </TableRow>
@@ -81,7 +81,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:backgroundTint="#ffffff"
-             android:text="$시 $분"/>
+             android:text="*시 *분"/>
 
         </TableRow>
 
@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#ffffff"
-                android:text="$시 $분"/>
+                android:text="창원대학교"/>
 
 
         </TableRow>

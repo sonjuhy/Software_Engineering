@@ -120,10 +120,10 @@ public class User implements Serializable {//implements Serializable for using i
     public void Group_Input(Group G_input){
         this.G.add(G_input);
     }
-    public void Place_Input(double x, double y){
+ /*   public void Place_Input(double x, double y){
         this.Place_x = x;
         this.Place_y = y;
-    }
+    }*/
     public String UserName_Output(){
         return this.Name;
     }

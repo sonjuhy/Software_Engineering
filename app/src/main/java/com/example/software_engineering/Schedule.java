@@ -13,16 +13,46 @@ public class Schedule implements Serializable {
     private  int Time;
     private  int Sound;
     private  int Vibration;
+
     private  int AlarmRepeatCount;
     private  double Place_x;
     private  double Place_y;
+    private  int alarmType;
+    private  String content;
     private String Network_data;
     private String Name;//UserName
     private Network n;
 
+
+    public Schedule(String name, String content, double place_x,double place_y, int alarmRepeatCount, int alarmType)
+    {
+        this.Name =name;
+        this.content =content;
+        this.Place_x = place_x;
+        this.Place_y = place_y;
+        this.AlarmRepeatCount = alarmRepeatCount;
+        this.alarmType = alarmType;
+    }
+    public Schedule(String name, String content, String place,int time, int alarmRepeatCount, int alarmType)
+    {
+        this.Name =name;
+        this.content =content;
+        this.Time = time;
+        this.AlarmRepeatCount = alarmRepeatCount;
+        this.alarmType = alarmType;
+    }
+
     Schedule(){
         Network n = new Network();
     }
+
+
+
+
+
+
+
+
     private void Network_Access() {
         n = new Network();//for Using Network without AsyncTask error
         try {
@@ -125,5 +155,4 @@ public class Schedule implements Serializable {
     double PlaceY_output(){
         return this.Place_y;
     }
-
 }
