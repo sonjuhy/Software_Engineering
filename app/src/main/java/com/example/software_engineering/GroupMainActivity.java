@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,12 @@ public class GroupMainActivity extends AppCompatActivity {
         G.add(new Group("D",4));
 
         adapter = new CustomAdapter(G);
+        adapter.setOnItemClickListener(new CustomAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                //내용 추가 바람
+            }
+        });
         recyclerView.setAdapter(adapter);
 
 
