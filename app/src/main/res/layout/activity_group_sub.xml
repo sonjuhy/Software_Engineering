@@ -82,12 +82,16 @@
                 android:text="그룹색"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editText5"
+            <TextView
+                android:id="@+id/color"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/color_pick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="9"
-                android:inputType="textPassword" />
+                android:text="색 선택" />
 
         </TableRow>
 
