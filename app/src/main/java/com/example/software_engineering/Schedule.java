@@ -7,10 +7,11 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 public class Schedule implements Serializable {
-    private  int Time;
+    private  Calendar calendar;
     private  int Sound;
     private  int Vibration;
 
@@ -35,32 +36,25 @@ public class Schedule implements Serializable {
         this.alarmType = alarmType;
         this.group =group;
     }
-    public Schedule(String name, String content,int time, int alarmRepeatCount, int alarmType, Group group)
+    public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int alarmType, Group group)
     {
         this.Name =name;
         this.content =content;
-        this.Time = time;
+        this.calendar = calendar;
         this.AlarmRepeatCount = alarmRepeatCount;
         this.alarmType = alarmType;
         this.group =group;
     }
 
 
-    public int  getTime()
+    public Calendar getCalendar()
     {
-        return Time;
+        return calendar;
     }
 
     Schedule(){
         Network n = new Network();
     }
-
-
-
-
-
-
-
 
     private void Network_Access() {
         n = new Network();//for Using Network without AsyncTask error
@@ -134,7 +128,7 @@ public class Schedule implements Serializable {
         }
     }
 
-    void Schedule_input(String Name_input , int Sound_input, int Vibration_input, int Time_input ,int AlarmRepeatCount_input, double x_input , double y_input){
+    /*void Schedule_input(String Name_input , int Sound_input, int Vibration_input, int Time_input ,int AlarmRepeatCount_input, double x_input , double y_input){
         this.Name = Name_input;
         this.Sound = Sound_input;
         this.Vibration = Vibration_input;
@@ -142,13 +136,13 @@ public class Schedule implements Serializable {
         this.AlarmRepeatCount = AlarmRepeatCount_input;
         this.Place_x = x_input;
         this.Place_y = y_input;
-    }
+    }*/ //v필요없음 삭제필요
    /*String GroupName_output() {
-        return this.Group_name;
+        return this.Group.name;
     }*/
-    int ScheduleTime_output(){
+    /*int ScheduleTime_output(){
         return this.Time;
-    }
+    }*/
     int ScheduleSound_output(){
         return this.Sound;
     }

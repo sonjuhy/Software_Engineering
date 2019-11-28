@@ -11,9 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import yuku.ambilwarna.AmbilWarnaDialog;
+//import yuku.ambilwarna.AmbilWarnaDialog;//// 살려야됨
 
 public class GroupSubActivity extends AppCompatActivity {
+
     int colorPick;
     TextView colorSample;
 
@@ -35,7 +36,7 @@ public class GroupSubActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openColorPicker();
+                //openColorPicker();//// 살려야됨
             }
         });
 
@@ -50,7 +51,7 @@ public class GroupSubActivity extends AppCompatActivity {
         });
     }
 
-    private void openColorPicker() {
+   /*private void openColorPicker() {
         AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, colorPick, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -65,7 +66,7 @@ public class GroupSubActivity extends AppCompatActivity {
             }
         });
         colorPicker.show();
-    }
+    }*//// 살려야됨
 
     public void CreateNewGroup(String GroupName, int PeopleNumber) {
         Group group = new Group(GroupName, PeopleNumber);
@@ -94,5 +95,20 @@ public class GroupSubActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

@@ -14,7 +14,8 @@ import java.util.ArrayList;
 //리사이클러 뷰 테스트를 위해 임의 작성
 public class GroupMainActivity extends AppCompatActivity {
 
-    private ArrayList<Group> G;
+
+    private ArrayList<Group> groupArrayList;
     private CustomAdapter adapter;
 
     @Override
@@ -26,13 +27,13 @@ public class GroupMainActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
 
-        G = new ArrayList<>();
-        G.add(new Group("A",1));
-        G.add(new Group("B",2));
-        G.add(new Group("C",3));
-        G.add(new Group("D",4));
+        groupArrayList = new ArrayList<>();
+        groupArrayList.add(new Group("A",1));
+        groupArrayList.add(new Group("B",2));
+        groupArrayList.add(new Group("C",3));
+        groupArrayList.add(new Group("D",4));
 
-        adapter = new CustomAdapter(G);
+        adapter = new CustomAdapter(groupArrayList);
         adapter.setOnItemClickListener(new CustomAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
