@@ -15,6 +15,10 @@ import java.util.Iterator;
 
 public class GroupSubActivity extends AppCompatActivity {
 
+    GroupMainActivity groupMainActivity = new GroupMainActivity();
+
+   // private GroupMember groupInvitationList = new GroupMember();
+
     int colorPick;
     TextView colorSample;
 
@@ -31,6 +35,47 @@ public class GroupSubActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_sub);
+
+        Button button2 = findViewById(R.id.member_ok);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ID ="a";
+                String name="a";
+                String phone="a";//////////// 이것들 서버에서 리턴값 받아야함
+
+
+            }
+        });
+
+        Button button3 = findViewById(R.id.member_edit);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*public GroupMember getgroupMember(int index) {
+                    return groupMember.get(index);
+                }*///////////////////// 이거써서 리스트 출력해주면 됩니다 레이아웃에
+            }
+        });
+
+        Button button4 = findViewById(R.id.member_edit);
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*public GroupMember getgroupMember(int index) {
+                    return groupMember.get(index);
+                }*///////////////////// 이거써서 리스트 출력해주면 됩니다 레이아웃에
+            }
+        });
+
+
+
+
+
+
+
+
+
 
         Button button = findViewById(R.id.color_pick);
         button.setOnClickListener(new View.OnClickListener() {
@@ -68,11 +113,13 @@ public class GroupSubActivity extends AppCompatActivity {
         colorPicker.show();
     }*//// 살려야됨
 
-    public void CreateNewGroup(String GroupName, int PeopleNumber) {
+   /* public void CreateNewGroup(String GroupName, int PeopleNumber) {
         Group group = new Group(GroupName, PeopleNumber);
         User user = new User();
         user.Group_Input(group);
-    }
+    }*/
+
+
 
     public void ReviseGroup(String GroupName, int PeopleNumber) {
         User user = new User();
@@ -85,7 +132,7 @@ public class GroupSubActivity extends AppCompatActivity {
         }
     }
 
-    public void DeleteGroup(String GroupName, int PeopleNumber) {
+    public void DeleteGroup(String GroupName, int GroupColor) {
         User user = new User();
         ArrayList GroupLIst = user.UserGroup_Output();
         for (int i = 0; i < GroupLIst.size(); i++) {
