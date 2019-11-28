@@ -20,6 +20,9 @@ public class Group implements Serializable {
         public GroupMember(String GroupName, int PeopleNumber) {
             this.Name = GroupName;
             this.PhoneNumber = PeopleNumber;
+
+
+            
         }
     }
 
