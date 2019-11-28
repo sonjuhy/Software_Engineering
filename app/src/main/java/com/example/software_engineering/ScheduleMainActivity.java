@@ -19,33 +19,60 @@ import java.util.*;
 
 public class ScheduleMainActivity extends AppCompatActivity {
 
-    private ArrayList<Schedule> scheduleArrayList;
+    private ArrayList<Schedule> time_scheduleArrayList;
+    private ArrayList<Schedule> place_scheduleArrayList;
     int y=0, m=0, d=0, h=0, mi=0;
     public ScheduleMainActivity()
     {
-        scheduleArrayList = new ArrayList<Schedule>();
+        time_scheduleArrayList = new ArrayList<Schedule>();
+        place_scheduleArrayList = new ArrayList<Schedule>();
     };
 
-    public void add_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int alarmType)
+    public void add_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int alarmType,Group group)
     {
-            scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,alarmType));
+        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,alarmType, group));
     }
-    public void add_schedule(String name, String content, String place,int time, int alarmRepeatCount, int alarmType)
+    public void add_schedule(String name, String content,int time, int alarmRepeatCount, int alarmType,Group group)
     {
+
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
-            scheduleArrayList.add(new Schedule(name, content, place,time,alarmRepeatCount,alarmType));
+        if(time_scheduleArrayList.size()==0)
+        {
+            time_scheduleArrayList.add(new Schedule(name, content, time,alarmRepeatCount,alarmType,group));
+        }
+        else {
+            for (int i = 0; i < time_scheduleArrayList.size(); i++) {
+                if(time_scheduleArrayList.get(i).getTime()>time)
+                {
+                    time_scheduleArrayList.add(i,new Schedule(name, content, time,alarmRepeatCount,alarmType,group));
+                    break;
+                }
+            }
+        }
+        time_scheduleArrayList.add(new Schedule(name, content, time,alarmRepeatCount,alarmType,group));
     }
 
-    public void modified_schedule(String name, String content, String place,int time, int alarmRepeatCount, int alarmType, int index)
+    public void modified_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int alarmType,int index,Group group)
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
-        scheduleArrayList.remove(index);
-        scheduleArrayList.add(index,new Schedule(name, content, place,time,alarmRepeatCount,alarmType));
+        place_scheduleArrayList.remove(index);
+        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,alarmType, group));
     }
 
-    public void remove_schedule(int index)
+    public void modified_schedule(String name, String content, int time, int alarmRepeatCount, int alarmType, int index,Group group)
     {
-        scheduleArrayList.remove(index);
+        ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
+        time_scheduleArrayList.remove(index);
+        add_schedule(name, content,time,alarmRepeatCount,alarmType,group);
+    }
+
+    public void remove_time_schedule(int index)
+    {
+        time_scheduleArrayList.remove(index);
+    }
+    public void remove_palce_schedule(int index)
+    {
+        place_scheduleArrayList.remove(index);
     }
 
 
@@ -71,20 +98,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
             }
         });
 
-        Button mapbutton = findViewById(R.id.Map_button); //맵 버튼
-        mapbutton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent map = new Intent(ScheduleMainActivity.this, MapsActivity.class);
-                startActivity(map);
-            }
-        });
-
-        Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
+        Button exit_schedule = findViewById(R.id.exit_button);
         exit_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-             finish();
+                finish();
             }
         });
     }
