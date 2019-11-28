@@ -9,9 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-//import yuku.ambilwarna.AmbilWarnaDialog;//// 살려야됨
+import yuku.ambilwarna.AmbilWarnaDialog;//// 살려야됨
 
 public class GroupSubActivity extends AppCompatActivity {
 
@@ -81,7 +80,7 @@ public class GroupSubActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //openColorPicker();//// 살려야됨
+                openColorPicker();
             }
         });
 
@@ -90,13 +89,23 @@ public class GroupSubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
+                intent.putExtra("opt","add");
+                startActivityForResult(intent,1);
+            }
+        });
+
+        Button button2 = findViewById(R.id.member_edit);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
+                intent.putExtra("opt","view");
                 startActivity(intent);
-                //startActivityForResult(intent,1);
             }
         });
     }
 
-   /*private void openColorPicker() {
+   private void openColorPicker() {
         AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, colorPick, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -111,7 +120,7 @@ public class GroupSubActivity extends AppCompatActivity {
             }
         });
         colorPicker.show();
-    }*//// 살려야됨
+    }
 
    /* public void CreateNewGroup(String GroupName, int PeopleNumber) {
         Group group = new Group(GroupName, PeopleNumber);
