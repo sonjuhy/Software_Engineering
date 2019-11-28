@@ -1,10 +1,12 @@
 package com.example.software_engineering;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.solver.GoalRow;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,7 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +66,6 @@ public class MainActivity extends AppCompatActivity
         time_schedule_data.add("시간 스케쥴2");
         time_schedule_adapter.notifyDataSetChanged();
 
-
         //장소별 스케쥴 리스트 생성
         list_gps_schedule = (ListView)findViewById(R.id.list_gps_schedule);
         List<String> gps_schedule_data = new ArrayList<>();
@@ -71,7 +74,11 @@ public class MainActivity extends AppCompatActivity
         gps_schedule_data.add("타임 스케쥴1");
         gps_schedule_data.add("타임 스케쥴2");
         gps_schedule_adapter.notifyDataSetChanged();
+
+
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -98,8 +105,7 @@ public class MainActivity extends AppCompatActivity
                 return true;
 
             case R.id.add_schedule:
-                Intent intent_add = new Intent(MainActivity.this, ScheduleMainActivity.class);
-                startActivity(intent_add);
+                startActivity(new Intent(MainActivity.this, PopupSchedule.class));
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -122,6 +128,8 @@ public class MainActivity extends AppCompatActivity
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
             startActivity(intentToGroup);
+
+
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

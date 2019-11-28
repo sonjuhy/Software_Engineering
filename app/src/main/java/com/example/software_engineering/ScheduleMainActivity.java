@@ -85,49 +85,43 @@ public class ScheduleMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        Intent intent = new Intent(this.getIntent());
+
+        int i  = intent.getIntExtra("num", 1);
 
 
-        Button time_button = findViewById(R.id.time_button); // 스케쥴 시간창 추가
-        time_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTime();
-            }
-        });
+        if(i == 1) { //날짜별 스케쥴
+            setContentView(R.layout.activity_schedule);
 
 
-        Button date_button = findViewById(R.id.date_button); //스케쥴 날짜창 추가
-        date_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showDate();
-            }
-        });
-
-        Button mapbutton = findViewById(R.id.Map_button); //맵 버튼
-        mapbutton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent map = new Intent(ScheduleMainActivity.this, MapsActivity.class);
-                startActivity(map);
-            }
-        });
+            Button time_button = findViewById(R.id.time_button); // 스케쥴 시간창 추가
+            time_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showTime();
+                }
+            });
 
 
-
-        Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
-        exit_schedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-             finish();
-            }
-        });
-
+            Button date_button = findViewById(R.id.date_button); //스케쥴 날짜창 추가
+            date_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDate();
+                }
+            });
 
 
+            Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
+            exit_schedule.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
-        Button store_schedule_button = findViewById(R.id.store_schedule_button); // 스케쥴 시간창 추가
+
+            Button store_schedule_button = findViewById(R.id.store_schedule_button); // 스케쥴 시간창 추가
        /* time_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +131,43 @@ public class ScheduleMainActivity extends AppCompatActivity {
             }
         });*/
 
+        }
 
+        else if(i ==2) { //시간별 스케쥴
+            setContentView(R.layout.activity_location_schedule);
+
+
+
+            Button mapbutton = findViewById(R.id.Map_button); //맵 버튼
+            mapbutton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent map = new Intent(ScheduleMainActivity.this, MapsActivity.class);
+                    startActivity(map);
+                }
+            });
+
+
+            Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
+            exit_schedule.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+
+
+            Button store_schedule_button = findViewById(R.id.store_schedule_button); //
+       /* time_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
+                //add_schedule(R.id.schedule_name_input,content,time,alarmRepeatCount,alarmType,group);
+                // add_schedule(name, content, calendar, alarmRepeatCount, alarmType, group);
+            }
+        });*/
+
+        }
 
 
 
