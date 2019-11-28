@@ -40,6 +40,12 @@ public class Schedule implements Serializable {
         this.Time = time;
         this.AlarmRepeatCount = alarmRepeatCount;
         this.alarmType = alarmType;
+
+
+
+
+
+        
     }
 
     Schedule(){
