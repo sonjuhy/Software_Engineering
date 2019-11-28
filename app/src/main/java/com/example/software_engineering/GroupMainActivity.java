@@ -1,9 +1,12 @@
 package com.example.software_engineering;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -32,5 +35,28 @@ public class GroupMainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override //메인화면 오른쪽위 점3개 버튼
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+                return true;
+
+            case R.id.add_schedule:
+                Intent intent_add = new Intent(GroupMainActivity.this, GroupSubActivity.class);
+                startActivity(intent_add);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
