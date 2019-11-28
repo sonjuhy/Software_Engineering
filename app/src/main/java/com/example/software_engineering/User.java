@@ -1,5 +1,6 @@
 package com.example.software_engineering;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -21,33 +22,19 @@ public class User implements Serializable {//implements Serializable for using i
     private String PW;  //User PW
     private String Phone_Num;  //User Phone_num
     private String Network_data;  //Data value for communicating Server
+    private boolean Login_check;
     private double Place_x;  // User X Location
     private double Place_y;  //User Y Location
     private ArrayList<Schedule> S;  //Schedule List
     private ArrayList<Group> G;  //Group List
     private Network n;  //Network Value for Using Network
-
+    private Network_Access na;
     User(){
         n = new Network();
-    }
-    private void Network_Access(String Action) {
-        n = new Network();//for Using Network without AsyncTask error
-        n.Input_data(Action, Network_data);//Sending Data & kind of command to Network Class
-        try {
-            Network_data = n.execute().get(); //execute Network and take return value to Network_data
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        while(true){
-            if(n.finish == true){  //when Network doInBackground is End
-                System.out.println("Asyn finish");
-                break;
-            }
-        }
+        na = new Network_Access();
     }
     public boolean Network_DataArrangement(String... _param){ //Setting for Network Class Value before Working Network Class
+        Login_check = true;
         //_param mean String[] _param
         if(_param != null){
             switch(_param[0]){//Frist Parameter(String)
@@ -58,21 +45,19 @@ public class User implements Serializable {//implements Serializable for using i
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    Network_Access("Login");//Running Network
-                    if(Network_data.equals(false)){ //Login Failed
+                    Network_data = na.Network_Access("Login", Network_data);//Running Network
+                    if(Network_data.equals("Failed")){ //Login Failed
                         System.out.println("Login Failed");
-                        return false;
+                        Login_check = false;
                     }
                     else { //Login Success
-                        //n.Input_data("Login_DownLoad");//request communicating for Download User data from Server
-                        //Network_Access();//Running Network
-                        //Get_UserData(Network_data, n.User_name);//translate JSonData from Server to Java and Save Data
+                        this.Name = Network_data;
+                        Network_data = na.Network_Access("Get_UserData",Network_data);//Running Network
                         System.out.println("Load Name : " + this.Name);
                     }
                     break;
                 case "Get_Data"://Download User data part
-                    //n.Input_data("Get_UserData");//Sending command to Network Class
-                    Network_Access("Get_UserData");//Running Network
+                    na.Network_Access("Get_UserData",Network_data);//Running Network
                     Get_UserData(Network_data, this.Name);//translate JSonData from Server to Java and Save Data
                     break;
                 case "Upload_Data"://Upload User data to Server
@@ -86,10 +71,12 @@ public class User implements Serializable {//implements Serializable for using i
                         e.printStackTrace();
                     }
                    // n.Input_data("UpLoad_UserData",Network_data);//Sending Data & kind of command to Network Class
-                    Network_Access("UpLoad_UserData");
+                    Network_data = na.Network_Access("UpLoad_UserData",Network_data);
                     break;
             }
         }
+        if(Login_check == false)
+            return false;
         return true;//Working is Success
     }
     private void Get_UserData(String mJsonString, String User_name){//Parsing data(JSon to Java)
@@ -121,10 +108,6 @@ public class User implements Serializable {//implements Serializable for using i
     public void Group_Input(Group G_input){
         this.G.add(G_input);
     }
- /*   public void Place_Input(double x, double y){
-        this.Place_x = x;
-        this.Place_y = y;
-    }*/
     public String UserName_Output(){
         return this.Name;
     }

@@ -2,22 +2,16 @@ package com.example.software_engineering;
 
 import android.os.AsyncTask;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class Network extends AsyncTask<String, Void, String> implements Serializable {
     protected boolean finish;
@@ -53,8 +47,8 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        this.url = "http://sonjuhy.iptime.org/SE/Login_Check.php";
-        //this.url = "http://sonjuhy.iptime.org/"+arr_String[0]+".php";
+        //this.url = "http://sonjuhy.iptime.org/SE/Login_Check.php";
+        this.url = "http://sonjuhy.iptime.org/SE/"+arr_String[0]+".php";
         System.out.println("onPre Success");
     }
 
@@ -118,3 +112,24 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
         System.out.println("onPost : " + s);
     }
 }
+class Network_Access implements Serializable{
+    public String Network_Access(String Action, String Network_data) {
+        Network n = new Network();//for Using Network without AsyncTask error
+        n.Input_data(Action, Network_data);//Sending Data & kind of command to Network Class
+        try {
+            Network_data = n.execute().get(); //execute Network and take return value to Network_data
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        while(true){
+            if(n.finish == true){  //when Network doInBackground is End
+                System.out.println("Asyn finish");
+                break;
+            }
+        }
+        return Network_data;
+    }
+}
+

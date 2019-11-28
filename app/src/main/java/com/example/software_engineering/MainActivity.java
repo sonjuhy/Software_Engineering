@@ -33,15 +33,17 @@ public class MainActivity extends AppCompatActivity
     private Group G;
     private ListView list_time_schedule;
     private ListView list_gps_schedule;
+
+    private Schedule LoginGetData_Schedule(){
+        S = new Schedule();
+        S.Network_DataArrangement("DownLoad");
+        return S;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // U = new User();
         U = (User) getIntent().getSerializableExtra("User");
-        System.out.println("User Name in MainActivity : " + U.UserName_Output());
-        //U.execute();
-        //U.Network_DataArrangement("Login","ID","PW");
-        //System.out.println("User Execute");
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

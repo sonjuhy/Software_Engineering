@@ -68,24 +68,24 @@ public class LoginActivity extends AppCompatActivity {
          *
          */
 
-        U.UserInfo_Input("Name","ID","PW","010123456789");
         SignIn.setOnClickListener(new OnClickListener() {//Login
             @Override
             public void onClick(View v) {
-               /* LoginCheck =  U.Network_DataArrangement("Login",ID_Text.getText().toString(),PW_Text.getText().toString());
-                if(!LoginCheck){
-                    Toast.makeText(LoginActivity.this, "LoginFailed", Toast.LENGTH_LONG);
+                if(ID_Text.getText().toString().equals("") || PW_Text.getText().toString().equals("")){
+                    Toast.makeText(LoginActivity.this, "Write ID and PW", Toast.LENGTH_LONG);
                 }
                 else {
-                    Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
-                    intentToMain.putExtra("User", U);
-                    Toast.makeText(LoginActivity.this,"Login Success", Toast.LENGTH_LONG);
-                    startActivity(intentToMain);
-                }*/
-                Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
-                intentToMain.putExtra("User", U);
-                Toast.makeText(LoginActivity.this,"Login Success", Toast.LENGTH_LONG);
-                startActivity(intentToMain);
+                    LoginCheck = U.Network_DataArrangement("Login", ID_Text.getText().toString(), PW_Text.getText().toString());
+                    System.out.println("Login Check : " + LoginCheck);
+                    if (!LoginCheck) {
+                        Toast.makeText(LoginActivity.this, "LoginFailed", Toast.LENGTH_LONG);
+                    } else {
+                        Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
+                        intentToMain.putExtra("User", U);
+                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG);
+                        startActivity(intentToMain);
+                    }
+                }
             }
         });
 
