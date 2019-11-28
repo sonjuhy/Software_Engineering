@@ -26,6 +26,7 @@
         android:ems="10"
         android:inputType="text"
         android:singleLine="true"
+        android:hint="ID"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

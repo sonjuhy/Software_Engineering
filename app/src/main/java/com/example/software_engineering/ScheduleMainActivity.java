@@ -71,7 +71,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
             }
         });
 
-        Button mapbutton = findViewById(R.id.Map_button);
+        Button mapbutton = findViewById(R.id.Map_button); //맵 버튼
         mapbutton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,13 +79,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 startActivity(map);
             }
         });
-        /*Button exit_schedule = findViewById(R.id.exit_button);
+
+        Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
         exit_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
              finish();
             }
-        });*/
+        });
     }
 
 
