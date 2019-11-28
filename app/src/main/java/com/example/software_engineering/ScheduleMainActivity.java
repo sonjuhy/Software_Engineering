@@ -128,14 +128,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
 
         Button store_schedule_button = findViewById(R.id.store_schedule_button); // 스케쥴 시간창 추가
-        time_button.setOnClickListener(new View.OnClickListener() {
+       /* time_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
                 //add_schedule(R.id.schedule_name_input,content,time,alarmRepeatCount,alarmType,group);
                 // add_schedule(name, content, calendar, alarmRepeatCount, alarmType, group);
             }
-        });
+        });*/
 
 
 
@@ -159,10 +159,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                Button date_button = findViewById(R.id.date_button);
                 y = year;
                 m = month+1;
                 d = dayOfMonth;
-
+                date_button.setText(y+"년 "+m+"월 "+d+"일");
             }
         },2019, 1, 11);
 
@@ -174,9 +175,10 @@ public class ScheduleMainActivity extends AppCompatActivity {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button time_button = findViewById(R.id.time_button);
                 h = hourOfDay;
                 mi = minute;
-
+                time_button.setText(h+"시 "+mi+"분");
             }
         }, 21, 12, true);
 

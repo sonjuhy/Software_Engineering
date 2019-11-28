@@ -67,6 +67,14 @@ public class GroupSubActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button exit_group = findViewById(R.id.exit_group); //그룹 추가에 취소 버튼
+        exit_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        });
     }
 
    private void openColorPicker() {

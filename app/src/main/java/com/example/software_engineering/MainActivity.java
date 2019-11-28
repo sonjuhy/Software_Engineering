@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.constraint.solver.GoalRow;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -110,11 +111,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         if (id == R.id.nav_Schedule) {
-            Intent intentToSchedule = new Intent(MainActivity.this, Schedule.class);
+            drawer.closeDrawer(Gravity.LEFT);
+            /*Intent intentToSchedule = new Intent(MainActivity.this, Schedule.class);
             intentToSchedule.putExtra("Schedule",S);
-            startActivity(intentToSchedule);
+            startActivity(intentToSchedule);*/
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
@@ -125,7 +128,6 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

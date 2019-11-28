@@ -62,6 +62,7 @@ public class PopupActivity extends Activity {
                 }
             });
         }
+
     }
 
     @Override

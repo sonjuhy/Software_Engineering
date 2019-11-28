@@ -112,7 +112,7 @@
             android:text="추가하기" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/exit_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="취소" />

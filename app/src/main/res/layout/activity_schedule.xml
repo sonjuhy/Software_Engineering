@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#ffffff"
-                android:text="$월 $일"/>
+                android:text="    년    월    일"/>
 
 
         </TableRow>
@@ -81,7 +81,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:backgroundTint="#ffffff"
-             android:text="*시 *분"/>
+             android:text="   0시   0분"/>
 
         </TableRow>
 
@@ -100,7 +100,7 @@
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/location_button"
+                android:id="@+id/Map_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#ffffff"
@@ -178,9 +178,4 @@
             android:text="취소" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/Map_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GotoMap" />
 </LinearLayout>
