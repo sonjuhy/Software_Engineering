@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -24,15 +26,26 @@ public class PopupActivity extends Activity {
         if(opt.equals("add_member")){
             setContentView(R.layout.popup_add_activity);
 
-            //버튼 눌러서 검색 기능 넣기
+            final GroupMember member;
 
-            Button button1 = findViewById(R.id.member_ok);
-            button1.setOnClickListener(new View.OnClickListener() {
+            final EditText editText = findViewById(R.id.search);
+            TextView textView = findViewById(R.id.search_text);
+
+            Button button = findViewById(R.id.member_search);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //검색 기능
+
+                }
+            });
+
+            Button button2 = findViewById(R.id.member_ok);
+            button2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    //유저 인텐트에 추가
-                    //intent.putExtra( 유저 자료);
+                    //intent.putExtra("member",member);
                     setResult(RESULT_OK,intent);
                     finish();
                 }

@@ -45,7 +45,7 @@ public class User implements Serializable {//implements Serializable for using i
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    Network_data = na.Network_Access("Login", Network_data);//Running Network
+                    Network_data = na.Network_Access("Login_Check", Network_data);//Running Network
                     if(Network_data.equals("Failed")){ //Login Failed
                         System.out.println("Login Failed");
                         Login_check = false;

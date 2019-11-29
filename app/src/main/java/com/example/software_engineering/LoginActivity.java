@@ -56,13 +56,13 @@ public class LoginActivity extends AppCompatActivity {
         // Set up the login form.
 
         final User U = new User();
-        ID_Text = (EditText)findViewById(R.id.ID_editText);
-        PW_Text = (EditText)findViewById(R.id.PW_editText);
+        ID_Text = findViewById(R.id.ID_editText);
+        PW_Text = findViewById(R.id.PW_editText);
 
-        SignIn = (Button)findViewById(R.id.SignIn_button);
-        SignUp = (Button)findViewById(R.id.SignUp_button);
+        SignIn = findViewById(R.id.SignIn_button);
+        SignUp = findViewById(R.id.SignUp_button);
 
-        AutoLogin = (CheckBox)findViewById(R.id.AutoLogin_checkBox);
+        AutoLogin = findViewById(R.id.AutoLogin_checkBox);
         /**
          * if(AutoLogin.setOnClickListener()==true){}
          *

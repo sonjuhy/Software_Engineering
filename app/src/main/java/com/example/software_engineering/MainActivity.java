@@ -48,22 +48,22 @@ public class MainActivity extends AppCompatActivity
         U = (User) getIntent().getSerializableExtra("User");
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
         //시간별 스케쥴 리스트 생성
-        list_time_schedule = (ListView)findViewById(R.id.list_time_schedule);
+        list_time_schedule = findViewById(R.id.list_time_schedule);
         List<String> time_schedule_data = new ArrayList<>();
         ArrayAdapter<String> time_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, time_schedule_data);
         list_time_schedule.setAdapter(time_schedule_adapter);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
         time_schedule_adapter.notifyDataSetChanged();
 
         //장소별 스케쥴 리스트 생성
-        list_gps_schedule = (ListView)findViewById(R.id.list_gps_schedule);
+        list_gps_schedule = findViewById(R.id.list_gps_schedule);
         List<String> gps_schedule_data = new ArrayList<>();
         ArrayAdapter<String> gps_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, gps_schedule_data);
         list_gps_schedule.setAdapter(gps_schedule_adapter);
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         if (id == R.id.nav_Schedule) {
             drawer.closeDrawer(Gravity.LEFT);
