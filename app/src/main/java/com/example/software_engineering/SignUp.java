@@ -12,7 +12,7 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        EditText brand_phone = (EditText) findViewById(R.id.phone_input);
+        EditText brand_phone = findViewById(R.id.phone_input);
         brand_phone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         Button exit_schedule = findViewById(R.id.exit_button);
