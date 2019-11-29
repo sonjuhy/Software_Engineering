@@ -21,13 +21,17 @@ public class GroupSubActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==1){
-            if(resultCode==RESULT_OK){
-                GroupMember member = (GroupMember)data.getSerializableExtra("member");
-                list.add(member);
-            }
-            else if(resultCode==RESULT_CANCELED){
+        if (resultCode == RESULT_CANCELED) {
 
+        } else {
+            switch (requestCode) {
+                case 1:
+                    GroupMember member = (GroupMember) data.getSerializableExtra("member");
+                    list.add(member);
+                    break;
+                case 2:
+                    list = (ArrayList<GroupMember>) data.getSerializableExtra("list");
+                    break;
             }
         }
     }
@@ -50,8 +54,8 @@ public class GroupSubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
-                intent.putExtra("opt","add_member");
-                startActivityForResult(intent,1);
+                intent.putExtra("opt", "add_member");
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -60,22 +64,30 @@ public class GroupSubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
-                intent.putExtra("list",list);
-                intent.putExtra("opt","view");
-                startActivity(intent);
+                intent.putExtra("list", list);
+                intent.putExtra("opt", "delete");
+                startActivityForResult(intent, 2);
+            }
+        });
+
+        Button button3 = findViewById(R.id.add_group);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
             }
         });
 
         Button exit_group = findViewById(R.id.exit_group); //그룹 추가에 취소 버튼
         exit_group.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 finish();
             }
         });
     }
 
-   private void openColorPicker() {
+    private void openColorPicker() {
         AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, colorPick, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -119,19 +131,6 @@ public class GroupSubActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

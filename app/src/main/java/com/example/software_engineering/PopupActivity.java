@@ -70,6 +70,37 @@ public class PopupActivity extends Activity {
             });
         }
         else if(opt.equals("delete")){
+            setContentView(R.layout.popup_view_activity);
+
+            final ArrayList<GroupMember> list = (ArrayList<GroupMember>) intent.getExtras().get("list");
+            CustomMemberAdapter adapter;
+
+            RecyclerView recyclerView = findViewById(R.id.member_view);
+            LinearLayoutManager manager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(manager);
+
+            adapter=new CustomMemberAdapter(list);
+            adapter.setOnItemClickListener(new CustomMemberAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View v, int pos) {
+                    list.remove(pos);
+                    Intent intent = new Intent();
+                    intent.putExtra("list",list);
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }
+            });
+            recyclerView.setAdapter(adapter);
+
+            Button button1 = findViewById(R.id.view_ok);
+            button1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    setResult(RESULT_CANCELED,intent);
+                    finish();
+                }
+            });
 
         }
         else if(opt.equals("view")) {
