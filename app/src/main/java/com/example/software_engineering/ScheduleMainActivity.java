@@ -26,8 +26,12 @@ public class ScheduleMainActivity extends AppCompatActivity {
     private ArrayList<Schedule> place_scheduleArrayList;
     int y=0, m=0, d=0, h=0, mi=0;
     private Spinner group_spinner;
+    private Spinner alarm_spinner;
+
     ArrayList<String> group_list;
+    ArrayList<String> alarm_count;
     ArrayAdapter<String> arrayAdapter;
+    ArrayAdapter<String> alarmAdapter;
 
 
     Calendar calendar = Calendar.getInstance();
@@ -107,9 +111,16 @@ public class ScheduleMainActivity extends AppCompatActivity {
             group_list.add("람휘");
             group_list.add("녹지");
             arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
-            group_spinner = (Spinner)findViewById(R.id.spinner_group);
+            group_spinner = findViewById(R.id.spinner_group);
             group_spinner.setAdapter(arrayAdapter);
 
+            alarm_count = new ArrayList<>();
+            alarm_count.add("1회");
+            alarm_count.add("2회");
+            alarm_count.add("3회");
+            alarmAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, alarm_count);
+            alarm_spinner = findViewById(R.id.spinner_alarm_count);
+            alarm_spinner.setAdapter(alarmAdapter);
 
 
             Button time_button = findViewById(R.id.time_button); // 스케쥴 시간창 추가
@@ -132,8 +143,18 @@ public class ScheduleMainActivity extends AppCompatActivity {
             group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(getApplicationContext(),group_list.get(i)+"가 선택되었습니다.",
-                            Toast.LENGTH_SHORT).show();
+                    //spinner에서 가장 위에가 i= 0번~쭈루룩
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+            alarm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    //spinner에서 가장 위에가 i= 0번~쭈루룩
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
@@ -165,6 +186,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
         else if(i ==2) { //시간별 스케쥴
             setContentView(R.layout.activity_location_schedule);
+
             group_list = new ArrayList<>();
             group_list.add("철수");
             group_list.add("영희");
@@ -174,6 +196,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
             group_spinner = findViewById(R.id.spinner_group);
             group_spinner.setAdapter(arrayAdapter);
 
+            alarm_count = new ArrayList<>();
+            alarm_count.add("1회");
+            alarm_count.add("2회");
+            alarm_count.add("3회");
+            alarmAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, alarm_count);
+            alarm_spinner = findViewById(R.id.spinner_alarm_count);
+            alarm_spinner.setAdapter(alarmAdapter);
+
 
 
             Button mapbutton = findViewById(R.id.Map_button); //맵 버튼
@@ -182,6 +212,28 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent map = new Intent(ScheduleMainActivity.this, MapsActivity.class);
                     startActivity(map);
+                }
+            });
+
+            group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    //spinner에서 가장 위에가 i= 0번~쭈루룩
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+            alarm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    //spinner에서 가장 위에가 i= 0번~쭈루룩
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
                 }
             });
 
