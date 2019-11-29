@@ -37,8 +37,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
     ArrayList<String> alarm_count;
     ArrayAdapter<String> arrayAdapter;
     ArrayAdapter<String> alarmAdapter;
-
-
     Calendar calendar = Calendar.getInstance();
 
     public ScheduleMainActivity()
@@ -47,11 +45,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
         place_scheduleArrayList = new ArrayList<Schedule>();
     };
 
-    public void add_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int alarmType,Group group)
+    public void add_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
-        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,alarmType, group));
+        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
     }
-    public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int alarmType,Group group)
+    public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
         calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
 
@@ -59,32 +57,36 @@ public class ScheduleMainActivity extends AppCompatActivity {
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
         if(time_scheduleArrayList.size()==0)
         {
-            time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,alarmType,group));
+            time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
         }
         else {
             for (int i = 0; i < time_scheduleArrayList.size(); i++) {
                 if(time_scheduleArrayList.get(i).getCalendar().after(calendar))
                 {
-                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,alarmType,group));
+                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
                     return;
                 }
             }
         }
-        time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,alarmType,group));
+        time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
     }
 
-    public void modified_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int alarmType,int index,Group group)
+    public void modified_schedule(String name, String content,double place_x,double place_y,
+                                  int alarmRepeatCount,int sound ,int vibration,Group group,int index)
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         place_scheduleArrayList.remove(index);
-        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,alarmType, group));
+        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
     }
 
-    public void modified_schedule(String name, String content,int year,int month,int day,int hour,int minute, int alarmRepeatCount, int alarmType,Group group, int index) {
+    public void modified_schedule(String name, String content,Calendar calendar,
+                                  int alarmRepeatCount,int sound ,int vibration,Group group,int index)
+    {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
-        time_scheduleArrayList.remove(index);
-        add_schedule(name, content, calendar, alarmRepeatCount, alarmType, group);
+        place_scheduleArrayList.remove(index);
+        place_scheduleArrayList.add(new Schedule(name,content,calendar,alarmRepeatCount,sound,vibration, group));
     }
+
 
     public void remove_time_schedule(int index)
     {
@@ -100,8 +102,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         Intent intent = new Intent(this.getIntent());
 
         int i  = intent.getIntExtra("num", 1);
@@ -126,7 +126,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
             }
         }/////////////////////////////// 문제 있을수 있음!
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
         if(i == 1) { //날짜별 스케쥴
             setContentView(R.layout.activity_time_schedule);
 
@@ -274,14 +273,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
             });
 
 
-            Button store_location_schedule_button = findViewById(R.id.store_location_schedule_button); //
-            store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
+           // Button store_location_schedule_button = findViewById(R.id.store_location_schedule_button); //
+          //  store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
+           // @Override
+          // public void onClick(View v) {
+             //   String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
                // add_schedule(R.id.schedule_name_input,calendar,alarmRepeatCount,schedule_sound, schedule_vibration, group);
-            }///////////----------------------------------------
-        });
+           // }///////////----------------------------------------
+        //});
 
         }
 
