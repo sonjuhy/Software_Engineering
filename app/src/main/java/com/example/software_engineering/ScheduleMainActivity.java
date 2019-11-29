@@ -7,9 +7,14 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import java.util.Calendar;
 
 
@@ -20,6 +25,10 @@ public class ScheduleMainActivity extends AppCompatActivity {
     private ArrayList<Schedule> time_scheduleArrayList;
     private ArrayList<Schedule> place_scheduleArrayList;
     int y=0, m=0, d=0, h=0, mi=0;
+    private Spinner group_spinner;
+    ArrayList<String> group_list;
+    ArrayAdapter<String> arrayAdapter;
+
 
     Calendar calendar = Calendar.getInstance();
 
@@ -82,6 +91,8 @@ public class ScheduleMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         Intent intent = new Intent(this.getIntent());
 
         int i  = intent.getIntExtra("num", 1);
@@ -89,6 +100,16 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
         if(i == 1) { //날짜별 스케쥴
             setContentView(R.layout.activity_time_schedule);
+
+            group_list = new ArrayList<>();
+            group_list.add("철수");
+            group_list.add("영희");
+            group_list.add("람휘");
+            group_list.add("녹지");
+            arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
+            group_spinner = (Spinner)findViewById(R.id.spinner_group);
+            group_spinner.setAdapter(arrayAdapter);
+
 
 
             Button time_button = findViewById(R.id.time_button); // 스케쥴 시간창 추가
@@ -108,6 +129,17 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 }
             });
 
+            group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    Toast.makeText(getApplicationContext(),group_list.get(i)+"가 선택되었습니다.",
+                            Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
 
             Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
             exit_schedule.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +151,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
 
             Button store_schedule_button = findViewById(R.id.store_schedule_button); // 스케쥴 시간창 추가
+
        /* time_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +165,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
         else if(i ==2) { //시간별 스케쥴
             setContentView(R.layout.activity_location_schedule);
+            group_list = new ArrayList<>();
+            group_list.add("철수");
+            group_list.add("영희");
+            group_list.add("람휘");
+            group_list.add("녹지");
+            arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
+            group_spinner = findViewById(R.id.spinner_group);
+            group_spinner.setAdapter(arrayAdapter);
 
 
 
