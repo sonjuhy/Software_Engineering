@@ -16,13 +16,18 @@ public class GroupSubActivity extends AppCompatActivity {
 
     int colorPick;
     TextView colorSample;
-    ArrayList<GroupMember> list;
+    //실제 구현에서는 new 하면 안되고 그룹 불러와야됨
+    ArrayList<GroupMember> list = new ArrayList<>();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==1){
             if(resultCode==RESULT_OK){
-                //유저 목록에 추가한다는 내용
+                GroupMember member = (GroupMember)data.getSerializableExtra("member");
+                list.add(member);
+            }
+            else if(resultCode==RESULT_CANCELED){
+
             }
         }
     }
@@ -54,13 +59,6 @@ public class GroupSubActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //임시로 데이터 입력
-                list = new ArrayList<>();
-                list.add(new GroupMember("A","1",0));
-                list.add(new GroupMember("B","2",1111));
-                list.add(new GroupMember("C","3",2222));
-                list.add(new GroupMember("D","4",3333));
-
                 Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
                 intent.putExtra("list",list);
                 intent.putExtra("opt","view");

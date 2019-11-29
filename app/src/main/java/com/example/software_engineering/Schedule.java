@@ -19,6 +19,9 @@ public class Schedule implements Serializable {
     private  double Place_x;
     private  double Place_y;
     private  int alarmType;
+
+
+
     private  String content;
     private  Group group;
     private String Network_data;
@@ -26,23 +29,25 @@ public class Schedule implements Serializable {
     private Network n;
 
 
-    public Schedule(String name, String content, double place_x,double place_y, int alarmRepeatCount, int alarmType, Group group)
+    public Schedule(String name, String content, double place_x,double place_y, int alarmRepeatCount, int Sound, int Vibration, Group group)
     {
         this.Name =name;
         this.content =content;
         this.Place_x = place_x;
         this.Place_y = place_y;
         this.AlarmRepeatCount = alarmRepeatCount;
-        this.alarmType = alarmType;
+        this.Sound = Sound;
+        this.Vibration =Vibration;
         this.group =group;
     }
-    public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int alarmType, Group group)
+    public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int Sound, int Vibration, Group group)
     {
         this.Name =name;
         this.content =content;
         this.calendar = calendar;
         this.AlarmRepeatCount = alarmRepeatCount;
-        this.alarmType = alarmType;
+        this.Sound = Sound;
+        this.Vibration =Vibration;
         this.group =group;
     }
 

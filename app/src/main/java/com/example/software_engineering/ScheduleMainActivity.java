@@ -1,6 +1,7 @@
 package com.example.software_engineering;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -10,9 +11,11 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import java.util.Calendar;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -25,6 +28,8 @@ public class ScheduleMainActivity extends AppCompatActivity {
     private ArrayList<Schedule> time_scheduleArrayList;
     private ArrayList<Schedule> place_scheduleArrayList;
     int y=0, m=0, d=0, h=0, mi=0;
+    int schedule_sound =0;
+    int schedule_vibration =0;
     private Spinner group_spinner;
     private Spinner alarm_spinner;
 
@@ -101,6 +106,26 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
         int i  = intent.getIntExtra("num", 1);
 
+/////////////////////////////////////////////////////////////////////////////////////////////////// 벨소리 체크 박스
+        class soundSwitchListener implements CompoundButton.OnCheckedChangeListener{
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    schedule_sound  = 1;
+                else
+                    schedule_vibration = 0;
+            }
+        }/////////////////////////////// 문제 있을수 있음!
+        class vibrationSwitchListener implements CompoundButton.OnCheckedChangeListener{
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    schedule_sound =1;
+                else
+                    schedule_vibration=0;
+            }
+        }/////////////////////////////// 문제 있을수 있음!
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
         if(i == 1) { //날짜별 스케쥴
             setContentView(R.layout.activity_time_schedule);
@@ -174,6 +199,8 @@ public class ScheduleMainActivity extends AppCompatActivity {
             Button store_schedule_button = findViewById(R.id.store_schedule_button); // 스케쥴 시간창 추가
 
        /* time_button.setOnClickListener(new View.OnClickListener() {
+            Button store_time_schedule_button = findViewById(R.id.store_time_schedule_button); // 스케쥴 시간창 추가
+            store_time_schedule_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
@@ -247,15 +274,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
             });
 
 
-            Button store_schedule_button = findViewById(R.id.store_schedule_button); //
-       /* time_button.setOnClickListener(new View.OnClickListener() {
+            Button store_location_schedule_button = findViewById(R.id.store_location_schedule_button); //
+            store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                //add_schedule(R.id.schedule_name_input,content,time,alarmRepeatCount,alarmType,group);
-                // add_schedule(name, content, calendar, alarmRepeatCount, alarmType, group);
-            }
-        });*/
+               // add_schedule(R.id.schedule_name_input,calendar,alarmRepeatCount,schedule_sound, schedule_vibration, group);
+            }///////////----------------------------------------
+        });
 
         }
 
