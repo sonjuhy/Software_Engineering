@@ -45,7 +45,7 @@ public class GroupSubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
-                intent.putExtra("opt","add");
+                intent.putExtra("opt","add_member");
                 startActivityForResult(intent,1);
             }
         });

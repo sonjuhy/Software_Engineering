@@ -21,7 +21,7 @@ public class PopupActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Intent intent = getIntent();
         String opt = intent.getStringExtra("opt");
-        if(opt.equals("add")){
+        if(opt.equals("add_member")){
             setContentView(R.layout.popup_add_activity);
 
             //버튼 눌러서 검색 기능 넣기
@@ -41,7 +41,7 @@ public class PopupActivity extends Activity {
         else if(opt.equals("delete")){
 
         }
-        else {
+        else if(opt.equals("view")) {
             setContentView(R.layout.popup_view_activity);
 
             ArrayList<GroupMember> list = (ArrayList<GroupMember>) intent.getExtras().get("list");
@@ -62,6 +62,28 @@ public class PopupActivity extends Activity {
                 }
             });
         }
+        else if(opt.equals("add_schedule")){
+            setContentView(R.layout.popup_add_schedule);
+            final Intent schedule = new Intent(PopupActivity.this, ScheduleMainActivity.class);
+
+            Button time_button = findViewById(R.id.set_time_schedule);
+            time_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    schedule.putExtra("num",1);
+                    startActivity(schedule);
+                }
+            });
+
+            Button location_button = findViewById(R.id.set_location_schedule);
+            location_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    schedule.putExtra("num",2);
+                    startActivity(schedule);
+                }
+            });
+        }
 
     }
 
@@ -70,11 +92,5 @@ public class PopupActivity extends Activity {
         if(event.getAction()==MotionEvent.ACTION_OUTSIDE)
             return false;
         return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        //안드로이드 백버튼 막기
-        return;
     }
 }

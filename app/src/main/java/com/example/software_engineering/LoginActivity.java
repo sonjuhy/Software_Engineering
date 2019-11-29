@@ -72,17 +72,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(ID_Text.getText().toString().equals("") || PW_Text.getText().toString().equals("")){
-                    Toast.makeText(LoginActivity.this, "Write ID and PW", Toast.LENGTH_LONG);
+                    Toast.makeText(LoginActivity.this, "Write ID and PW", Toast.LENGTH_LONG).show();
                 }
                 else {
                     LoginCheck = U.Network_DataArrangement("Login", ID_Text.getText().toString(), PW_Text.getText().toString());
                     System.out.println("Login Check : " + LoginCheck);
                     if (!LoginCheck) {
-                        Toast.makeText(LoginActivity.this, "LoginFailed", Toast.LENGTH_LONG);
+                        Toast.makeText(LoginActivity.this, "LoginFailed", Toast.LENGTH_LONG).show();
                     } else {
                         Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
                         intentToMain.putExtra("User", U);
-                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG);
+                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG).show();
                         startActivity(intentToMain);
                     }
                 }

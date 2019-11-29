@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity
                 return true;
 
             case R.id.add_schedule:
-                startActivity(new Intent(MainActivity.this, PopupSchedule.class));
+                Intent intent = new Intent(getApplicationContext(),PopupActivity.class);
+                intent.putExtra("opt","add_schedule");
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);
