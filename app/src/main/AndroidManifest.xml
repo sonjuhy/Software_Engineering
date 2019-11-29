@@ -6,9 +6,6 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET"/>
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="@string/google_maps_key" />
 
     <application
 
@@ -19,8 +16,11 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:resource="@string/google_maps_key" />
 
-        <activity android:name=".GroupSubActivity"></activity>
+        <activity android:name=".GroupSubActivity"/>
         <activity android:name=".GroupMainActivity" />
         <activity android:name=".ScheduleMainActivity" />
         <activity android:name=".SignUp" />
@@ -47,7 +47,6 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"/>
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
-        <activity android:name=".PopupSchedule" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
     </application>
 
 </manifest>
