@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,17 +27,20 @@ public class PopupActivity extends Activity {
         if(opt.equals("add_member")){
             setContentView(R.layout.popup_add_activity);
 
-            final GroupMember member;
+            final GroupMember member = new GroupMember("id","name",0);
 
             final EditText editText = findViewById(R.id.search);
-            TextView textView = findViewById(R.id.search_text);
+            final TextView textView = findViewById(R.id.search_text);
 
             Button button = findViewById(R.id.member_search);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //검색 기능
-
+                    //검색 기능 구현 후 해당하는 값 밑에 대입
+                    member.id="아이디";
+                    member.name = "이름";
+                    member.PhoneNumber = 1;
+                    textView.setText("ID: "+member.id+", 이름: "+member.name);
                 }
             });
 
@@ -44,9 +48,23 @@ public class PopupActivity extends Activity {
             button2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(!member.id.equals("id")){
+                        Intent intent = new Intent(getApplicationContext(),GroupSubActivity.class);
+                        intent.putExtra("member",member);
+                        setResult(RESULT_OK,intent);
+                        finish();
+                    } else{
+                        Toast.makeText(PopupActivity.this,"검색한 사용자가 없습니다.",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+            Button button3 = findViewById(R.id.member_cancel);
+            button3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     Intent intent = new Intent();
-                    //intent.putExtra("member",member);
-                    setResult(RESULT_OK,intent);
+                    setResult(RESULT_CANCELED,intent);
                     finish();
                 }
             });
