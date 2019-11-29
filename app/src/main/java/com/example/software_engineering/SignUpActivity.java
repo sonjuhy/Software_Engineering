@@ -27,12 +27,12 @@ public class SignUpActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        /*Ok_Button = (Button)findViewById(R.id.OK_button);
-        Cancle_Button = (Button)findViewById(R.id.Cancle_button);
-        Name_text = (EditText)findViewById(R.id.Name_editText);
-        ID_text = (EditText)findViewById(R.id.ID_editText);
-        PW_text = (EditText)findViewById(R.id.PW_editText);
-        PhoneNum_text = (EditText)findViewById(R.id.PhoneNum_editText);*/
+        /*Ok_Button = findViewById(R.id.OK_button);
+        Cancel_Button = findViewById(R.id.Cancel_button);
+        Name_text = findViewById(R.id.Name_editText);
+        ID_text = findViewById(R.id.ID_editText);
+        PW_text = findViewById(R.id.PW_editText);
+        PhoneNum_text = findViewById(R.id.PhoneNum_editText);*/
 
         Ok_Button.setOnClickListener(new View.OnClickListener() {
             @Override
