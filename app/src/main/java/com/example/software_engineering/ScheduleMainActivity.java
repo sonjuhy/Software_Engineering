@@ -1,7 +1,6 @@
 package com.example.software_engineering;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -12,8 +11,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import java.util.Calendar;
-import android.widget.Toast;
-
 
 
 import java.util.*;
@@ -91,7 +88,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
 
         if(i == 1) { //날짜별 스케쥴
-            setContentView(R.layout.activity_schedule);
+            setContentView(R.layout.activity_time_schedule);
 
 
             Button time_button = findViewById(R.id.time_button); // 스케쥴 시간창 추가
