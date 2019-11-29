@@ -6,25 +6,9 @@ import java.util.ArrayList;
 //리사이클러뷰 테스트를 위해 임시로 구현
 public class Group implements Serializable {
     private String GroupName;  //Group name
-    private String PeopleName;
     private ArrayList<GroupMember> groupMember;
     private int PeopleNumber;  //Number of Group people
     private  int GroupColor = 0;
-    //private ArrayList<User> U;  //User List
-    //private ArrayList<Schedule> S;  //Schedule List
-
-    class GroupMember implements Serializable {
-        private String Name;
-        private int PhoneNumber;  //Number of Group people
-
-        public GroupMember(String GroupName, int PeopleNumber) {
-            this.Name = GroupName;
-            this.PhoneNumber = PeopleNumber;
-
-
-            
-        }
-    }
 
     public Group(String GroupName, int PeopleNumber) {
         groupMember = new ArrayList<GroupMember>();
