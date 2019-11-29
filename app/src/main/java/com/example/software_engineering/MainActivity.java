@@ -1,8 +1,11 @@
 package com.example.software_engineering;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.constraint.solver.GoalRow;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -78,7 +81,26 @@ public class MainActivity extends AppCompatActivity
         gps_schedule_adapter.notifyDataSetChanged();
 
 
+        /*
+        [AndroidManifest.xml]
+
+우선 안드로이드 메니페스트 파일 에  Vibrator 사용권한을 얻어옵니다.
+
+상단에 한줄만 추가하면 됩니다
+
+<uses-permission android:name="android.permission.VIBRATE"/>
+
+
+출처: https://bitsoul.tistory.com/129 [Happy Programmer~]
+        * */
+
+
+
     }
+
+
+
+
 
 
 
