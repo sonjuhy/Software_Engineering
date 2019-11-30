@@ -47,6 +47,8 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"/>
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+
+        <receiver android:name=".AlarmReceiver" android:exported="false" android:enabled="true"/>
     </application>
 
 </manifest>
