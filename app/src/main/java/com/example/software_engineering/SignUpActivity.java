@@ -114,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity implements Serializable {
         });
     }
 }
-class SignUp_Network implements Serializable{
+/*class SignUp_Network implements Serializable{
     private String Network_data;
     private Network n;
 
@@ -185,4 +185,4 @@ class SignUp_Network implements Serializable{
             return false;//Working is Success
         }
     }
-}
+}*/

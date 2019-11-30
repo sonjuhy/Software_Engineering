@@ -33,6 +33,7 @@ public class Group implements Serializable {
     public void GroupColor_input(int GroupColor){
         this.GroupColor = GroupColor;
     }
+    public void GroupMember_input(GroupMember GM){this.groupMember.add(GM);}
     public String GroupName_output() {
         return this.GroupName;
     }
@@ -42,13 +43,15 @@ public class Group implements Serializable {
     public int PeopleNumber_output() {
         return this.PeopleNumber;
     }
+    public ArrayList<GroupMember> GroupMember_output(){return this.groupMember;}
 }
 class Group_Network{
     private String Network_data;
     private Network n;
 
-    private void Network_Access() {
+    private void Network_Access(String Action, String Data) {
         n = new Network();//for Using Network without AsyncTask error
+        n.Input_data(Action, Data);
         try {
             Network_data = n.execute().get(); //execute Network and take return value to Network_data
         } catch (ExecutionException e) {
@@ -66,7 +69,7 @@ class Group_Network{
     public boolean Network_DataArrangement(User U, int chose, String... _param){ //Setting for Network Class Value before Working Network Class
         //_param mean String[] _param
         if(_param != null) {
-            if (chose == 1) {//Group Process
+            if (chose == 0) {//Group Process
                 switch (_param[0]) {//Frist Parameter(String)
                     case "UpLoad"://Login part
                         try {//Make and Fit a style data to send Network Class & Server
@@ -74,47 +77,78 @@ class Group_Network{
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
-                        n.Input_data("Schedule_UpLoad", Network_data);//Sending Data & kind of command to Network Class
-                        Network_Access();//Running Network
-                        if (Network_data.equals(false)) { //Login Failed
+                        Network_Access("Put_groupdb",Network_data);//Running Network
+                        if (Network_data.equals(false)) { //Upload Failed
                             System.out.println("UpLoad Failed");
                             return false;
-                        } else {//Login Success
+                        } else {//Upload Success
                             System.out.println("UpLoad Success");
                         }
                         break;
                     case "DownLoad"://Download User data part
-                        n.Input_data("Get_Schedule_Data");//Sending command to Network Class
-                        Network_Access();//Running Network
-                        Get_ScheduleData(Network_data, U);//translate JSonData from Server to Java and Save Data
+                        Network_Access("Get_groupdb","");//Running Network
+                        Get_GroupData(Network_data, U);//translate JSonData from Server to Java and Save Data
                         break;
                 }
             }
         }
         else{
-
+            switch ((_param[0])){
+                case "UpLoad":
+                    try {
+                        Network_data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(_param[1], "UTF-8");
+                        Network_data += "&" + URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(_param[2], "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    //Network_Access();
+                    Get_GroupData(Network_data, U);
+                    if (Network_data.equals(false)) { //Upload Failed
+                        System.out.println("UpLoad Failed");
+                        return false;
+                    } else {//Upload Success
+                        System.out.println("UpLoad Success");
+                    }
+                    break;
+                case "DownLoad":
+                    ArrayList<Group> tmp_G = U.UserGroup_Output();
+                    for(int i=0;i<tmp_G.size();i++) {
+                        Network_Access("Get_GroupMember", tmp_G.get(i).GroupName_output());
+                        Get_GroupMemberData(Network_data, tmp_G.get(i));
+                    }
+                    break;
+            }
         }
         return true;//Working is Success
     }
-    private void Get_ScheduleData(String mJsonString, User U){//Parsing data(JSon to Java)
+    private void Get_GroupData(String mJsonString, User U){//Parsing data(JSon to Java)
         System.out.println("mjson : "+mJsonString);
-
-        int Sound, Vibration ,AlarmRepeatCount;
-        double Place_x, Place_y;
+        String name_tmp = null;
         try{
             JSONObject jsonObject = new JSONObject(mJsonString);//Make object for Checking frist object data in JsonArray
             JSONArray jsonArray = jsonObject.getJSONArray(U.UserID_Output());//Checking JSonArray
 
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);//JSonArray[i] Data is moved to jsonObject1
+                name_tmp = jsonObject1.getString("groupName");
+                Group G = new Group(name_tmp,null,0);
+                U.Group_Input(G);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private void Get_GroupMemberData(String mJsonString, Group G){
+        String name_tmp = null;
+        try{
+            JSONObject jsonObject = new JSONObject(mJsonString);//Make object for Checking frist object data in JsonArray
+            JSONArray jsonArray = jsonObject.getJSONArray(G.GroupName_output());//Checking JSonArray
 
-                Sound = Integer.parseInt(jsonObject1.getString("Sound"));
-                Vibration = Integer.parseInt(jsonObject1.getString("Vibration"));
-                AlarmRepeatCount = Integer.parseInt(jsonObject1.getString("AlarmRepeatCount"));
-                Place_x = Double.parseDouble(jsonObject1.getString("Place_X"));
-                Place_y = Double.parseDouble(jsonObject1.getString("Place_Y"));
-                Schedule schedule_tmp = new Schedule();
-                U.UserSchedule_Output().add(schedule_tmp);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject1 = jsonArray.getJSONObject(i);//JSonArray[i] Data is moved to jsonObject1
+                name_tmp = jsonObject1.getString("userID");
+                GroupMember GM = new GroupMember(name_tmp,G.GroupName_output(),0);
+                G.GroupMember_input(GM);
             }
         } catch (JSONException e) {
             e.printStackTrace();

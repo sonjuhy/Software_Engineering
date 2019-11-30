@@ -37,13 +37,18 @@ public class MainActivity extends AppCompatActivity
         Schedule_Network schedule_network = new Schedule_Network();
         schedule_network.Network_DataArrangement(U,"DownLoad");
     }
+    private void LoginGetData_Group(){
+        Group_Network group_network = new Group_Network();
+        group_network.Network_DataArrangement(U,0,"DownLoad");//Group Name Load
+        group_network.Network_DataArrangement(U,1,"DownLoad");//Group Member Load
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         U = (User) getIntent().getSerializableExtra("User");
 
         LoginGetData_Schedule();//DownLoad Schedule Data from Server;
-        //LoginGetData_Group();//DownLoad Group Data from Server;
+        LoginGetData_Group();//DownLoad Group Data from Server;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
