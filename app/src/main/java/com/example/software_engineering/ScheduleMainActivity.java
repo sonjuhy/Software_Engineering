@@ -107,6 +107,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
         Intent intent = new Intent(this.getIntent());
 
         int i  = intent.getIntExtra("num", 1);
+        group_list= (ArrayList<String>)intent.getSerializableExtra("group");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// 벨소리 체크 박스
         class soundSwitchListener implements CompoundButton.OnCheckedChangeListener{
@@ -131,11 +132,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
         if(i == 1) { //날짜별 스케쥴
             setContentView(R.layout.activity_time_schedule);
 
-            group_list = new ArrayList<>();
-            group_list.add("철수");
-            group_list.add("영희");
-            group_list.add("람휘");
-            group_list.add("녹지");
+
             arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
             group_spinner = findViewById(R.id.spinner_group);
             group_spinner.setAdapter(arrayAdapter);
@@ -198,12 +195,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
         else if(i ==2) { //시간별 스케쥴
             setContentView(R.layout.activity_location_schedule);
-
-            group_list = new ArrayList<>();
-            group_list.add("철수");
-            group_list.add("영희");
-            group_list.add("람휘");
-            group_list.add("녹지");
             arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
             group_spinner = findViewById(R.id.spinner_group);
             group_spinner.setAdapter(arrayAdapter);

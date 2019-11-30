@@ -2,6 +2,7 @@ package com.example.software_engineering;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     private ListView list_location_schedule;
     private ArrayList<Schedule> time_scheduleArrayList;
     private ArrayList<Schedule> location_scheduleArrayList;
+    private ArrayList<String> groupArrayList = new ArrayList<>();
 
 
 
@@ -133,6 +135,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.add_schedule:
                 Intent intent = new Intent(getApplicationContext(),PopupActivity.class);
                 intent.putExtra("opt","add_schedule");
+                intent.putExtra("group",groupArrayList);
                 startActivity(intent);
 
             default:
@@ -152,7 +155,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
-            startActivity(intentToGroup);
+            startActivityForResult(intentToGroup,1);
 
 
         } else if (id == R.id.nav_slideshow) {
@@ -165,5 +168,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode==RESULT_OK){
+            groupArrayList = (ArrayList<String>) data.getSerializableExtra("list");
+        }
+    }
 }

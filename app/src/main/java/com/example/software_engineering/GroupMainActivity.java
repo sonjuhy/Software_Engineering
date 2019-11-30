@@ -20,6 +20,20 @@ public class GroupMainActivity extends AppCompatActivity {
     private CustomAdapter adapter;
 
     @Override
+    public void onBackPressed() {
+        ArrayList<String> output = new ArrayList<>();
+        Intent intent = new Intent();
+
+        for(Group g : groupArrayList){
+            output.add(g.GroupName_output());
+        }
+
+        intent.putExtra("list",output);
+        setResult(RESULT_OK,intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_main);
