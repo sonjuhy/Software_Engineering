@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity
     private Group G;
     private ListView list_time_schedule;
     private ListView list_gps_schedule;
+    private ArrayList<Schedule> time_scheduleArrayList;
+    private ArrayList<Schedule> place_scheduleArrayList;
+
+
+    Intent intent;
 
     private Schedule LoginGetData_Schedule(){
         S = new Schedule();
