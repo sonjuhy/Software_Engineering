@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Schedule> time_scheduleArrayList;
     private ArrayList<Schedule> place_scheduleArrayList;
 
-
+    private static final int REQUEST_CODE =777;
 
 
     private void LoginGetData_Schedule(){
@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity
         //private ListView list_location_schedule;
 
 
-   /*     time_scheduleArrayList = new ArrayList<>();
+
 
 // 사이 필요없는값 강제 넣기
 
-            Schedule time1 = new Schedule("첫번쨰", null,null,0,0,0,null);
-            time_scheduleArrayList.add(time1);
+        Schedule time1 = new Schedule("첫번쨰", null,null,0,0,0,null);
+        time_scheduleArrayList.add(time1);
         Schedule time2 = new Schedule("두번쨰", null,null,0,0,0,null);
         time_scheduleArrayList.add(time2);
         Schedule time3 = new Schedule("세번쨰", null,null,0,0,0,null);
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-*/
+
         //장소별 스케쥴 리스트 생성
         list_location_schedule = findViewById(R.id.list_location_schedule);
         List<String> gps_schedule_data = new ArrayList<>();
@@ -152,6 +152,17 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_Schedule) {
             drawer.closeDrawer(Gravity.LEFT);
+
+            Intent intent = new Intent(MainActivity.this,ScheduleMainActivity.class);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
+            bundle.putSerializable("place_scheduleArrayList" , place_scheduleArrayList);
+
+            intent.putExtras( bundle );
+            startActivityForResult(intent, REQUEST_CODE);
+
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
@@ -169,4 +180,26 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE)
+        {
+            if(resultCode == 0)
+            {
+                Bundle bundle = data.getExtras();
+                time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+            }
+            else if(resultCode == 1)
+            {
+                Bundle bundle = data.getExtras();
+                place_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("place_scheduleArrayList");
+            }
+            else
+            {
+                /////실패
+            }
+        }
+
+    }
 }
