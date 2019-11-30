@@ -7,7 +7,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.concurrent.ExecutionException;
 
 public class SignUpActivity extends AppCompatActivity implements Serializable {
 
@@ -15,6 +22,7 @@ public class SignUpActivity extends AppCompatActivity implements Serializable {
     private String ID;
     private String PW;
     private String Phone_Num;
+    private boolean result;
 
     private Button Ok_Button;
     private Button Cancle_Button;
@@ -27,13 +35,6 @@ public class SignUpActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        /*Ok_Button = findViewById(R.id.OK_button);
-        Cancel_Button = findViewById(R.id.Cancel_button);
-        Name_text = findViewById(R.id.Name_editText);
-        ID_text = findViewById(R.id.ID_editText);
-        PW_text = findViewById(R.id.PW_editText);
-        PhoneNum_text = findViewById(R.id.PhoneNum_editText);*/
-
         Ok_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,21 +44,92 @@ public class SignUpActivity extends AppCompatActivity implements Serializable {
                 Phone_Num = PhoneNum_text.getText().toString();
 
                 if(Name.matches("")){
-                    Toast.makeText(SignUpActivity.this, "Name is Empty", Toast.LENGTH_SHORT);
+                    Toast.makeText(SignUpActivity.this, "Name is Empty", Toast.LENGTH_SHORT).show();
                 }
                 else if(ID.matches("")){
-                    Toast.makeText(SignUpActivity.this, "ID is Empty", Toast.LENGTH_SHORT);
+                    Toast.makeText(SignUpActivity.this, "ID is Empty", Toast.LENGTH_SHORT).show();
                 }
                 else if(PW.matches("")){
-                    Toast.makeText(SignUpActivity.this, "PW is Empty", Toast.LENGTH_SHORT);
+                    Toast.makeText(SignUpActivity.this, "PW is Empty", Toast.LENGTH_SHORT).show();
                 }
                 else if(Phone_Num.matches("")){
-                    Toast.makeText(SignUpActivity.this, "Phone Num is Empty", Toast.LENGTH_SHORT);
+                    Toast.makeText(SignUpActivity.this, "Phone Num is Empty", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(SignUpActivity.this, "Sign Up is Success", Toast.LENGTH_SHORT);
+                    SignUp_Network signUp_network = new SignUp_Network();
+                    result = signUp_network.Network_DataArrangement("UpLoad",Name, ID, PW, Phone_Num);
+                    if(result) {
+                        Toast.makeText(SignUpActivity.this, "Sign Up is Success", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(SignUpActivity.this, "Sign Up is Failed", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
+        Cancle_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+}
+class SignUp_Network implements Serializable{
+    private String Network_data;
+    private Network n;
+
+    private boolean result;
+
+    private void Network_Access() {
+        n = new Network();//for Using Network without AsyncTask error
+        try {
+            Network_data = n.execute().get(); //execute Network and take return value to Network_data
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        while(true){
+            if(n.finish == true){  //when Network doInBackground is End
+                System.out.println("Asyn finish");
+                break;
+            }
+        }
+    }
+    public boolean Network_DataArrangement(String... _param){ //Setting for Network Class Value before Working Network Class
+        //_param mean String[] _param
+        if(_param != null){
+            switch(_param[0]){//Frist Parameter(String)
+                case "UpLoad"://Login part
+                    try {//Make and Fit a style data to send Network Class & Server
+                        Network_data = URLEncoder.encode("Name","UTF-8") + "=" + URLEncoder.encode(_param[1],"UTF-8");
+                        Network_data += URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(_param[2],"UTF-8");
+                        Network_data += URLEncoder.encode("PW","UTF-8") + "=" + URLEncoder.encode(_param[3],"UTF-8");
+                        Network_data += URLEncoder.encode("Phone_Num","UTF-8") + "=" + URLEncoder.encode(_param[4],"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    n.Input_data("Schedule_UpLoad",Network_data);//Sending Data & kind of command to Network Class
+                    Network_Access();//Running Network
+                    if(Network_data.equals(false)){ //Login Failed
+                        System.out.println("UpLoad Failed");
+                        return false;
+                    }
+                    else {//Login Success
+                        System.out.println("UpLoad Success");
+                    }
+                    break;
+                    default:
+                        result = false;
+                        break;
+            }
+        }
+        if(result == true){
+            return true;//Working is Success
+        }
+        else{
+            return false;//Working is Success
+        }
     }
 }

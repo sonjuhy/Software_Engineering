@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Network extends AsyncTask<String, Void, String> implements Serializable {
     protected boolean finish;
+    protected boolean Server_Response;
     protected String User_name;
     protected String data;
     private String url;
@@ -27,6 +28,7 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     private InputStream inputStream;
     Network(){
         finish = false;
+        Server_Response = false;
         User_name = null;
         data = null;
         url = null;
@@ -79,6 +81,7 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
 
             if(responseStatusCode == HttpURLConnection.HTTP_OK){
                 inputStream = httpURLConnection.getInputStream();
+                Server_Response = true;
                 System.out.println("Response OK");
             }
             else{
