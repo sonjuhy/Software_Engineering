@@ -23,6 +23,7 @@
             android:layout_marginBottom="10dp">
 
             <TextView
+                android:id="@+id/gName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -34,8 +35,10 @@
                 android:id="@+id/gName_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_column="1"
                 android:ems="9"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                tools:visibility="visible" />
 
         </TableRow>
 

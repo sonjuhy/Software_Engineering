@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,13 +47,61 @@ public class GroupSubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_sub);
 
-        Button button = findViewById(R.id.color_pick);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openColorPicker();
-            }
-        });
+        if(getIntent().getStringExtra("opt").equals("edit")){
+            Intent data = getIntent();
+            Group group = (Group) data.getSerializableExtra("item");
+
+            TextView textView = findViewById(R.id.gName);
+            TextView textView1 = findViewById(R.id.color);
+            EditText editText = findViewById(R.id.gName_input);
+            Button button = findViewById(R.id.color_pick);
+
+            TableRow.LayoutParams params = (TableRow.LayoutParams)textView.getLayoutParams();
+            params.gravity = Gravity.START;
+            params.span = 2;
+            textView.setLayoutParams(params);
+
+            textView.setText("그룹명   "+group.GroupName_output());
+            editText.setVisibility(View.GONE);
+
+            list = group.GroupMember_output();
+            textView1.setBackgroundColor(group.GroupColor_output());
+            button.setVisibility(View.GONE);
+
+            Button button2 = findViewById(R.id.member_edit);
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
+                    intent.putExtra("list", list);
+                    intent.putExtra("opt", "view");
+                    startActivityForResult(intent, 2);
+                }
+            });
+
+            intent.putExtra("position",data.getIntExtra("position",0));
+
+        }
+        else {
+            Button button = findViewById(R.id.color_pick);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openColorPicker();
+                }
+            });
+            Button button2 = findViewById(R.id.member_edit);
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
+                    intent.putExtra("list", list);
+                    intent.putExtra("opt", "delete");
+                    startActivityForResult(intent, 2);
+                }
+            });
+
+        }
 
         Button button1 = findViewById(R.id.add_member);
         button1.setOnClickListener(new View.OnClickListener() {
@@ -60,17 +110,6 @@ public class GroupSubActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
                 intent.putExtra("opt", "add_member");
                 startActivityForResult(intent, 1);
-            }
-        });
-
-        Button button2 = findViewById(R.id.member_edit);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
-                intent.putExtra("list", list);
-                intent.putExtra("opt", "delete");
-                startActivityForResult(intent, 2);
             }
         });
 

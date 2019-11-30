@@ -44,6 +44,10 @@ public class Group implements Serializable {
         return this.PeopleNumber;
     }
     public ArrayList<GroupMember> GroupMember_output(){return this.groupMember;}
+    public void setGroupMember(ArrayList<GroupMember> groupMember) {
+        this.groupMember = groupMember;
+        PeopleNumber = groupMember.size();
+    }
 }
 class Group_Network{
     private String Network_data;

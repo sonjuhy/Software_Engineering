@@ -35,7 +35,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
     private Spinner group_spinner;
     double locatin_x=0, locatin_y=0;
 
-
     ArrayList<String> group_list;
     ArrayList<String> alarm_count;
     ArrayAdapter<String> arrayAdapter;
@@ -189,7 +188,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     Bundle bundle = intent_schedule.getExtras();
                     time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                 ///add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요
+                 ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요 -> 이걸 왜 그룹으로 넘김 ?
                     setAlarm();
 
                     bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
@@ -251,7 +250,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     Bundle bundle = intent_schedule.getExtras();
                     location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요/// 위치정보 넘겨야됨
+                    //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요-> 이걸 왜 그룹으로 넘김 ?/// 위치정보 넘겨야됨
                     setAlarm();
 
                     bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);

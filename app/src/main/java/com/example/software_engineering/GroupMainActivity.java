@@ -12,11 +12,10 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-//리사이클러 뷰 테스트를 위해 임의 작성
 public class GroupMainActivity extends AppCompatActivity {
 
 
-    private ArrayList<Group> groupArrayList;
+    private static ArrayList<Group> groupArrayList = new ArrayList<>();
     private CustomAdapter adapter;
 
     @Override
@@ -24,6 +23,7 @@ public class GroupMainActivity extends AppCompatActivity {
         ArrayList<String> output = new ArrayList<>();
         Intent intent = new Intent();
 
+        output.add("");
         for(Group g : groupArrayList){
             output.add(g.GroupName_output());
         }
@@ -42,13 +42,15 @@ public class GroupMainActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
 
-        groupArrayList = new ArrayList<>();
-
         adapter = new CustomAdapter(groupArrayList);
         adapter.setOnItemClickListener(new CustomAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                //내용 추가 바람
+                Intent intent = new Intent(getApplicationContext(),GroupSubActivity.class);
+                intent.putExtra("opt","edit");
+                intent.putExtra("position",pos);
+                intent.putExtra("item",groupArrayList.get(pos));
+                startActivityForResult(intent,2);
             }
         });
         recyclerView.setAdapter(adapter);
@@ -59,11 +61,16 @@ public class GroupMainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(resultCode==RESULT_OK){
-            groupArrayList.add(new Group(
-                    data.getStringExtra("name"),
-                    (ArrayList<GroupMember>) data.getSerializableExtra("list"),
-                    data.getIntExtra("color",0)
-            ));
+            if(requestCode==1){
+                groupArrayList.add(new Group(
+                        data.getStringExtra("name"),
+                        (ArrayList<GroupMember>) data.getSerializableExtra("list"),
+                        data.getIntExtra("color",0)
+                ));
+            }
+            else if(requestCode==2){
+                groupArrayList.get(data.getIntExtra("position",0)).setGroupMember((ArrayList<GroupMember>) data.getSerializableExtra("list"));
+            }
             adapter.notifyDataSetChanged();
         }
     }
@@ -84,6 +91,7 @@ public class GroupMainActivity extends AppCompatActivity {
 
             case R.id.add_schedule:
                 Intent intent_add = new Intent(GroupMainActivity.this, GroupSubActivity.class);
+                intent_add.putExtra("opt","add");
                 startActivityForResult(intent_add,1);
 
             default:
