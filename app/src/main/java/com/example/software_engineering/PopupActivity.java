@@ -127,6 +127,7 @@ public class PopupActivity extends Activity {
         else if(opt.equals("add_schedule")){
             setContentView(R.layout.popup_add_schedule);
             final Intent schedule = new Intent(PopupActivity.this, ScheduleMainActivity.class);
+            schedule.putExtra("group",getIntent().getSerializableExtra("group"));
 
             Button time_button = findViewById(R.id.set_time_schedule);
             time_button.setOnClickListener(new View.OnClickListener() {

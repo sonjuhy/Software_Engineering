@@ -1,6 +1,7 @@
 package com.example.software_engineering;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,20 @@ public class GroupMainActivity extends AppCompatActivity {
     private CustomAdapter adapter;
 
     @Override
+    public void onBackPressed() {
+        ArrayList<String> output = new ArrayList<>();
+        Intent intent = new Intent();
+
+        for(Group g : groupArrayList){
+            output.add(g.GroupName_output());
+        }
+
+        intent.putExtra("list",output);
+        setResult(RESULT_OK,intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_main);
@@ -28,10 +43,6 @@ public class GroupMainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
 
         groupArrayList = new ArrayList<>();
-        groupArrayList.add(new Group("A",1));
-        groupArrayList.add(new Group("B",2));
-        groupArrayList.add(new Group("C",3));
-        groupArrayList.add(new Group("D",4));
 
         adapter = new CustomAdapter(groupArrayList);
         adapter.setOnItemClickListener(new CustomAdapter.OnItemClickListener() {
@@ -43,6 +54,18 @@ public class GroupMainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode==RESULT_OK){
+            groupArrayList.add(new Group(
+                    data.getStringExtra("name"),
+                    (ArrayList<GroupMember>) data.getSerializableExtra("list"),
+                    data.getIntExtra("color",0)
+            ));
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -61,7 +84,7 @@ public class GroupMainActivity extends AppCompatActivity {
 
             case R.id.add_schedule:
                 Intent intent_add = new Intent(GroupMainActivity.this, GroupSubActivity.class);
-                startActivity(intent_add);
+                startActivityForResult(intent_add,1);
 
             default:
                 return super.onOptionsItemSelected(item);

@@ -10,18 +10,18 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.ArrayList;
 
-public class CustomTimeAdapter extends BaseAdapter {
+public class CustomLocationAdapter extends BaseAdapter {
     LayoutInflater inflater = null;
-    private ArrayList<Schedule> time_schedule_list = null;
+    private ArrayList<Schedule> location_schedule_list = null;
     private int nListCnt = 0;
 
 
 
 
 
-    public CustomTimeAdapter(ArrayList<Schedule> time){
-        time_schedule_list = time;
-        nListCnt = time_schedule_list.size();
+    public CustomLocationAdapter(ArrayList<Schedule> location){
+        location_schedule_list = location;
+        nListCnt = location_schedule_list.size();
     }
 
 
@@ -51,14 +51,14 @@ public class CustomTimeAdapter extends BaseAdapter {
             {
                 inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             }
-            convertView = inflater.inflate(R.layout.time_list_layout, parent, false);
+            convertView = inflater.inflate(R.layout.location_list_layout, parent, false);
         }
 
         TextView name_schedule = (TextView) convertView.findViewById(R.id.name_schedule);
-        TextView time_schedule = (TextView) convertView.findViewById(R.id.time_schedule);
+        TextView location_schedule = (TextView) convertView.findViewById(R.id.location_schedule);
 
-        name_schedule.setText(time_schedule_list.get(position).Name);
-        time_schedule.setText(time_schedule_list.get(position).time_cal());
+        name_schedule.setText(location_schedule_list.get(position).Name);
+        location_schedule.setText(location_schedule_list.get(position).locationXY());
         return convertView;
     }
 }

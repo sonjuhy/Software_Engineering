@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class GroupSubActivity extends AppCompatActivity {
     TextView colorSample;
     //실제 구현에서는 new 하면 안되고 그룹 불러와야됨
     ArrayList<GroupMember> list = new ArrayList<>();
+    final Intent intent = new Intent();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -28,9 +30,11 @@ public class GroupSubActivity extends AppCompatActivity {
                 case 1:
                     GroupMember member = (GroupMember) data.getSerializableExtra("member");
                     list.add(member);
+                    intent.putExtra("list",list);
                     break;
                 case 2:
                     list = (ArrayList<GroupMember>) data.getSerializableExtra("list");
+                    intent.putExtra("list",list);
                     break;
             }
         }
@@ -74,7 +78,10 @@ public class GroupSubActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
+                EditText name = findViewById(R.id.gName_input);
+                intent.putExtra("name",name.getText().toString());
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
 
@@ -99,46 +106,10 @@ public class GroupSubActivity extends AppCompatActivity {
                 colorSample = findViewById(R.id.color);
                 colorPick = color;
                 colorSample.setBackgroundColor(color);
+                intent.putExtra("color",color);
             }
         });
         colorPicker.show();
     }
-
-
-
-
-
-
-
-
-    public void CreateNewGroup(String GroupName, int PeopleNumber) {
-        Group group = new Group(GroupName, PeopleNumber);
-        User user = new User();
-        user.Group_Input(group);
-    }
-
-    public void ReviseGroup(String GroupName, int PeopleNumber) {
-        User user = new User();
-        ArrayList GroupLIst = user.UserGroup_Output();
-        for (int i = 0; i < GroupLIst.size(); i++) {
-            if (GroupLIst.contains(GroupName)) {
-                int index = GroupLIst.indexOf(GroupLIst);
-                GroupLIst.set(index, new Group(GroupName, PeopleNumber));
-            }
-        }
-    }
-
-    public void DeleteGroup(String GroupName, int PeopleNumber) {
-        User user = new User();
-        ArrayList GroupLIst = user.UserGroup_Output();
-        for (int i = 0; i < GroupLIst.size(); i++) {
-            if (GroupLIst.contains(GroupName)) {
-                int index = GroupLIst.indexOf(GroupLIst);
-                GroupLIst.remove(index);
-            }
-        }
-    }
-
-
 }
 

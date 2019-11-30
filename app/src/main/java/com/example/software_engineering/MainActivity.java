@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     private ListView list_location_schedule;
     private ArrayList<Schedule> time_scheduleArrayList;
     private ArrayList<Schedule> place_scheduleArrayList;
+    private ArrayList<String> groupArrayList = new ArrayList<>();
 
     private static final int REQUEST_CODE =777;
 
@@ -70,8 +71,7 @@ public class MainActivity extends AppCompatActivity
         //private ListView list_time_schedule;
         //private ListView list_location_schedule;
 
-
-
+        time_scheduleArrayList = new ArrayList<>(); //시간별 리스트
 
 // 사이 필요없는값 강제 넣기
 
@@ -91,15 +91,25 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        //장소별 스케쥴 리스트 생성
-        list_location_schedule = findViewById(R.id.list_location_schedule);
-        List<String> gps_schedule_data = new ArrayList<>();
-        ArrayAdapter<String> gps_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, gps_schedule_data);
-        list_location_schedule.setAdapter(gps_schedule_adapter);
-        gps_schedule_data.add("타임 스케쥴1");
-        gps_schedule_data.add("타임 스케쥴2");
-        gps_schedule_adapter.notifyDataSetChanged();
 
+
+
+        location_scheduleArrayList = new ArrayList<>(); //장소별 리스트
+
+// 사이 필요없는값 강제 넣기
+
+        Schedule location1 = new Schedule("첫번쨰", null,0,0,0,0,0,null);
+        location_scheduleArrayList.add(location1);
+        Schedule location2 = new Schedule("두번쨰", null,0,0,0,0,0,null);
+        location_scheduleArrayList.add(location2);
+        Schedule location3 = new Schedule("세번쨰", null,0,0,0,0,0,null);
+        location_scheduleArrayList.add(location3);
+
+//
+
+        list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
+        CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
+        list_location_schedule.setAdapter(location_adapter);
 
     }
 
@@ -136,6 +146,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.add_schedule:
                 Intent intent = new Intent(getApplicationContext(),PopupActivity.class);
                 intent.putExtra("opt","add_schedule");
+                intent.putExtra("group",groupArrayList);
                 startActivity(intent);
 
             default:
@@ -166,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
-            startActivity(intentToGroup);
+            startActivityForResult(intentToGroup,1);
 
 
         } else if (id == R.id.nav_slideshow) {
@@ -185,7 +196,11 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE)
         {
-            if(resultCode == 0)
+            if(resultCode==RESULT_OK){
+                groupArrayList = (ArrayList<String>) data.getSerializableExtra("list");
+            }
+
+            else if(resultCode == 0)
             {
                 Bundle bundle = data.getExtras();
                 time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
