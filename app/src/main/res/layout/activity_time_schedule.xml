@@ -131,32 +131,6 @@
 
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="알람 횟수"
-                android:textSize="16sp" />
-
-            <Spinner
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:id="@+id/spinner_alarm_count"
-
-                android:spinnerMode="dropdown"/>
-            />
-
-
-        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -190,7 +164,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/store_schedule_button"
+            android:id="@+id/store_time_schedule_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp"

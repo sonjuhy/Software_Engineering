@@ -1,17 +1,8 @@
 package com.example.software_engineering;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Vibrator;
-import android.support.constraint.solver.GoalRow;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,9 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +24,12 @@ public class MainActivity extends AppCompatActivity
     private Schedule S;
     private Group G;
     private ListView list_time_schedule;
-    private ListView list_gps_schedule;
+    private ListView list_location_schedule;
+    private ArrayList<Schedule> time_scheduleArrayList;
+    private ArrayList<Schedule> place_scheduleArrayList;
+
+
+
 
     private void LoginGetData_Schedule(){
         Schedule_Network schedule_network = new Schedule_Network();
@@ -64,37 +58,47 @@ public class MainActivity extends AppCompatActivity
 
 
         //시간별 스케쥴 리스트 생성
-        list_time_schedule = findViewById(R.id.list_time_schedule);
+        /*list_time_schedule = findViewById(R.id.list_time_schedule);
         List<String> time_schedule_data = new ArrayList<>();
         ArrayAdapter<String> time_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, time_schedule_data);
         list_time_schedule.setAdapter(time_schedule_adapter);
         time_schedule_data.add("시간 스케쥴1");
         time_schedule_data.add("시간 스케쥴2");
-        time_schedule_adapter.notifyDataSetChanged();
+        time_schedule_adapter.notifyDataSetChanged();*/
 
+        //private ArrayList<Schedule> time_scheduleArrayList; 어레이리스트
+        //private ListView list_time_schedule;
+        //private ListView list_location_schedule;
+
+
+   /*     time_scheduleArrayList = new ArrayList<>();
+
+// 사이 필요없는값 강제 넣기
+
+            Schedule time1 = new Schedule("첫번쨰", null,null,0,0,0,null);
+            time_scheduleArrayList.add(time1);
+        Schedule time2 = new Schedule("두번쨰", null,null,0,0,0,null);
+        time_scheduleArrayList.add(time2);
+        Schedule time3 = new Schedule("세번쨰", null,null,0,0,0,null);
+        time_scheduleArrayList.add(time3);
+
+//
+
+        list_time_schedule = (ListView)findViewById(R.id.list_time_schedule);
+        CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
+        list_time_schedule.setAdapter(time_adapter);
+
+
+
+*/
         //장소별 스케쥴 리스트 생성
-        list_gps_schedule = findViewById(R.id.list_gps_schedule);
+        list_location_schedule = findViewById(R.id.list_location_schedule);
         List<String> gps_schedule_data = new ArrayList<>();
         ArrayAdapter<String> gps_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, gps_schedule_data);
-        list_gps_schedule.setAdapter(gps_schedule_adapter);
+        list_location_schedule.setAdapter(gps_schedule_adapter);
         gps_schedule_data.add("타임 스케쥴1");
         gps_schedule_data.add("타임 스케쥴2");
         gps_schedule_adapter.notifyDataSetChanged();
-
-
-        /*
-        [AndroidManifest.xml]
-
-우선 안드로이드 메니페스트 파일 에  Vibrator 사용권한을 얻어옵니다.
-
-상단에 한줄만 추가하면 됩니다
-
-<uses-permission android:name="android.permission.VIBRATE"/>
-
-
-출처: https://bitsoul.tistory.com/129 [Happy Programmer~]
-        * */
-
 
 
     }
@@ -148,9 +152,6 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_Schedule) {
             drawer.closeDrawer(Gravity.LEFT);
-            /*Intent intentToSchedule = new Intent(MainActivity.this, Schedule.class);
-            intentToSchedule.putExtra("Schedule",S);
-            startActivity(intentToSchedule);*/
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
