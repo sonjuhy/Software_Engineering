@@ -17,10 +17,11 @@ public class Group implements Serializable {
     private int PeopleNumber;  //Number of Group people
     private int GroupColor = 0;
 
-    public Group(String GroupName, int PeopleNumber) {
-        groupMember = new ArrayList<GroupMember>();
-        this.GroupName = GroupName;
-        this.PeopleNumber = PeopleNumber;
+    public Group(String groupName, ArrayList<GroupMember> groupMember, int groupColor) {
+        GroupName = groupName;
+        this.groupMember = groupMember;
+        PeopleNumber = groupMember.size();
+        GroupColor = groupColor;
     }
 
     public void GroupName_input(String GroupName) {
