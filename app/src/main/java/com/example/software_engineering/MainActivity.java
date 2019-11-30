@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Schedule> place_scheduleArrayList;
 
 
-    Intent intent;
+
 
     private void LoginGetData_Schedule(){
         Schedule_Network schedule_network = new Schedule_Network();
@@ -85,21 +85,6 @@ public class MainActivity extends AppCompatActivity
         gps_schedule_data.add("타임 스케쥴1");
         gps_schedule_data.add("타임 스케쥴2");
         gps_schedule_adapter.notifyDataSetChanged();
-
-
-        /*
-        [AndroidManifest.xml]
-
-우선 안드로이드 메니페스트 파일 에  Vibrator 사용권한을 얻어옵니다.
-
-상단에 한줄만 추가하면 됩니다
-
-<uses-permission android:name="android.permission.VIBRATE"/>
-
-
-출처: https://bitsoul.tistory.com/129 [Happy Programmer~]
-        * */
-
 
 
     }
@@ -153,9 +138,6 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_Schedule) {
             drawer.closeDrawer(Gravity.LEFT);
-            /*Intent intentToSchedule = new Intent(MainActivity.this, Schedule.class);
-            intentToSchedule.putExtra("Schedule",S);
-            startActivity(intentToSchedule);*/
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
