@@ -183,13 +183,21 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
 
 
-            Button store_time_schedule_button = findViewById(R.id.store_time_schedule_button); //스케쥴 추가에 취소 버튼
+            Button store_time_schedule_button = findViewById(R.id.store_time_schedule_button); //스케쥴 추가 버튼
             store_time_schedule_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v){
+                    Intent intent_schedule = getIntent();
+                    Bundle bundle = intent_schedule.getExtras();
+                    time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                 ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요
+                 ///add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요
                     setAlarm();
+
+                    bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
+                    intent_schedule.putExtras( bundle );
+                    setResult(0,intent_schedule);
+                    finish();
                 }
             });
 
@@ -246,9 +254,18 @@ public class ScheduleMainActivity extends AppCompatActivity {
             store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v){
+
+                    Intent intent_schedule = getIntent();
+                    Bundle bundle = intent_schedule.getExtras();
+                    place_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("place_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
                     //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요/// 위치정보 넘겨야됨
-                    //////setAlarm(); 위치기반 알람??????????????????????????????
+                    setAlarm();
+
+                    bundle.putSerializable("place_scheduleArrayList" , place_scheduleArrayList);
+                    intent_schedule.putExtras( bundle );
+                    setResult(0,intent_schedule);
+                    finish();
                 }
             });
 
