@@ -51,7 +51,7 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
         super.onPreExecute();
         //this.url = "http://sonjuhy.iptime.org/SE/Login_Check.php";
         this.url = "http://sonjuhy.iptime.org/SE/"+arr_String[0]+".php";
-        System.out.println("onPre Success");
+        System.out.println("onPre Success : "+this.url);
     }
 
     @Override
@@ -116,6 +116,7 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     }
 }
 class Network_Access implements Serializable{
+    public boolean Server_Response;
     public String Network_Access(String Action, String Network_data) {
         Network n = new Network();//for Using Network without AsyncTask error
         n.Input_data(Action, Network_data);//Sending Data & kind of command to Network Class
@@ -126,6 +127,9 @@ class Network_Access implements Serializable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        this.Server_Response = n.Server_Response;
+        System.out.println("Network Access n.Response : "+n.Server_Response);
+        System.out.println("Network Access na.Response : "+this.Server_Response);
         while(true){
             if(n.finish == true){  //when Network doInBackground is End
                 System.out.println("Asyn finish");

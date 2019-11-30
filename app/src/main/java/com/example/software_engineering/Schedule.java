@@ -92,8 +92,12 @@ class Schedule_Network implements Serializable{
     private String Network_data;
     private Network n;
 
-    private void Network_Access() {
+    Schedule_Network(){
+        n = new Network();
+    }
+    private void Network_Access(String Action, String Data) {
         n = new Network();//for Using Network without AsyncTask error
+        n.Input_data(Action, Data);
         try {
             Network_data = n.execute().get(); //execute Network and take return value to Network_data
         } catch (ExecutionException e) {
@@ -124,8 +128,7 @@ class Schedule_Network implements Serializable{
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    n.Input_data("Schedule_UpLoad",Network_data);//Sending Data & kind of command to Network Class
-                    Network_Access();//Running Network
+                    Network_Access("Schedule_UpLoad", Network_data);//Sending Data, kind of command to Network Class &Running Network
                     if(Network_data.equals(false)){ //Login Failed
                         System.out.println("UpLoad Failed");
                         return false;
@@ -135,8 +138,7 @@ class Schedule_Network implements Serializable{
                     }
                     break;
                 case "DownLoad"://Download User data part
-                    n.Input_data("Get_Schedule_Data");//Sending command to Network Class
-                    Network_Access();//Running Network
+                    Network_Access("Get_ScheduleData",U.UserID_Output());//Sending command to Network Class & Running Network
                     Get_ScheduleData(Network_data, U);//translate JSonData from Server to Java and Save Data
                     break;
             }
@@ -160,7 +162,7 @@ class Schedule_Network implements Serializable{
                 AlarmRepeatCount = Integer.parseInt(jsonObject1.getString("AlarmRepeatCount"));
                 Place_x = Double.parseDouble(jsonObject1.getString("Place_X"));
                 Place_y = Double.parseDouble(jsonObject1.getString("Place_Y"));
-                Schedule schedule_tmp = new Schedule();
+                Schedule schedule_tmp = new Schedule();//Data Input
                 U.Schedule_Input(schedule_tmp);
             }
         } catch (JSONException e) {

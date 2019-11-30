@@ -46,20 +46,25 @@ public class User implements Serializable {//implements Serializable for using i
                         e.printStackTrace();
                     }
                     Network_data = na.Network_Access("Login_Check", Network_data);//Running Network
-                    System.out.println("Server Response : "+n.Server_Response);
-                    if(Network_data.equals("Failed") || n.Server_Response == false){ //Login Failed
+                    System.out.println("Server Response : "+na.Server_Response);
+                    if(Network_data.equals("Failed") || na.Server_Response == false){ //Login Failed
                         System.out.println("Login Failed");
                         Login_check = false;
                     }
                     else { //Login Success
-                        this.Name = Network_data;
-                        Network_data = na.Network_Access("Get_UserData",Network_data);//Running Network
-                        this.Phone_Num = Network_data;
+                        this.ID = Network_data;
+                        if(this.ID.equals("")) {
+                            Login_check = false;
+                        }
+                        else {
+                            Network_data = na.Network_Access("Get_UserData", Network_data);//Running Network
+                            this.Phone_Num = Network_data;
+                        }
                     }
                     break;
                 case "Get_Data"://Download User data part
                     na.Network_Access("Get_UserData",Network_data);//Running Network
-                    Get_UserData(Network_data, this.Name);//translate JSonData from Server to Java and Save Data
+                    Get_UserData(Network_data, this.ID);//translate JSonData from Server to Java and Save Data
                     break;
                 case "Upload_Data"://Upload User data to Server
                     try{//Make and Fit a style data to send Network Class & Server
@@ -82,11 +87,11 @@ public class User implements Serializable {//implements Serializable for using i
             return true;//Working is Success
         }
     }
-    private void Get_UserData(String mJsonString, String User_name){//Parsing data(JSon to Java)
+    private void Get_UserData(String mJsonString, String User_ID){//Parsing data(JSon to Java)
         System.out.println("mjson : "+mJsonString);
         try{
             JSONObject jsonObject = new JSONObject(mJsonString);//Make object for Checking frist object data in JsonArray
-            JSONArray jsonArray = jsonObject.getJSONArray(User_name);//Checking JSonArray
+            JSONArray jsonArray = jsonObject.getJSONArray(User_ID);//Checking JSonArray
 
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);//JSonArray[i] Data is moved to jsonObject1
