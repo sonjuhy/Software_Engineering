@@ -37,16 +37,17 @@ public class MainActivity extends AppCompatActivity
     private ListView list_time_schedule;
     private ListView list_gps_schedule;
 
-    private Schedule LoginGetData_Schedule(){
-        S = new Schedule();
-        S.Network_DataArrangement("DownLoad");
-        return S;
+    private void LoginGetData_Schedule(){
+        Schedule_Network schedule_network = new Schedule_Network();
+        schedule_network.Network_DataArrangement(U,"DownLoad");
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         U = (User) getIntent().getSerializableExtra("User");
 
+        LoginGetData_Schedule();//DownLoad Schedule Data from Server;
+        //LoginGetData_Group();//DownLoad Group Data from Server;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

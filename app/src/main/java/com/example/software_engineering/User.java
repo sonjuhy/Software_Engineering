@@ -46,14 +46,15 @@ public class User implements Serializable {//implements Serializable for using i
                         e.printStackTrace();
                     }
                     Network_data = na.Network_Access("Login_Check", Network_data);//Running Network
-                    if(Network_data.equals("Failed")){ //Login Failed
+                    System.out.println("Server Response : "+n.Server_Response);
+                    if(Network_data.equals("Failed") || n.Server_Response == false){ //Login Failed
                         System.out.println("Login Failed");
                         Login_check = false;
                     }
                     else { //Login Success
                         this.Name = Network_data;
                         Network_data = na.Network_Access("Get_UserData",Network_data);//Running Network
-                        System.out.println("Load Name : " + this.Name);
+                        this.Phone_Num = Network_data;
                     }
                     break;
                 case "Get_Data"://Download User data part
@@ -77,7 +78,9 @@ public class User implements Serializable {//implements Serializable for using i
         }
         if(Login_check == false)
             return false;
-        return true;//Working is Success
+        else {
+            return true;//Working is Success
+        }
     }
     private void Get_UserData(String mJsonString, String User_name){//Parsing data(JSon to Java)
         System.out.println("mjson : "+mJsonString);
