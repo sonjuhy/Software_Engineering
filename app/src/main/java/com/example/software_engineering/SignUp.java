@@ -158,7 +158,7 @@ class SignUp_Network implements Serializable {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    Network_Access("Schedule_UpLoad",Network_data);//Sending Data & kind of command to Network Class Running Network
+                    Network_Access("Get_UserData",Network_data);//Sending Data & kind of command to Network Class Running Network
                     if(Network_data.equals(false)){ //Login Failed
                         System.out.println("UpLoad Failed");
                         return false;

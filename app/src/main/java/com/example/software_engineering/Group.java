@@ -86,7 +86,7 @@ class Group_Network{
                         }
                         break;
                     case "DownLoad"://Download User data part
-                        Network_Access("Get_groupdb","");//Running Network
+                        Network_Access("Get_GroupName","");//Running Network
                         Get_GroupData(Network_data, U);//translate JSonData from Server to Java and Save Data
                         break;
                 }
