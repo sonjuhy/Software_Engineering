@@ -31,7 +31,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
     int schedule_sound =0;
     int schedule_vibration =0;
     private Spinner group_spinner;
-    private Spinner alarm_spinner;
 
     ArrayList<String> group_list;
     ArrayList<String> alarm_count;
@@ -138,13 +137,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
             group_spinner = findViewById(R.id.spinner_group);
             group_spinner.setAdapter(arrayAdapter);
 
-            alarm_count = new ArrayList<>();
-            alarm_count.add("1회");
-            alarm_count.add("2회");
-            alarm_count.add("3회");
-            alarmAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, alarm_count);
-            alarm_spinner = findViewById(R.id.spinner_alarm_count);
-            alarm_spinner.setAdapter(alarmAdapter);
 
 
             Button time_button = findViewById(R.id.time_button); // 스케쥴 시간창 추가
@@ -175,16 +167,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 }
             });
 
-            alarm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    //spinner에서 가장 위에가 i= 0번~쭈루룩
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
 
-                }
-            });
 
             Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
             exit_schedule.setOnClickListener(new View.OnClickListener() {
@@ -222,13 +205,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
             group_spinner = findViewById(R.id.spinner_group);
             group_spinner.setAdapter(arrayAdapter);
 
-            alarm_count = new ArrayList<>();
-            alarm_count.add("1회");
-            alarm_count.add("2회");
-            alarm_count.add("3회");
-            alarmAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, alarm_count);
-            alarm_spinner = findViewById(R.id.spinner_alarm_count);
-            alarm_spinner.setAdapter(alarmAdapter);
+
 
 
 
@@ -242,17 +219,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
             });
 
             group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    //spinner에서 가장 위에가 i= 0번~쭈루룩
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-            alarm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     //spinner에서 가장 위에가 i= 0번~쭈루룩
