@@ -1,5 +1,7 @@
 package com.example.software_engineering;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     int schedule_sound =0;
     int schedule_vibration =0;
     private Spinner group_spinner;
+    double locatin_x=0, locatin_y=0;
 
     ArrayList<String> group_list;
     ArrayList<String> alarm_count;
@@ -178,18 +181,18 @@ public class ScheduleMainActivity extends AppCompatActivity {
             });
 
 
-            Button store_schedule_button = findViewById(R.id.store_schedule_button); // 스케쥴 시간창 추가
 
-       /* time_button.setOnClickListener(new View.OnClickListener() {
-            Button store_time_schedule_button = findViewById(R.id.store_time_schedule_button); // 스케쥴 시간창 추가
+
+            Button store_time_schedule_button = findViewById(R.id.store_time_schedule_button); //스케쥴 추가에 취소 버튼
             store_time_schedule_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                //add_schedule(R.id.schedule_name_input,content,time,alarmRepeatCount,alarmType,group);
-                // add_schedule(name, content, calendar, alarmRepeatCount, alarmType, group);
-            }
-        });*/
+                @Override
+                public void onClick (View v){
+                    String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
+                 ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요
+                    setAlarm();
+                }
+            });
+
 
         }
 
@@ -239,14 +242,15 @@ public class ScheduleMainActivity extends AppCompatActivity {
             });
 
 
-           // Button store_location_schedule_button = findViewById(R.id.store_location_schedule_button); //
-          //  store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
-           // @Override
-          // public void onClick(View v) {
-             //   String content= null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-               // add_schedule(R.id.schedule_name_input,calendar,alarmRepeatCount,schedule_sound, schedule_vibration, group);
-           // }///////////----------------------------------------
-        //});
+            Button store_location_schedule_button = findViewById(R.id.store_location_schedule_button); //스케쥴 추가에 취소 버튼
+            store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick (View v){
+                    String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
+                    //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요/// 위치정보 넘겨야됨
+                    //////setAlarm(); 위치기반 알람??????????????????????????????
+                }
+            });
 
         }
 
@@ -264,6 +268,26 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
 
     }
+    /* 알람 등록 */
+    private void setAlarm() {
+        // 알람 시간 설정
+
+        // 현재일보다 이전이면 등록 실패
+        if (this.calendar.before(Calendar.getInstance())) {
+            Toast.makeText(this, "알람시간이 현재시간보다 이전일 수 없습니다.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Receiver 설정
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // 알람 설정
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
+
+    }
+
 
 
     void showDate() {

@@ -104,6 +104,13 @@ public class GroupSubActivity extends AppCompatActivity {
         colorPicker.show();
     }
 
+
+
+
+
+
+
+
     public void CreateNewGroup(String GroupName, int PeopleNumber) {
         Group group = new Group(GroupName, PeopleNumber);
         User user = new User();
