@@ -2,7 +2,6 @@ package com.example.software_engineering;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Schedule> location_scheduleArrayList;
     private ArrayList<String> groupArrayList = new ArrayList<>();
 
-
+    private static final int REQUEST_CODE =777;
 
 
     private void LoginGetData_Schedule(){
@@ -64,6 +63,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        //시간별 스케쥴 리스트 생성
+        /*list_time_schedule = findViewById(R.id.list_time_schedule);
+        List<String> time_schedule_data = new ArrayList<>();
+        ArrayAdapter<String> time_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, time_schedule_data);
+        list_time_schedule.setAdapter(time_schedule_adapter);
+        time_schedule_data.add("시간 스케쥴1");
+        time_schedule_data.add("시간 스케쥴2");
+        time_schedule_adapter.notifyDataSetChanged();*/
+
+        //private ArrayList<Schedule> time_scheduleArrayList; 어레이리스트
+        //private ListView list_time_schedule;
+        //private ListView list_location_schedule;
 
         time_scheduleArrayList = new ArrayList<>(); //시간별 리스트
 
@@ -157,6 +168,17 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_Schedule) {
             drawer.closeDrawer(Gravity.LEFT);
+
+            Intent intent = new Intent(MainActivity.this,ScheduleMainActivity.class);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
+            bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
+
+            intent.putExtras( bundle );
+            startActivityForResult(intent, REQUEST_CODE);
+
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
@@ -173,10 +195,31 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode==RESULT_OK){
-            groupArrayList = (ArrayList<String>) data.getSerializableExtra("list");
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE)
+        {
+            if(resultCode==RESULT_OK){
+                groupArrayList = (ArrayList<String>) data.getSerializableExtra("list");
+            }
+
+            else if(resultCode == 0)
+            {
+                Bundle bundle = data.getExtras();
+                time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+            }
+            else if(resultCode == 1)
+            {
+                Bundle bundle = data.getExtras();
+                location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
+            }
+            else
+            {
+                /////실패
+            }
         }
+
     }
 }
