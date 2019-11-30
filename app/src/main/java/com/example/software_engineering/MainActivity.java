@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
     private ListView list_time_schedule;
     private ListView list_location_schedule;
     private ArrayList<Schedule> time_scheduleArrayList;
-    private ArrayList<Schedule> place_scheduleArrayList;
+    private ArrayList<Schedule> location_scheduleArrayList;
 
 
 
@@ -57,26 +57,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //시간별 스케쥴 리스트 생성
-        /*list_time_schedule = findViewById(R.id.list_time_schedule);
-        List<String> time_schedule_data = new ArrayList<>();
-        ArrayAdapter<String> time_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, time_schedule_data);
-        list_time_schedule.setAdapter(time_schedule_adapter);
-        time_schedule_data.add("시간 스케쥴1");
-        time_schedule_data.add("시간 스케쥴2");
-        time_schedule_adapter.notifyDataSetChanged();*/
 
-        //private ArrayList<Schedule> time_scheduleArrayList; 어레이리스트
-        //private ListView list_time_schedule;
-        //private ListView list_location_schedule;
-
-
-   /*     time_scheduleArrayList = new ArrayList<>();
+        time_scheduleArrayList = new ArrayList<>(); //시간별 리스트
 
 // 사이 필요없는값 강제 넣기
 
-            Schedule time1 = new Schedule("첫번쨰", null,null,0,0,0,null);
-            time_scheduleArrayList.add(time1);
+        Schedule time1 = new Schedule("첫번쨰", null,null,0,0,0,null);
+        time_scheduleArrayList.add(time1);
         Schedule time2 = new Schedule("두번쨰", null,null,0,0,0,null);
         time_scheduleArrayList.add(time2);
         Schedule time3 = new Schedule("세번쨰", null,null,0,0,0,null);
@@ -90,16 +77,26 @@ public class MainActivity extends AppCompatActivity
 
 
 
-*/
-        //장소별 스케쥴 리스트 생성
-        list_location_schedule = findViewById(R.id.list_location_schedule);
-        List<String> gps_schedule_data = new ArrayList<>();
-        ArrayAdapter<String> gps_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, gps_schedule_data);
-        list_location_schedule.setAdapter(gps_schedule_adapter);
-        gps_schedule_data.add("타임 스케쥴1");
-        gps_schedule_data.add("타임 스케쥴2");
-        gps_schedule_adapter.notifyDataSetChanged();
 
+
+
+
+        location_scheduleArrayList = new ArrayList<>(); //장소별 리스트
+
+// 사이 필요없는값 강제 넣기
+
+        Schedule location1 = new Schedule("첫번쨰", null,0,0,0,0,0,null);
+        location_scheduleArrayList.add(location1);
+        Schedule location2 = new Schedule("두번쨰", null,0,0,0,0,0,null);
+        location_scheduleArrayList.add(location2);
+        Schedule location3 = new Schedule("세번쨰", null,0,0,0,0,0,null);
+        location_scheduleArrayList.add(location3);
+
+//
+
+        list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
+        CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
+        list_location_schedule.setAdapter(location_adapter);
 
     }
 
