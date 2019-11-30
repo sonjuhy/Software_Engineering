@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
     private ListView list_time_schedule;
     private ListView list_location_schedule;
     private ArrayList<Schedule> time_scheduleArrayList;
-    private ArrayList<Schedule> place_scheduleArrayList;
+    private ArrayList<Schedule> location_scheduleArrayList;
     private ArrayList<String> groupArrayList = new ArrayList<>();
 
     private static final int REQUEST_CODE =777;
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity
             Bundle bundle = new Bundle();
 
             bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
-            bundle.putSerializable("place_scheduleArrayList" , place_scheduleArrayList);
+            bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
 
             intent.putExtras( bundle );
             startActivityForResult(intent, REQUEST_CODE);
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity
             else if(resultCode == 1)
             {
                 Bundle bundle = data.getExtras();
-                place_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("place_scheduleArrayList");
+                location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
             }
             else
             {

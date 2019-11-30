@@ -28,12 +28,13 @@ import java.util.*;
 public class ScheduleMainActivity extends AppCompatActivity {
 
     private ArrayList<Schedule> time_scheduleArrayList;
-    private ArrayList<Schedule> place_scheduleArrayList;
+    private ArrayList<Schedule> location_scheduleArrayList;
     int y=0, m=0, d=0, h=0, mi=0;
     int schedule_sound =0;
     int schedule_vibration =0;
     private Spinner group_spinner;
     double locatin_x=0, locatin_y=0;
+
 
     ArrayList<String> group_list;
     ArrayList<String> alarm_count;
@@ -44,12 +45,12 @@ public class ScheduleMainActivity extends AppCompatActivity {
     public ScheduleMainActivity()
     {
         time_scheduleArrayList = new ArrayList<Schedule>();
-        place_scheduleArrayList = new ArrayList<Schedule>();
+        location_scheduleArrayList = new ArrayList<Schedule>();
     };
 
     public void add_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
-        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
+        location_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
     }
     public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
@@ -77,16 +78,16 @@ public class ScheduleMainActivity extends AppCompatActivity {
                                   int alarmRepeatCount,int sound ,int vibration,Group group,int index)
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
-        place_scheduleArrayList.remove(index);
-        place_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
+        location_scheduleArrayList.remove(index);
+        location_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
     }
 
     public void modified_schedule(String name, String content,Calendar calendar,
                                   int alarmRepeatCount,int sound ,int vibration,Group group,int index)
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
-        place_scheduleArrayList.remove(index);
-        place_scheduleArrayList.add(new Schedule(name,content,calendar,alarmRepeatCount,sound,vibration, group));
+        location_scheduleArrayList.remove(index);
+        location_scheduleArrayList.add(new Schedule(name,content,calendar,alarmRepeatCount,sound,vibration, group));
     }
 
 
@@ -96,7 +97,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     }
     public void remove_palce_schedule(int index)
     {
-        place_scheduleArrayList.remove(index);
+        location_scheduleArrayList.remove(index);
     }
 
 
@@ -248,12 +249,12 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
                     Intent intent_schedule = getIntent();
                     Bundle bundle = intent_schedule.getExtras();
-                    place_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("place_scheduleArrayList");
+                    location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
                     //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요/// 위치정보 넘겨야됨
                     setAlarm();
 
-                    bundle.putSerializable("place_scheduleArrayList" , place_scheduleArrayList);
+                    bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
                     intent_schedule.putExtras( bundle );
                     setResult(0,intent_schedule);
                     finish();
