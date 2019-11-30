@@ -52,7 +52,7 @@
                 android:text="장소별 일정"/>
 
             <ListView
-                android:id="@+id/list_gps_schedule"
+                android:id="@+id/list_location_schedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
