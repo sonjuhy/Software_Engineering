@@ -153,18 +153,20 @@ class SignUp_Network implements Serializable {
                     try {//Make and Fit a style data to send Network Class & Server
                         Network_data = URLEncoder.encode("Name","UTF-8") + "=" + URLEncoder.encode(_param[1],"UTF-8");
                         Network_data += "&" + URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(_param[2],"UTF-8");
+                        Network_data += "&" +URLEncoder.encode("Phone","UTF-8") + "=" + URLEncoder.encode(_param[4],"UTF-8");
                         Network_data += "&" +URLEncoder.encode("PW","UTF-8") + "=" + URLEncoder.encode(_param[3],"UTF-8");
-                        Network_data += "&" +URLEncoder.encode("Phone_Num","UTF-8") + "=" + URLEncoder.encode(_param[4],"UTF-8");
+
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
                     Network_Access("SignUp",Network_data);//Sending Data & kind of command to Network Class Running Network
                     if(!Network_data.equals("Success")){ //Login Failed
                         System.out.println("UpLoad Failed");
-                        return false;
+                        result = false;
                     }
                     else {//Login Success
                         System.out.println("UpLoad Success");
+                        result = true;
                     }
                     break;
                 case "IDCheck":

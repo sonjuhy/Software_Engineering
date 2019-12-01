@@ -14,10 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class PopupActivity extends Activity {
 
+    private boolean result;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +41,19 @@ public class PopupActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     //검색 기능 구현 후 해당하는 값 밑에 대입
-                    member.id="아이디";
-                    member.name = "이름";
-                    member.PhoneNumber = 1;
-                    textView.setText("ID: "+member.id+", 이름: "+member.name);
+                    PopUp_Network popUp_network = new PopUp_Network();
+                    result = popUp_network.Network_DataArrangement("Search",editText.getText().toString());
+                    if(result){
+                        User User_search = new User();
+                        User_search.UserInfo_Input("",editText.getText().toString(),"","");
+                        User_search.Network_DataArrangement("Get_Data","");
+                        member.id=User_search.UserID_Output();
+                        member.name = User_search.UserName_Output();
+                        textView.setText("ID: "+member.id+", 이름: "+member.name);
+                    }
+                    else{
+                        textView.setText("찾을수 없습니다.");
+                    }
                 }
             });
 
@@ -155,5 +168,49 @@ public class PopupActivity extends Activity {
         if(event.getAction()==MotionEvent.ACTION_OUTSIDE)
             return false;
         return true;
+    }
+}
+class PopUp_Network{
+    private Network n;
+    private String Network_data;
+    private void Network_Access(String Action, String Data) {
+        n = new Network();//for Using Network without AsyncTask error
+        n.Input_data(Action, Data);
+        try {
+            Network_data = n.execute().get(); //execute Network and take return value to Network_data
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        while(true){
+            if(n.finish == true){  //when Network doInBackground is End
+                System.out.println("Asyn finish");
+                break;
+            }
+        }
+    }
+    public boolean Network_DataArrangement(String... _param){ //Setting for Network Class Value before Working Network Class
+        //_param mean String[] _param
+        if(_param != null){
+            switch(_param[0]){//Frist Parameter(String)
+                case "Search"://Login part
+                    try {//Make and Fit a style data to send Network Class & Server
+                        Network_data = URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(_param[1],"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    Network_Access("SignUp_IDCheck", Network_data);//Sending Data, kind of command to Network Class &Running Network
+                    if(Network_data.equals(false)){ //Login Failed
+                        System.out.println("Search Failed");
+                        return false;
+                    }
+                    else {//Login Success
+                        System.out.println("Search Success");
+                    }
+                    break;
+            }
+        }
+        return true;//Working is Success
     }
 }

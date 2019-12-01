@@ -63,15 +63,20 @@ public class User implements Serializable {//implements Serializable for using i
                     }
                     break;
                 case "Get_Data"://Download User data part
+                    try {
+                        Network_data = URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(this.ID,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                     na.Network_Access("Get_UserData",Network_data);//Running Network
                     Get_UserData(Network_data, this.ID);//translate JSonData from Server to Java and Save Data
                     break;
                 case "Upload_Data"://Upload User data to Server
                     try{//Make and Fit a style data to send Network Class & Server
                         Network_data = URLEncoder.encode("NAME","UTF-8") + "=" + URLEncoder.encode(this.Name,"UTF-8");
-                        Network_data += URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(this.ID,"UTF-8");
-                        Network_data += URLEncoder.encode("PW","UTF-8") + "=" + URLEncoder.encode(this.PW,"UTF-8");
-                        Network_data += URLEncoder.encode("Phone_Num","UTF-8") + "=" + URLEncoder.encode(this.Phone_Num,"UTF-8");
+                        Network_data += "&" + URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(this.ID,"UTF-8");
+                        Network_data += "&" + URLEncoder.encode("PW","UTF-8") + "=" + URLEncoder.encode(this.PW,"UTF-8");
+                        Network_data += "&" + URLEncoder.encode("Phone_Num","UTF-8") + "=" + URLEncoder.encode(this.Phone_Num,"UTF-8");
                     }
                     catch(UnsupportedEncodingException e){
                         e.printStackTrace();
