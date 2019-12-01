@@ -2,6 +2,7 @@ package com.example.software_engineering;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Gravity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,8 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_main);
         U = (User) getIntent().getSerializableExtra("User");
 
         LoginGetData_Schedule();//DownLoad Schedule Data from Server;
@@ -63,18 +68,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //시간별 스케쥴 리스트 생성
-        /*list_time_schedule = findViewById(R.id.list_time_schedule);
-        List<String> time_schedule_data = new ArrayList<>();
-        ArrayAdapter<String> time_schedule_adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, time_schedule_data);
-        list_time_schedule.setAdapter(time_schedule_adapter);
-        time_schedule_data.add("시간 스케쥴1");
-        time_schedule_data.add("시간 스케쥴2");
-        time_schedule_adapter.notifyDataSetChanged();*/
-
-        //private ArrayList<Schedule> time_scheduleArrayList; 어레이리스트
-        //private ListView list_time_schedule;
-        //private ListView list_location_schedule;
 
         time_scheduleArrayList = new ArrayList<>(); //시간별 리스트
 
@@ -92,6 +85,9 @@ public class MainActivity extends AppCompatActivity
         list_time_schedule = (ListView)findViewById(R.id.list_time_schedule);
         CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
         list_time_schedule.setAdapter(time_adapter);
+
+        registerForContextMenu(list_time_schedule);
+
 
 
 
@@ -115,9 +111,43 @@ public class MainActivity extends AppCompatActivity
         list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
         CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
         list_location_schedule.setAdapter(location_adapter);
+        registerForContextMenu(list_location_schedule);
+
 
     }
 
+    @Override
+
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.list_click_menu, menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+    }
+
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int index= info.position; //AdapterView안에서 ContextMenu를 보여즈는 항목의 위치
+
+        //선택된 ContextMenu의  아이템아이디를 구별하여 원하는 작업 수행
+        //예제에서는 선택된 ListView의 항목(String 문자열) data와 해당 메뉴이름을 출력함
+
+        switch( item.getItemId() ){
+
+            case R.id.modify:
+                Toast.makeText(this, time_scheduleArrayList.get(index)+" Modify", Toast.LENGTH_SHORT).show();
+
+                break;
+
+
+
+            case R.id.delete:
+                Toast.makeText(this, time_scheduleArrayList.get(index)+" Delete", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+
+    };
 
 
 
