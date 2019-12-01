@@ -69,7 +69,11 @@ public class GroupMainActivity extends AppCompatActivity {
                 ));
             }
             else if(requestCode==2){
-                groupArrayList.get(data.getIntExtra("position",0)).setGroupMember((ArrayList<GroupMember>) data.getSerializableExtra("list"));
+                if(data.getBooleanExtra("exit",false)){
+                    groupArrayList.remove(data.getIntExtra("position",0));
+                }else{
+                    groupArrayList.get(data.getIntExtra("position",0)).setGroupMember((ArrayList<GroupMember>) data.getSerializableExtra("list"));
+                }
             }
             adapter.notifyDataSetChanged();
         }
