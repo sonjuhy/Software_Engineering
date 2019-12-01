@@ -61,12 +61,22 @@ public class GroupSubActivity extends AppCompatActivity {
             params.span = 2;
             textView.setLayoutParams(params);
 
-            textView.setText("그룹명   "+group.GroupName_output());
+            textView.setText("그룹명      "+group.GroupName_output());
             editText.setVisibility(View.GONE);
 
             list = group.GroupMember_output();
             textView1.setBackgroundColor(group.GroupColor_output());
-            button.setVisibility(View.GONE);
+
+            button.setText("그룹 나가기");
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //나가기
+                    intent.putExtra("exit",true);
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }
+            });
 
             Button button2 = findViewById(R.id.member_edit);
             button2.setOnClickListener(new View.OnClickListener() {
