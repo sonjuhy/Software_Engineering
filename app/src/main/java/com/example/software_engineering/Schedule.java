@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
+
 public class Schedule implements Serializable {
     public  Calendar calendar;
     public  int Sound;
@@ -36,6 +37,8 @@ public class Schedule implements Serializable {
         this.Vibration =Vibration;
         this.group =group;
     }
+
+
     public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int Sound, int Vibration, Group group)
     {
         this.Name =name;

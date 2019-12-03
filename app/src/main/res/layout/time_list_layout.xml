@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/time_list_layout"
     android:orientation="horizontal"
     android:layout_width="200dp"
-    android:layout_height="80dp">
+
+    android:layout_height="80dp"
+
+    android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
+
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="75"
-        android:orientation="vertical">
+        android:orientation="vertical"
+>
 
         <TextView
             android:id="@+id/name_schedule"
@@ -19,7 +25,9 @@
             android:paddingLeft="10dp"
             android:text="일정이름"
             android:textColor="#33aabb"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+  />
+
         <TextView
             android:id="@+id/time_schedule"
             android:layout_width="match_parent"
@@ -28,6 +36,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
+
             />
     </LinearLayout>
 </LinearLayout>

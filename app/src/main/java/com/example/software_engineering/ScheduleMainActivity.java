@@ -1,29 +1,29 @@
 package com.example.software_engineering;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
-import android.widget.Spinner;
-import android.widget.TimePicker;
-import java.util.Calendar;
-import android.widget.Toast;
+        import android.app.AlarmManager;
+        import android.app.PendingIntent;
+        import android.content.Intent;
+        import android.support.design.widget.FloatingActionButton;
+        import android.support.v7.app.AppCompatActivity;
+        import android.app.DatePickerDialog;
+        import android.app.TimePickerDialog;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.view.View.OnClickListener;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.CompoundButton;
+        import android.widget.DatePicker;
+        import android.widget.Spinner;
+        import android.widget.TimePicker;
+        import java.util.Calendar;
+        import android.widget.Toast;
 
-import java.util.Calendar;
+        import java.util.Calendar;
 
 
-import java.util.*;
+        import java.util.*;
 
 public class ScheduleMainActivity extends AppCompatActivity {
 
@@ -188,7 +188,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     Bundle bundle = intent_schedule.getExtras();
                     time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                 ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요 -> 이걸 왜 그룹으로 넘김 ?
+                    ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요 -> 이걸 왜 그룹으로 넘김 ?
                     setAlarm();
 
                     bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);

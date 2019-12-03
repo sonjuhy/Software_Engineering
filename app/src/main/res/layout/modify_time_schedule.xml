@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="#ffffff"
-    tools:context=".ScheduleMainActivity"
+    tools:context=".ModifySchedule"
     >
 
     <TableLayout
@@ -77,12 +77,12 @@
                 android:text="시간"
                 android:textSize="16sp" />
 
-         <Button
-             android:id="@+id/time_button"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:backgroundTint="#ffffff"
-             android:text="   0시   0분"/>
+            <Button
+                android:id="@+id/time_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ffffff"
+                android:text="   0시   0분"/>
 
         </TableRow>
 

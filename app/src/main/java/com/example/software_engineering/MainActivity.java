@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Schedule> location_scheduleArrayList;
     private ArrayList<String> groupArrayList = new ArrayList<>();
     private int choose_num=0;
+    private int list_position=0;
 
     private static final int REQUEST_CODE =777;
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity
         list_time_schedule = (ListView)findViewById(R.id.list_time_schedule);
         CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
         list_time_schedule.setAdapter(time_adapter);
-        list_time_schedule.setOnItemClickListener(time_listener);//<<<<<<<<<<<<<<<<<<
+
         registerForContextMenu(list_time_schedule);              //<<<<<<<<<<<<<<<<<<
 
 
@@ -112,11 +113,42 @@ public class MainActivity extends AppCompatActivity
         list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
         CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
         list_location_schedule.setAdapter(location_adapter);
-        list_location_schedule.setOnItemClickListener(location_listener);
         registerForContextMenu(list_location_schedule);
 
+        list_time_schedule.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                list_position=position;
+                choose_num = 1;
+                return false;
+            }
+        });
+
+        list_location_schedule.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                list_position=position;
+                choose_num = 2;
+                return false;
+            }
+        });
+
+        list_time_schedule.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+            }
+        });
+
+        list_location_schedule.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+            }
+        });
 
     }
+
 
     @Override
 
@@ -138,51 +170,29 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.modify:
                 if(choose_num==1) {
-                    Intent schedule = new Intent(MainActivity.this, ScheduleMainActivity.class);
-                    Toast.makeText(this, time_scheduleArrayList.get(index)+" Modify", Toast.LENGTH_SHORT).show();
-                    schedule.putExtra("num", choose_num);
-                    startActivity(schedule);
+;
+                    Intent intent1 = new Intent(MainActivity.this,ModifySchedule.class);
+
+                    startActivity(intent1);
+                    Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
                 }
 
                 else if(choose_num==2){
-                    Intent schedule = new Intent(MainActivity.this, ScheduleMainActivity.class);
-                    Toast.makeText(this, location_scheduleArrayList.get(index)+" Modify", Toast.LENGTH_SHORT).show();
-                    schedule.putExtra("num", choose_num);
-                    startActivity(schedule);
+
+                    Intent intent2 = new Intent(MainActivity.this,ModifySchedule.class);
+                    startActivity(intent2);
+                    Toast.makeText(this, choose_num+" Modify 선택 리스트:"+list_position, Toast.LENGTH_SHORT).show();
                     break;
                 }
 
 
-
             case R.id.delete:
-                Intent schedule = new Intent(MainActivity.this, ScheduleMainActivity.class);
                 Toast.makeText(this, "3333", Toast.LENGTH_SHORT).show();
 
                 break;
         }
         return true;
-
-    };
-
-    AdapterView.OnItemClickListener time_listener= new AdapterView.OnItemClickListener() {
-
-        @Override
-
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            choose_num=1; // time list 뷰가 눌러졌으므로 수정버튼을 누르면 Time schedule add가 나와야한다.
-        }
-
-    };
-
-    AdapterView.OnItemClickListener location_listener= new AdapterView.OnItemClickListener() {
-
-        @Override
-
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            choose_num=2;// location list 뷰가 눌러졌으므로 수정버튼을 누르면 Location schedule add가 나와야한다.
-        }
 
     };
 

@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Calendar;
 import java.util.ArrayList;
 
@@ -42,7 +45,7 @@ public class CustomTimeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         if (convertView == null)
         {
@@ -59,6 +62,13 @@ public class CustomTimeAdapter extends BaseAdapter {
 
         name_schedule.setText(time_schedule_list.get(position).Name);
         time_schedule.setText(time_schedule_list.get(position).time_cal());
+
+        /*LinearLayout time_layout = (LinearLayout)convertView.findViewById(R.id.time_list_layout);
+        time_layout.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Toast.makeText(v.getContext(),"위치는: "+position,Toast.LENGTH_SHORT);
+            }
+        });*/
         return convertView;
     }
 }
