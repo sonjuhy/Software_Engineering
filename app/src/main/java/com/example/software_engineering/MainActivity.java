@@ -171,26 +171,35 @@ public class MainActivity extends AppCompatActivity
             case R.id.modify:
                 if(choose_num==1) {
 ;
-                    Intent intent1 = new Intent(MainActivity.this,ModifySchedule.class);
-
-                    startActivity(intent1);
+                    Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
+                    intent.putExtra("num",choose_num);
+                    startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
                 }
 
                 else if(choose_num==2){
 
-                    Intent intent2 = new Intent(MainActivity.this,ModifySchedule.class);
-                    startActivity(intent2);
+                    Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
+                    intent.putExtra("num",choose_num);
+                    startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트:"+list_position, Toast.LENGTH_SHORT).show();
                     break;
                 }
 
 
             case R.id.delete:
-                Toast.makeText(this, "3333", Toast.LENGTH_SHORT).show();
+                if(choose_num==1) {
+                    time_scheduleArrayList.remove(list_position);
+                    Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
 
-                break;
+                else if(choose_num==2) {
+                    time_scheduleArrayList.remove(list_position);
+                    Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
         }
         return true;
 
