@@ -191,15 +191,20 @@ public class MainActivity extends AppCompatActivity
             case R.id.delete:
                 if(choose_num==1) {
                     time_scheduleArrayList.remove(list_position);
+                    CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
+                    list_time_schedule.setAdapter(time_adapter);
                     Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
                 }
 
                 else if(choose_num==2) {
-                    time_scheduleArrayList.remove(list_position);
+                    location_scheduleArrayList.remove(list_position);
+                    CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
+                    list_location_schedule.setAdapter(location_adapter);
                     Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
                 }
+
         }
         return true;
 
