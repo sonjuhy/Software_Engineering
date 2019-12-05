@@ -44,7 +44,7 @@ public class Schedule implements Serializable {
     }
 
 
-    public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int Sound, int Vibration)
+    public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int Sound, int Vibration, Group group)
     {
         this.Name =name;
         this.content =content;
@@ -52,6 +52,7 @@ public class Schedule implements Serializable {
         this.AlarmRepeatCount = alarmRepeatCount;
         this.Sound = Sound;
         this.Vibration =Vibration;
+        this.group = group;
     }
 
     public String time_cal()

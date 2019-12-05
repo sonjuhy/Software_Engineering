@@ -14,15 +14,11 @@ public class AlarmActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.alram);
+        setContentView(R.layout.activity_alarm);
 
-
-
-
-        출처: https://yeolco.tistory.com/90 [열코의 프로그래밍 일기]
 
         // 알람음 재생
-       // this.mediaPlayer = MediaPlayer.create(this, R.raw.TAEYEON_Spark);/////////// 여기에 음악넣으면 됩니다!
+        //this.mediaPlayer = MediaPlayer.create(this, R.raw.TAEYEON_Spark);/////////// 여기에 음악넣으면 됩니다!
         this.mediaPlayer.start();
         long[] pattern = {1000,3000}; // 2000 = x , 1000 = y
         vibrator.vibrate(pattern,0);
@@ -67,3 +63,6 @@ public class AlarmActivity extends AppCompatActivity {
         }
     };
 }
+
+
+

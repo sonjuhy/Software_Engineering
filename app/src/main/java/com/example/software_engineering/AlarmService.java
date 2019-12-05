@@ -24,13 +24,13 @@ public class AlarmService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Foreground 에서 실행되면 Notification 을 보여줘야 됨
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
+            // Oreo(26) 버전 이후 버전부터는 channel 이 필요함
             String channelId =  createNotificationChannel();
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
             Notification notification = builder.setOngoing(true)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setCategory(Notification.CATEGORY_SERVICE)
+                    //.setCategory(Notification.CATEGORY_SERVICE)
                     .build();
 
             startForeground(1, notification);
@@ -58,7 +58,7 @@ public class AlarmService extends Service {
         String channelId = "Alarm";
         String channelName = getString(R.string.app_name);
         NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_NONE);
-        channel.setDescription(channelName);
+        //channel.setDescription(channelName);
         channel.setSound(null, null);
         channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -67,4 +67,3 @@ public class AlarmService extends Service {
         return channelId;
     }
 }
-

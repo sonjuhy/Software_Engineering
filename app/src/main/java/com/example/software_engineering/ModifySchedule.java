@@ -17,6 +17,8 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import android.widget.Toast;
 
@@ -59,16 +61,16 @@ public class ModifySchedule extends AppCompatActivity {
 
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
         if (time_scheduleArrayList.size() == 0) {
-            time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
+            time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
         } else {
             for (int i = 0; i < time_scheduleArrayList.size(); i++) {
                 if (time_scheduleArrayList.get(i).getCalendar().after(calendar)) {
-                    time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
+                    time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
                     return;
                 }
             }
         }
-        time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
+        time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
     }
 
     public void modified_schedule(String name, String content, double place_x, double place_y,
@@ -82,8 +84,8 @@ public class ModifySchedule extends AppCompatActivity {
                                   int alarmRepeatCount,int sound ,int vibration,Group group,int index)
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
-        location_scheduleArrayList.remove(index);
-        location_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
+        time_scheduleArrayList.remove(index);
+        time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
     }
 
 
@@ -287,6 +289,10 @@ public class ModifySchedule extends AppCompatActivity {
         // 알람 설정
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
+
+        // Toast 보여주기 (알람 시간 표시)
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Toast.makeText(this, "Alarm : " + format.format(calendar.getTime()), Toast.LENGTH_LONG).show();
 
     }
 

@@ -63,19 +63,19 @@ public class ScheduleMainActivity extends AppCompatActivity {
         if(time_scheduleArrayList==null)
         {
             time_scheduleArrayList = new ArrayList<Schedule>();
-            time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration));
+            time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
         }
         else {
             for (int i = 0; i < time_scheduleArrayList.size(); i++) {
                 if(time_scheduleArrayList.get(i).getCalendar().after(calendar))
                 {
-                    time_scheduleArrayList.add(i,new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
-                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration));
+                    time_scheduleArrayList.add(i,new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
+                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
                     return;
                 }
             }
         }
-        time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration));
+        time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
     }
 
     public void modified_schedule(String name, String content,double place_x,double place_y,
@@ -91,7 +91,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         location_scheduleArrayList.remove(index);
-        location_scheduleArrayList.add(new Schedule(name,content,calendar,alarmRepeatCount,sound,vibration));
+        location_scheduleArrayList.add(new Schedule(name,content,calendar,alarmRepeatCount,sound,vibration,group));
     }
 
 
@@ -287,7 +287,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     private void setAlarm() {
         // 알람 시간 설정
 
-        System.out.println(this.calendar.getTime());
+
 
 
         // 현재일보다 이전이면 등록 실패
@@ -297,9 +297,10 @@ public class ScheduleMainActivity extends AppCompatActivity {
         }
 
         // Receiver 설정
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        Intent intent = new Intent(ScheduleMainActivity.this, AlarmReceiver.class);
+        System.out.println("222222222222222222222222222222222");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(ScheduleMainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        System.out.println("22222222233333333333333333333333333333222222222222222222222222");
         // 알람 설정
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
