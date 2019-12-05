@@ -7,19 +7,15 @@
         <item
             android:id="@+id/nav_Schedule"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Schedule" />
+            android:title="스케줄" />
         <item
             android:id="@+id/nav_Group"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Group" />
+            android:title="그룹" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_User_Information"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="미정" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="미정" />
+            android:title="사용자 정보" />
     </group>
 
 

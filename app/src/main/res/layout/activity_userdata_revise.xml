@@ -31,14 +31,14 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/id_input"
+                android:id="@+id/id_Revise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="9"
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/id_check"
+                android:id="@+id/id_check1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="중복 확인"
@@ -61,7 +61,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/pw_Revise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="9"
@@ -84,7 +84,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/pw_Check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="9"
@@ -106,7 +106,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/name_Revise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="9"
@@ -129,14 +129,14 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/phone_input"
+                android:id="@+id/phone_Revise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="9"
                 android:inputType="phone" />
 
             <Button
-                android:id="@+id/phone_check"
+                android:id="@+id/phone_check1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="중복 확인"
@@ -152,14 +152,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/revise_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp"
             android:text="수정하기" />
 
         <Button
-            android:id="@+id/exit_button"
+            android:id="@+id/exit_button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="취소" />

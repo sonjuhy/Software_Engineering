@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity
 
 // 사이 필요없는값 강제 넣기
 
-        Schedule time1 = new Schedule("첫번쨰", null,null,0,0,0,null);
+        Schedule time1 = new Schedule("첫번째", null,null,0,0,0,null);
         time_scheduleArrayList.add(time1);
-        Schedule time2 = new Schedule("두번쨰", null,null,0,0,0,null);
+        Schedule time2 = new Schedule("두번째", null,null,0,0,0,null);
         time_scheduleArrayList.add(time2);
-        Schedule time3 = new Schedule("세번쨰", null,null,0,0,0,null);
+        Schedule time3 = new Schedule("세번째", null,null,0,0,0,null);
         time_scheduleArrayList.add(time3);
 
 //
@@ -282,10 +282,13 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intentToGroup,REQUEST_CODE);
 
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.nav_User_Information) {
+            Intent intentToUserDataRevise = new Intent(MainActivity.this, UserActivity.class);
+            intentToUserDataRevise.putExtra("ID",U.UserID_Output());
+            intentToUserDataRevise.putExtra("Name",U.UserName_Output());
+            intentToUserDataRevise.putExtra("PW",U.UserPW_Output());
+            intentToUserDataRevise.putExtra("Phone_Num",U.UserPhone_num_Output());
+            startActivityForResult(intentToUserDataRevise,1);
         }
 
         drawer.closeDrawer(GravityCompat.START);
