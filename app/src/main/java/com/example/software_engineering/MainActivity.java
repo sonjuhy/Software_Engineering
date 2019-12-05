@@ -170,9 +170,12 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.modify:
                 if(choose_num==1) {
-;
+                    ;
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("position",list_position);
+                    intent.putExtra("list",time_scheduleArrayList);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -182,6 +185,9 @@ public class MainActivity extends AppCompatActivity
 
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("position",list_position);
+                    intent.putExtra("list",location_scheduleArrayList);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트:"+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -275,10 +281,13 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intentToGroup,1);
 
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.nav_User_Information) {
+            Intent intentToUserDataRevise = new Intent(MainActivity.this, UserActivity.class);
+            intentToUserDataRevise.putExtra("ID",U.UserID_Output());
+            intentToUserDataRevise.putExtra("Name",U.UserName_Output());
+            intentToUserDataRevise.putExtra("PW",U.UserPW_Output());
+            intentToUserDataRevise.putExtra("Phone_Num",U.UserPhone_num_Output());
+            startActivityForResult(intentToUserDataRevise,1);
         }
 
         drawer.closeDrawer(GravityCompat.START);
