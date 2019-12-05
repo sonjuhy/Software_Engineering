@@ -15,6 +15,7 @@ package com.example.software_engineering;
         import android.widget.Button;
         import android.widget.CompoundButton;
         import android.widget.DatePicker;
+        import android.widget.EditText;
         import android.widget.Spinner;
         import android.widget.TimePicker;
         import java.util.Calendar;
@@ -32,6 +33,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     int y=0, m=0, d=0, h=0, mi=0;
     int schedule_sound =0;
     int schedule_vibration =0;
+    int pos;
     private Spinner group_spinner;
     double locatin_x=0, locatin_y=0;
     User user;
@@ -158,7 +160,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
             group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    //spinner에서 가장 위에가 i= 0번~쭈루룩
+                    pos = i-1;
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
@@ -184,12 +186,14 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
                     Intent intent_schedule = getIntent();
+                    EditText editText = findViewById(R.id.schedule_name_input);
                     user = (User) getIntent().getSerializableExtra("user");
                     time_scheduleArrayList = user.UserSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
 
                     calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
-                    //add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요-> 이걸 왜 그룹으로 넘김 ?/// 위치정보 넘겨야됨
+                    //마지막에 new Group()은 임시
+                    add_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group());
                     //setAlarm();
                     intent_schedule.putExtra("time",time_scheduleArrayList);
                     setResult(0,intent_schedule);
@@ -327,7 +331,4 @@ public class ScheduleMainActivity extends AppCompatActivity {
         timePickerDialog.setMessage("메시지");
         timePickerDialog.show();
     }
-
-
-
 }

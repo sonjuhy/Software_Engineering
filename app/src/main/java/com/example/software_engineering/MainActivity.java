@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity
 ;
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -189,6 +190,7 @@ public class MainActivity extends AppCompatActivity
 
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트:"+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -275,7 +277,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
-            startActivityForResult(intentToGroup,1);
+            startActivityForResult(intentToGroup,REQUEST_CODE);
 
 
         } else if (id == R.id.nav_slideshow) {
