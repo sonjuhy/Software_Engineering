@@ -173,6 +173,9 @@ public class MainActivity extends AppCompatActivity
 ;
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("position",list_position);
+                    intent.putExtra("list",time_scheduleArrayList);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -182,6 +185,9 @@ public class MainActivity extends AppCompatActivity
 
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("position",list_position);
+                    intent.putExtra("list",location_scheduleArrayList);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트:"+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -189,12 +195,12 @@ public class MainActivity extends AppCompatActivity
 
 
             case R.id.delete:
-                if(choose_num==1) {
-                    time_scheduleArrayList.remove(list_position);
-                    CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
-                    list_time_schedule.setAdapter(time_adapter);
-                    Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                    break;
+                    if(choose_num==1) {
+                        time_scheduleArrayList.remove(list_position);
+                        CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
+                        list_time_schedule.setAdapter(time_adapter);
+                        Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                        break;
                 }
 
                 else if(choose_num==2) {
