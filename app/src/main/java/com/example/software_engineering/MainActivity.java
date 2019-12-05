@@ -53,11 +53,18 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.content_main);
         U = (User) getIntent().getSerializableExtra("User");
 
+
+
+
         LoginGetData_Schedule();//DownLoad Schedule Data from Server;
         LoginGetData_Group();//DownLoad Group Data from Server;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
+        System.out.println(U.UserName_Output()+"222222222222222222222222222222222");
+        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -109,6 +116,8 @@ public class MainActivity extends AppCompatActivity
         location_scheduleArrayList.add(location3);
 
 //
+
+
 
         list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
         CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
@@ -173,6 +182,7 @@ public class MainActivity extends AppCompatActivity
 ;
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -182,6 +192,7 @@ public class MainActivity extends AppCompatActivity
 
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트:"+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -241,8 +252,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.add_schedule:
                 Intent intent = new Intent(getApplicationContext(),PopupActivity.class);
                 intent.putExtra("opt","add_schedule");
-                intent.putExtra("group",groupArrayList);
-                startActivity(intent);
+                Intent group = intent.putExtra("group", groupArrayList);
+                intent.putExtra("user",U);
+
+
+                startActivityForResult(intent,REQUEST_CODE);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -261,18 +275,11 @@ public class MainActivity extends AppCompatActivity
 
             Intent intent = new Intent(MainActivity.this,ScheduleMainActivity.class);
 
-            Bundle bundle = new Bundle();
-
-            bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
-            bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
-
-            intent.putExtras( bundle );
-            startActivityForResult(intent, REQUEST_CODE);
 
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
-            startActivityForResult(intentToGroup,1);
+            startActivityForResult(intentToGroup,REQUEST_CODE);
 
 
         } else if (id == R.id.nav_User_Information) {
@@ -304,8 +311,8 @@ public class MainActivity extends AppCompatActivity
 
             else if(resultCode == 0)
             {
-                Bundle bundle = data.getExtras();
-                time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+                time_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("time");
+                //System.out.println(time_scheduleArrayList.get(0).);
             }
             else if(resultCode == 1)
             {
