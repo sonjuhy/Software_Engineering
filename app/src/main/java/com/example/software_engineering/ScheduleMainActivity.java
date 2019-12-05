@@ -3,6 +3,7 @@ package com.example.software_engineering;
         import android.app.AlarmManager;
         import android.app.PendingIntent;
         import android.content.Intent;
+        import android.support.constraint.solver.ArrayLinkedVariables;
         import android.support.design.widget.FloatingActionButton;
         import android.support.v7.app.AppCompatActivity;
         import android.app.DatePickerDialog;
@@ -18,6 +19,8 @@ package com.example.software_engineering;
         import android.widget.EditText;
         import android.widget.Spinner;
         import android.widget.TimePicker;
+
+        import java.sql.Array;
         import java.util.Calendar;
         import android.widget.Toast;
 
@@ -57,8 +60,9 @@ public class ScheduleMainActivity extends AppCompatActivity {
     {
 
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
-        if(time_scheduleArrayList.size()==0)
+        if(time_scheduleArrayList==null)
         {
+            time_scheduleArrayList = new ArrayList<Schedule>();
             time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
         }
         else {
@@ -190,7 +194,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     user = (User) getIntent().getSerializableExtra("user");
                     time_scheduleArrayList = user.UserSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-
                     calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
                     //마지막에 new Group()은 임시
                     add_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group());

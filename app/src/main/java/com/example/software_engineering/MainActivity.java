@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity
 
 //
 
+
+
         list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
         CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
         list_location_schedule.setAdapter(location_adapter);
@@ -303,6 +305,7 @@ public class MainActivity extends AppCompatActivity
             else if(resultCode == 0)
             {
                 time_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("time");
+                System.out.println(time_scheduleArrayList.get(0).Name);
             }
             else if(resultCode == 1)
             {

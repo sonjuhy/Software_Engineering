@@ -151,7 +151,6 @@ public class PopupActivity extends Activity {
                 public void onClick(View v) {
                     schedule.putExtra("num",1);
                     startActivityForResult(schedule,REQUEST_CODE_POPUP);
-                    finish();
 
                 }
             });
@@ -163,7 +162,7 @@ public class PopupActivity extends Activity {
                 public void onClick(View v) {
                     schedule.putExtra("num",2);
                     startActivity(schedule);
-                    finish();
+
                 }
             });
 
@@ -184,8 +183,10 @@ public class PopupActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_POPUP)
         {
-            if(resultCode==RESULT_OK){
+            if(resultCode==0){
+                System.out.println("~~~~~~~~~~~~popup on activity~~~~~~~~~~~~~~~~~~~~~~~~~");
                    setResult(0,data);
+                finish();
             }
         }
 
