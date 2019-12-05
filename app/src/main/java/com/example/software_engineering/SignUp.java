@@ -18,6 +18,7 @@ public class SignUp extends AppCompatActivity {
     private String ID;
     private String PW;
     private String Phone_Num;
+    private String Name_tmp;
     private boolean result;
     private boolean ID_Check;
 
@@ -78,6 +79,7 @@ public class SignUp extends AppCompatActivity {
         Ok_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                result = false;
                 Name = Name_text.getText().toString();
                 ID = ID_text.getText().toString();
                 PW = PW_text.getText().toString();

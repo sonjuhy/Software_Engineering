@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="#ffffff"
-    tools:context=".SignUp">
+    tools:context=".UserActivity">
 
     <TableLayout
         android:layout_width="wrap_content"

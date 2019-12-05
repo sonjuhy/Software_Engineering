@@ -49,7 +49,6 @@ public class Network extends AsyncTask<String, Void, String> implements Serializ
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //this.url = "http://sonjuhy.iptime.org/SE/Login_Check.php";
         this.url = "http://sonjuhy.iptime.org/SE/"+arr_String[0]+".php";
         System.out.println("onPre Success : "+this.url);
     }
