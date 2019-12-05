@@ -53,11 +53,18 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.content_main);
         U = (User) getIntent().getSerializableExtra("User");
 
+
+
+
         LoginGetData_Schedule();//DownLoad Schedule Data from Server;
         LoginGetData_Group();//DownLoad Group Data from Server;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
+        System.out.println(U.UserName_Output()+"222222222222222222222222222222222");
+        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -173,6 +180,7 @@ public class MainActivity extends AppCompatActivity
 ;
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -182,6 +190,7 @@ public class MainActivity extends AppCompatActivity
 
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
+                    intent.putExtra("group",groupArrayList);
                     startActivity(intent);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트:"+list_position, Toast.LENGTH_SHORT).show();
                     break;
@@ -191,15 +200,20 @@ public class MainActivity extends AppCompatActivity
             case R.id.delete:
                 if(choose_num==1) {
                     time_scheduleArrayList.remove(list_position);
+                    CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
+                    list_time_schedule.setAdapter(time_adapter);
                     Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
                 }
 
                 else if(choose_num==2) {
-                    time_scheduleArrayList.remove(list_position);
+                    location_scheduleArrayList.remove(list_position);
+                    CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
+                    list_location_schedule.setAdapter(location_adapter);
                     Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
                 }
+
         }
         return true;
 
@@ -236,8 +250,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.add_schedule:
                 Intent intent = new Intent(getApplicationContext(),PopupActivity.class);
                 intent.putExtra("opt","add_schedule");
-                intent.putExtra("group",groupArrayList);
-                startActivity(intent);
+                Intent group = intent.putExtra("group", groupArrayList);
+                intent.putExtra("user",U);
+
+
+                startActivityForResult(intent,REQUEST_CODE);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -256,18 +273,11 @@ public class MainActivity extends AppCompatActivity
 
             Intent intent = new Intent(MainActivity.this,ScheduleMainActivity.class);
 
-            Bundle bundle = new Bundle();
-
-            bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
-            bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
-
-            intent.putExtras( bundle );
-            startActivityForResult(intent, REQUEST_CODE);
 
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
             intentToGroup.putExtra("Group",G);
-            startActivityForResult(intentToGroup,1);
+            startActivityForResult(intentToGroup,REQUEST_CODE);
 
 
         } else if (id == R.id.nav_User_Information) {
@@ -295,8 +305,7 @@ public class MainActivity extends AppCompatActivity
 
             else if(resultCode == 0)
             {
-                Bundle bundle = data.getExtras();
-                time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+                time_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("time");
             }
             else if(resultCode == 1)
             {
