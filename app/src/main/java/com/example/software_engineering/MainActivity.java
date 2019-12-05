@@ -1,8 +1,5 @@
 package com.example.software_engineering;
 
-import com.example.software_engineering.Schedule_Network;
-import com.example.software_engineering.Group_Network;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -23,7 +20,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,9 +53,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.content_main);
         U = (User) getIntent().getSerializableExtra("User");
 
-        System.out.println("U name : " + U.UserName_Output());
-        System.out.println("U ID : " + U.UserID_Output());
-        System.out.println("U PW : " + U.UserPW_Output());
+
 
 
         LoginGetData_Schedule();//DownLoad Schedule Data from Server;
@@ -67,6 +61,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
+        System.out.println(U.UserName_Output()+"222222222222222222222222222222222");
+        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -97,6 +96,14 @@ public class MainActivity extends AppCompatActivity
         list_time_schedule.setAdapter(time_adapter);
 
         registerForContextMenu(list_time_schedule);              //<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+
+
         location_scheduleArrayList = new ArrayList<>(); //장소별 리스트
 
 // 사이 필요없는값 강제 넣기
@@ -107,6 +114,10 @@ public class MainActivity extends AppCompatActivity
         location_scheduleArrayList.add(location2);
         Schedule location3 = new Schedule("세번째", "", "", "", null,0.0,0,0,0,0);
         location_scheduleArrayList.add(location3);
+
+//
+
+
 
         list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
         CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
