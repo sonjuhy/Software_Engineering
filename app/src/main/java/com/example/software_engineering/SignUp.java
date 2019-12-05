@@ -34,26 +34,26 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        EditText et = findViewById(R.id.phone_input);
+        EditText et = findViewById(R.id.phone_Revise);
         et.setInputType(android.text.InputType.TYPE_CLASS_PHONE); // 먼저 EditText에 번호만 입력되도록 바꾼 뒤
         et.addTextChangedListener(new PhoneNumberFormattingTextWatcher()); // 이렇게 리스너를 걸어주면
 
-        Button exit_schedule = findViewById(R.id.exit_button);
+        Button exit_schedule = findViewById(R.id.exit_button1);
         exit_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 finish();
             }
         });
-        IDCheck_Button = findViewById(R.id.id_check);
-        Ok_Button = findViewById(R.id.button);
-        Cancle_Button =findViewById(R.id.exit_button);
+        IDCheck_Button = findViewById(R.id.id_check1);
+        Ok_Button = findViewById(R.id.revise_button);
+        Cancle_Button =findViewById(R.id.exit_button1);
 
-        Name_text = findViewById(R.id.editText2);
-        ID_text = findViewById(R.id.id_input);
-        PW_text = findViewById(R.id.editText5);
-        PW_Check_text = findViewById(R.id.editText6);
-        PhoneNum_text = findViewById(R.id.phone_input);
+        Name_text = findViewById(R.id.name_Revise);
+        ID_text = findViewById(R.id.id_Revise);
+        PW_text = findViewById(R.id.pw_Revise);
+        PW_Check_text = findViewById(R.id.pw_Check);
+        PhoneNum_text = findViewById(R.id.phone_Revise);
 
         System.out.println("SignUp Activity Working");
         IDCheck_Button.setOnClickListener(new View.OnClickListener() {
