@@ -53,8 +53,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
     }
     public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
-        calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
-
 
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
         if(time_scheduleArrayList.size()==0)
@@ -189,8 +187,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     user = (User) getIntent().getSerializableExtra("user");
                     time_scheduleArrayList = user.UserSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요-> 이걸 왜 그룹으로 넘김 ?/// 위치정보 넘겨야됨
-                    setAlarm();
+
+                    calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
+                    //add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요-> 이걸 왜 그룹으로 넘김 ?/// 위치정보 넘겨야됨
+                    //setAlarm();
+                    intent_schedule.putExtra("time",time_scheduleArrayList);
                     setResult(0,intent_schedule);
                     finish();
                 }
@@ -326,4 +327,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
         timePickerDialog.setMessage("메시지");
         timePickerDialog.show();
     }
+
+
+
 }

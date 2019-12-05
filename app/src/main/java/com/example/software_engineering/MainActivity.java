@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
+        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
         System.out.println(U.UserName_Output()+"222222222222222222222222222222222");
         System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
 
@@ -252,7 +252,7 @@ System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
                 intent.putExtra("user",U);
 
 
-                startActivityForResult(intent,777);
+                startActivityForResult(intent,REQUEST_CODE);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -300,8 +300,7 @@ System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
 
             else if(resultCode == 0)
             {
-                Bundle bundle = data.getExtras();
-                time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+                time_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("time");
             }
             else if(resultCode == 1)
             {

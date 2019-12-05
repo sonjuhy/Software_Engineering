@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 
 public class PopupActivity extends Activity {
 
+    private static final int REQUEST_CODE_POPUP =888;
     private boolean result;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,38 +150,29 @@ public class PopupActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     schedule.putExtra("num",1);
-                    startActivityForResult(schedule,888);
+                    startActivityForResult(schedule,REQUEST_CODE_POPUP);
+                    finish();
 
                 }
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             Button location_button = findViewById(R.id.set_location_schedule);
             location_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     schedule.putExtra("num",2);
-
                     startActivity(schedule);
+                    finish();
                 }
             });
+
+            setResult(0,schedule);
+
         }
 
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -188,6 +180,23 @@ public class PopupActivity extends Activity {
             return false;
         return true;
     }
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_POPUP)
+        {
+            if(resultCode==RESULT_OK){
+                   setResult(0,data);
+            }
+        }
+
+    }
+
+
+
+
+
+
+
 }
 class PopUp_Network{
     private Network n;
