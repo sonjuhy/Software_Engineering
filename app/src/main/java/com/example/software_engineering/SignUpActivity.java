@@ -7,14 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.concurrent.ExecutionException;
 
 public class SignUpActivity extends AppCompatActivity implements Serializable {
 
@@ -38,15 +31,15 @@ public class SignUpActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        IDCheck_Button = findViewById(R.id.id_check);
-        Ok_Button = findViewById(R.id.button);
-        Cancle_Button =findViewById(R.id.exit_button);
+        IDCheck_Button = findViewById(R.id.id_check1);
+        Ok_Button = findViewById(R.id.revise_button);
+        Cancle_Button =findViewById(R.id.exit_button1);
 
-        Name_text = findViewById(R.id.editText2);
-        ID_text = findViewById(R.id.id_input);
-        PW_text = findViewById(R.id.editText5);
-        PW_Check_text = findViewById(R.id.editText6);
-        PhoneNum_text = findViewById(R.id.phone_input);
+        Name_text = findViewById(R.id.name_Revise);
+        ID_text = findViewById(R.id.id_Revise);
+        PW_text = findViewById(R.id.pw_Revise);
+        PW_Check_text = findViewById(R.id.pw_Check);
+        PhoneNum_text = findViewById(R.id.phone_Revise);
 
         System.out.println("SignUp Activity Working");
         IDCheck_Button.setOnClickListener(new View.OnClickListener() {

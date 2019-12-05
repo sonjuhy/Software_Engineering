@@ -25,7 +25,7 @@ public class User implements Serializable {//implements Serializable for using i
     private boolean Login_check;
     private double Place_x;  // User X Location
     private double Place_y;  //User Y Location
-    private ArrayList<Schedule> S;  //Schedule List
+    private ArrayList<Schedule> time_scheduleArrayList;  //Schedule List
     private ArrayList<Group> G;  //Group List
     private Network n;  //Network Value for Using Network
     private Network_Access na;
@@ -116,7 +116,10 @@ public class User implements Serializable {//implements Serializable for using i
         this.Phone_Num = Phone_input;
     }
     public void Schedule_Input(Schedule S_input){
-        this.S.add(S_input);
+        this.time_scheduleArrayList.add(S_input);
+    }
+    public void set_user_time_Schedule(ArrayList<Schedule> S_input){
+        this.time_scheduleArrayList=S_input;
     }
     public void Group_Input(Group G_input){
         this.G.add(G_input);
@@ -140,7 +143,7 @@ public class User implements Serializable {//implements Serializable for using i
         return this.Place_y;
     }
     public ArrayList<Schedule> UserSchedule_Output(){
-        return this.S;
+        return this.time_scheduleArrayList;
     }
     public ArrayList<Group> UserGroup_Output(){
         return this.G;

@@ -3,6 +3,7 @@ package com.example.software_engineering;
         import android.app.AlarmManager;
         import android.app.PendingIntent;
         import android.content.Intent;
+        import android.support.constraint.solver.ArrayLinkedVariables;
         import android.support.design.widget.FloatingActionButton;
         import android.support.v7.app.AppCompatActivity;
         import android.app.DatePickerDialog;
@@ -15,8 +16,11 @@ package com.example.software_engineering;
         import android.widget.Button;
         import android.widget.CompoundButton;
         import android.widget.DatePicker;
+        import android.widget.EditText;
         import android.widget.Spinner;
         import android.widget.TimePicker;
+
+        import java.sql.Array;
         import java.util.Calendar;
         import android.widget.Toast;
 
@@ -32,9 +36,10 @@ public class ScheduleMainActivity extends AppCompatActivity {
     int y=0, m=0, d=0, h=0, mi=0;
     int schedule_sound =0;
     int schedule_vibration =0;
+    int pos;
     private Spinner group_spinner;
     double locatin_x=0, locatin_y=0;
-
+    User user;
     ArrayList<String> group_list;
     ArrayList<String> alarm_count;
     ArrayAdapter<String> arrayAdapter;
@@ -53,12 +58,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
     }
     public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
-        calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
-
 
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
-        if(time_scheduleArrayList.size()==0)
+        if(time_scheduleArrayList==null)
         {
+            time_scheduleArrayList = new ArrayList<Schedule>();
             time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
         }
         else {
@@ -104,10 +108,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this.getIntent());
+        Intent intent = getIntent();
 
         int i  = intent.getIntExtra("num", 1);
         group_list= (ArrayList<String>)intent.getSerializableExtra("group");
+        user = (User)intent.getSerializableExtra("user");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// 벨소리 체크 박스
         class soundSwitchListener implements CompoundButton.OnCheckedChangeListener{
@@ -159,7 +164,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
             group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    //spinner에서 가장 위에가 i= 0번~쭈루룩
+                    pos = i-1;
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
@@ -185,14 +190,15 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
                     Intent intent_schedule = getIntent();
-                    Bundle bundle = intent_schedule.getExtras();
-                    time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+                    EditText editText = findViewById(R.id.schedule_name_input);
+                    user = (User) getIntent().getSerializableExtra("user");
+                    time_scheduleArrayList = user.UserSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요 -> 이걸 왜 그룹으로 넘김 ?
-                    setAlarm();
-
-                    bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
-                    intent_schedule.putExtras( bundle );
+                    calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
+                    //마지막에 new Group()은 임시
+                    add_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group());
+                    //setAlarm();
+                    intent_schedule.putExtra("time",time_scheduleArrayList);
                     setResult(0,intent_schedule);
                     finish();
                 }
@@ -246,7 +252,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
 
-                    Intent intent_schedule = getIntent();
+                   /* Intent intent_schedule = getIntent();
                     Bundle bundle = intent_schedule.getExtras();
                     location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
@@ -255,7 +261,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
                     bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
                     intent_schedule.putExtras( bundle );
-                    setResult(0,intent_schedule);
+                    setResult(0,intent_schedule);*/
                     finish();
                 }
             });

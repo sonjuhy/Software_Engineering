@@ -17,6 +17,10 @@ public class Group implements Serializable {
     private int PeopleNumber;  //Number of Group people
     private int GroupColor = 0;
 
+    //테스트용 임시
+    public Group() {
+    }
+
     public Group(String groupName, ArrayList<GroupMember> groupMember, int groupColor) {
         GroupName = groupName;
         this.groupMember = groupMember;
