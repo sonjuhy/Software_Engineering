@@ -69,7 +69,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
             for (int i = 0; i < time_scheduleArrayList.size(); i++) {
                 if(time_scheduleArrayList.get(i).getCalendar().after(calendar))
                 {
-                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
+                    time_scheduleArrayList.add(i,new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
                     return;
                 }
             }
@@ -197,7 +197,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
                     //마지막에 new Group()은 임시
                     add_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group());
-                    //setAlarm();
+                    setAlarm();
                     intent_schedule.putExtra("time",time_scheduleArrayList);
                     setResult(0,intent_schedule);
                     finish();
@@ -285,6 +285,9 @@ public class ScheduleMainActivity extends AppCompatActivity {
     /* 알람 등록 */
     private void setAlarm() {
         // 알람 시간 설정
+
+        System.out.println(this.calendar.getTime());
+
 
         // 현재일보다 이전이면 등록 실패
         if (this.calendar.before(Calendar.getInstance())) {
