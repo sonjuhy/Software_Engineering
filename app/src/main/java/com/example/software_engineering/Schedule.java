@@ -12,34 +12,39 @@ import java.util.concurrent.ExecutionException;
 
 
 public class Schedule implements Serializable {
-    public  Calendar calendar;
-    public  int Sound;
-    public  int Vibration;
+    private  Calendar calendar;
+    private  int Sound;
+    private  int Vibration;
 
-    public int AlarmRepeatCount;
-    public  double Place_x;
-    public  double Place_y;
-    public  int alarmType;
+    private int AlarmRepeatCount;
+    private  double Place_x;
+    private  double Place_y;
+    private  int alarmType;
 
-    public String content;
-    public Group group;
-    public String Name;//UserName
+    private String content;
+    private String Time;
+    private String Place;
+    private Group group;
+    private String Name;
+    private String ID; //UserID
 
 
-    public Schedule(String name, String content, double place_x,double place_y, int alarmRepeatCount, int Sound, int Vibration, Group group)
+    public Schedule(String name, String content, String Time, String Place, String ID, double place_x,double place_y, int alarmRepeatCount, int Sound, int Vibration)
     {
         this.Name =name;
+        this.ID = ID;
         this.content =content;
         this.Place_x = place_x;
         this.Place_y = place_y;
+        this.Time = Time;
+        this.Place = Place;
         this.AlarmRepeatCount = alarmRepeatCount;
         this.Sound = Sound;
         this.Vibration =Vibration;
-        this.group =group;
     }
 
 
-    public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int Sound, int Vibration, Group group)
+    public Schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int Sound, int Vibration)
     {
         this.Name =name;
         this.content =content;
@@ -47,7 +52,6 @@ public class Schedule implements Serializable {
         this.AlarmRepeatCount = alarmRepeatCount;
         this.Sound = Sound;
         this.Vibration =Vibration;
-        this.group =group;
     }
 
     public String time_cal()
@@ -168,7 +172,8 @@ class Schedule_Network implements Serializable{
         System.out.println("mjson : "+mJsonString);
 
         int Sound, Vibration ,AlarmRepeatCount;
-        double Place_x, Place_y;
+        double Place_x = 0.0, Place_y = 0.0;
+        String Name, Contens, Time, Place;
         try{
             JSONObject jsonObject = new JSONObject(mJsonString);//Make object for Checking frist object data in JsonArray
             JSONArray jsonArray = jsonObject.getJSONArray(U.UserID_Output());//Checking JSonArray
@@ -179,10 +184,18 @@ class Schedule_Network implements Serializable{
                 Sound = Integer.parseInt(jsonObject1.getString("Sound"));
                 Vibration = Integer.parseInt(jsonObject1.getString("Vibration"));
                 AlarmRepeatCount = Integer.parseInt(jsonObject1.getString("AlarmRepeatCount"));
-                Place_x = Double.parseDouble(jsonObject1.getString("Place_X"));
-                Place_y = Double.parseDouble(jsonObject1.getString("Place_Y"));
-                Schedule schedule_tmp = new Schedule();//Data Input
-                U.Schedule_Input(schedule_tmp);
+                Name = jsonObject1.getString("calendarName");
+                Contens = jsonObject1.getString("calendarContens");
+                Time = jsonObject1.getString("calendarTime");
+                Place = jsonObject1.getString("calendarPlace");
+
+                Schedule schedule_tmp = new Schedule(Name,Contens, Time, Place, U.UserID_Output(), Place_x, Place_y, AlarmRepeatCount, Sound, Vibration);//Data Input
+                if(Place.equals("")){
+                    U.TimeSchedule_Input(schedule_tmp);
+                }
+                else{
+                    U.PlaceSchedule_Input(schedule_tmp);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

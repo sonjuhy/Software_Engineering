@@ -25,13 +25,16 @@ public class User implements Serializable {//implements Serializable for using i
     private boolean Login_check;
     private double Place_x;  // User X Location
     private double Place_y;  //User Y Location
-    private ArrayList<Schedule> time_scheduleArrayList;  //Schedule List
+    private ArrayList<Schedule> S_Time;  //Time Schedule List
+    private ArrayList<Schedule> S_Place;  //Place Schedule List
     private ArrayList<Group> G;  //Group List
     private Network n;  //Network Value for Using Network
     private Network_Access na;
     User(){
         n = new Network();
         na = new Network_Access();
+        S_Time = new ArrayList<Schedule>();
+        S_Place = new ArrayList<Schedule>();
     }
     public boolean Network_DataArrangement(String... _param){ //Setting for Network Class Value before Working Network Class
         Login_check = true;
@@ -52,12 +55,21 @@ public class User implements Serializable {//implements Serializable for using i
                         Login_check = false;
                     }
                     else { //Login Success
-                        this.ID = Network_data;
-                        if(this.ID.equals("")) {
+                        this.Name = Network_data;
+                        this.ID = _param[1];
+                        this.PW = _param[2];
+                        if(this.Name.equals("")) {
                             Login_check = false;
                         }
                         else {
+                            try {
+                                Network_data = URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(this.ID, "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("Login Success User class : " + Network_data);
                             Network_data = na.Network_Access("Get_UserData", Network_data);//Running Network
+                            System.out.println("Phone Num : "+Network_data);
                             this.Phone_Num = Network_data;
                         }
                     }
@@ -115,11 +127,11 @@ public class User implements Serializable {//implements Serializable for using i
         this.PW = PW_input;
         this.Phone_Num = Phone_input;
     }
-    public void Schedule_Input(Schedule S_input){
-        this.time_scheduleArrayList.add(S_input);
+    public void TimeSchedule_Input(Schedule S_input){
+        this.S_Time.add(S_input);
     }
-    public void set_user_time_Schedule(ArrayList<Schedule> S_input){
-        this.time_scheduleArrayList=S_input;
+    public void PlaceSchedule_Input(Schedule S_input){
+        this.S_Place.add(S_input);
     }
     public void Group_Input(Group G_input){
         this.G.add(G_input);
@@ -142,8 +154,11 @@ public class User implements Serializable {//implements Serializable for using i
     public double UserPlaceY_Output(){
         return this.Place_y;
     }
-    public ArrayList<Schedule> UserSchedule_Output(){
-        return this.time_scheduleArrayList;
+    public ArrayList<Schedule> UserTimeSchedule_Output(){
+        return this.S_Time;
+    }
+    public ArrayList<Schedule> UserPlaceSchedule_Outpu(){
+        return this.S_Place;
     }
     public ArrayList<Group> UserGroup_Output(){
         return this.G;

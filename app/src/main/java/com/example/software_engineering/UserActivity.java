@@ -29,9 +29,7 @@ public class UserActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-        User.UserInfo_Input(intent.getExtras().getString("Name"),intent.getExtras().getString("ID"),intent.getExtras().getString("PW"),
-                intent.getExtras().getString("Phone_Num"));
+        User = (User) getIntent().getSerializableExtra("User");
 
 
         setContentView(R.layout.activity_userdata_revise);
@@ -66,7 +64,7 @@ public class UserActivity extends AppCompatActivity{
     PhoneNum_text = findViewById(R.id.phone_Revise);
 
         System.out.println("Revise Activity Working");
-        /*
+
         IDCheck_Button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -79,10 +77,10 @@ public class UserActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
             if(!ID_Check){
-                Toast.makeText(SignUp.this, "ID Check isn't Passed", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserActivity.this, "ID Check isn't Passed", Toast.LENGTH_LONG).show();
             }
             else{
-                Toast.makeText(SignUp.this, "ID Check is Passed", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserActivity.this, "ID Check is Passed", Toast.LENGTH_LONG).show();
             }
         }
     });
@@ -95,32 +93,32 @@ public class UserActivity extends AppCompatActivity{
             Phone_Num = PhoneNum_text.getText().toString();
 
             if(Name.matches("")){
-                Toast.makeText(SignUp.this, "Name is Empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "Name is Empty", Toast.LENGTH_SHORT).show();
             }
             else if(ID.matches("")){
-                Toast.makeText(SignUp.this, "ID is Empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "ID is Empty", Toast.LENGTH_SHORT).show();
             }
             // 수정하기라서 PW빈거 검사 할필요가 있을까?
             else if(PW.matches("")){
-                Toast.makeText(SignUp.this, "PW is Empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "PW is Empty", Toast.LENGTH_SHORT).show();
             }
             else if(Phone_Num.matches("")){
-                Toast.makeText(SignUp.this, "Phone Num is Empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "Phone Num is Empty", Toast.LENGTH_SHORT).show();
             }
             // signup_network 말고 revise_network로 바꿔야할듯 그리고 수정완료되면 Intent로 name,pW,id,pN다시 mainActivity로 돌려주는 코드 필요
             else{
                 SignUp_Network signUp_network = new SignUp_Network();
                 if(ID_Check) {
-                    result = signUp_network.Network_DataArrangement("UpLoad", Name, ID, PW, Phone_Num);
+                    result = signUp_network.Network_DataArrangement("IDCheck", ID);
                     if(result) {
-                        Toast.makeText(SignUp.this, "Revise is Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserActivity.this, "Revise is Success", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(SignUp.this, "Revise is Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserActivity.this, "Revise is Failed", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
-                    Toast.makeText(SignUp.this, "ID Check isn't Passed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserActivity.this, "ID Check isn't Passed", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -133,7 +131,5 @@ public class UserActivity extends AppCompatActivity{
         }
     });
 }
+}
 
-         */
-}
-}

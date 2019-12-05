@@ -80,6 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (!LoginCheck) {
                         Toast.makeText(LoginActivity.this, "LoginFailed", Toast.LENGTH_LONG).show();
                     } else {
+                        System.out.println("U name : " + U.UserName_Output());
+                        System.out.println("U ID : " + U.UserID_Output());
+                        System.out.println("U PW : " + U.UserPW_Output());
                         Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
                         intentToMain.putExtra("User", U);
                         Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG).show();

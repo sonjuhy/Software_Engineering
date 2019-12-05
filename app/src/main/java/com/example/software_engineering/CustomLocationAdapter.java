@@ -60,7 +60,7 @@ public class CustomLocationAdapter extends BaseAdapter {
         TextView name_schedule = (TextView) convertView.findViewById(R.id.name_schedule);
         TextView location_schedule = (TextView) convertView.findViewById(R.id.location_schedule);
 
-        name_schedule.setText(location_schedule_list.get(position).Name);
+        //name_schedule.setText(location_schedule_list.get(position).Name);
         location_schedule.setText(location_schedule_list.get(position).locationXY());
 
      /*   LinearLayout location_layout = (LinearLayout)convertView.findViewById(R.id.location_list_layout);

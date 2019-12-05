@@ -50,8 +50,8 @@ public class ModifySchedule extends AppCompatActivity {
 
     ;
 
-    public void add_schedule(String name, String content, double place_x, double place_y, int alarmRepeatCount, int sound, int vibration, Group group) {
-        location_scheduleArrayList.add(new Schedule(name, content, place_x, place_y, alarmRepeatCount, sound, vibration, group));
+    public void add_schedule(String name, String content, double place_x, double place_y, int alarmRepeatCount, int sound, int vibration) {
+        location_scheduleArrayList.add(new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
     }
 
     public void add_schedule(String name, String content, Calendar calendar, int alarmRepeatCount, int sound, int vibration, Group group) {
@@ -60,30 +60,30 @@ public class ModifySchedule extends AppCompatActivity {
 
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
         if (time_scheduleArrayList.size() == 0) {
-            time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration, group));
+            time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
         } else {
             for (int i = 0; i < time_scheduleArrayList.size(); i++) {
                 if (time_scheduleArrayList.get(i).getCalendar().after(calendar)) {
-                    time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration, group));
+                    time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
                     return;
                 }
             }
         }
-        time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration, group));
+        time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
     }
 
     public void modified_schedule(String name, String content, double place_x, double place_y,
                                   int alarmRepeatCount, int sound, int vibration, Group group, int index) {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         location_scheduleArrayList.remove(index);
-        location_scheduleArrayList.add(new Schedule(name, content, place_x, place_y, alarmRepeatCount, sound, vibration, group));
+        location_scheduleArrayList.add(new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
     }
 
     public void modified_schedule(String name, String content, Calendar calendar,
-                                  int alarmRepeatCount, int sound, int vibration, Group group, int index) {
+                                  int alarmRepeatCount, int sound, int vibration, int index) {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         location_scheduleArrayList.remove(index);
-        location_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration, group));
+        location_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration));
     }
 
 

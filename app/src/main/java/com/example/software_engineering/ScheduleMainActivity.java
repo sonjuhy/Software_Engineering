@@ -54,7 +54,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
     public void add_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
-        location_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
+        location_scheduleArrayList.add(new Schedule(name,content,"", "", "", place_x,place_y,alarmRepeatCount,sound,vibration));
     }
     public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
@@ -63,18 +63,18 @@ public class ScheduleMainActivity extends AppCompatActivity {
         if(time_scheduleArrayList==null)
         {
             time_scheduleArrayList = new ArrayList<Schedule>();
-            time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
+            time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration));
         }
         else {
             for (int i = 0; i < time_scheduleArrayList.size(); i++) {
                 if(time_scheduleArrayList.get(i).getCalendar().after(calendar))
                 {
-                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
+                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration));
                     return;
                 }
             }
         }
-        time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration, group));
+        time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration));
     }
 
     public void modified_schedule(String name, String content,double place_x,double place_y,
@@ -82,7 +82,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         location_scheduleArrayList.remove(index);
-        location_scheduleArrayList.add(new Schedule(name,content,place_x,place_y,alarmRepeatCount,sound,vibration, group));
+        location_scheduleArrayList.add(new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
     }
 
     public void modified_schedule(String name, String content,Calendar calendar,
@@ -90,7 +90,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         location_scheduleArrayList.remove(index);
-        location_scheduleArrayList.add(new Schedule(name,content,calendar,alarmRepeatCount,sound,vibration, group));
+        location_scheduleArrayList.add(new Schedule(name,content,calendar,alarmRepeatCount,sound,vibration));
     }
 
 
@@ -192,7 +192,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     Intent intent_schedule = getIntent();
                     EditText editText = findViewById(R.id.schedule_name_input);
                     user = (User) getIntent().getSerializableExtra("user");
-                    time_scheduleArrayList = user.UserSchedule_Output();
+                    time_scheduleArrayList = user.UserTimeSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
                     calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
                     //마지막에 new Group()은 임시

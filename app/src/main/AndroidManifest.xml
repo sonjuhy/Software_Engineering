@@ -26,6 +26,7 @@
         <activity android:name=".ScheduleMainActivity" />
         <activity android:name=".ModifySchedule" />
         <activity android:name=".SignUp" />
+        <activity android:name=".UserActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
