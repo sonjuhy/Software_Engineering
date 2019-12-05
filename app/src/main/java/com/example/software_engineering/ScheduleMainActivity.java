@@ -34,7 +34,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     int schedule_vibration =0;
     private Spinner group_spinner;
     double locatin_x=0, locatin_y=0;
-
+    User user;
     ArrayList<String> group_list;
     ArrayList<String> alarm_count;
     ArrayAdapter<String> arrayAdapter;
@@ -104,10 +104,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this.getIntent());
+        Intent intent = getIntent();
 
         int i  = intent.getIntExtra("num", 1);
         group_list= (ArrayList<String>)intent.getSerializableExtra("group");
+        user = (User)intent.getSerializableExtra("user");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// 벨소리 체크 박스
         class soundSwitchListener implements CompoundButton.OnCheckedChangeListener{
@@ -185,14 +186,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
                     Intent intent_schedule = getIntent();
-                    Bundle bundle = intent_schedule.getExtras();
-                    time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+                    user = (User) getIntent().getSerializableExtra("user");
+                    time_scheduleArrayList = user.UserSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요 -> 이걸 왜 그룹으로 넘김 ?
+                    //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요-> 이걸 왜 그룹으로 넘김 ?/// 위치정보 넘겨야됨
                     setAlarm();
-
-                    bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
-                    intent_schedule.putExtras( bundle );
                     setResult(0,intent_schedule);
                     finish();
                 }
@@ -246,7 +244,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
 
-                    Intent intent_schedule = getIntent();
+                   /* Intent intent_schedule = getIntent();
                     Bundle bundle = intent_schedule.getExtras();
                     location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
@@ -255,7 +253,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
                     bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
                     intent_schedule.putExtras( bundle );
-                    setResult(0,intent_schedule);
+                    setResult(0,intent_schedule);*/
                     finish();
                 }
             });

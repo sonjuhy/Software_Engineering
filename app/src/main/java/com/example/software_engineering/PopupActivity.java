@@ -140,22 +140,41 @@ public class PopupActivity extends Activity {
         else if(opt.equals("add_schedule")){
             setContentView(R.layout.popup_add_schedule);
             final Intent schedule = new Intent(PopupActivity.this, ScheduleMainActivity.class);
-            schedule.putExtra("group",getIntent().getSerializableExtra("group"));
 
+
+            schedule.putExtra("group",getIntent().getSerializableExtra("group"));
+            schedule.putExtra("user",getIntent().getSerializableExtra("user"));
             Button time_button = findViewById(R.id.set_time_schedule);
             time_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     schedule.putExtra("num",1);
-                    startActivity(schedule);
+                    startActivityForResult(schedule,888);
+
                 }
             });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             Button location_button = findViewById(R.id.set_location_schedule);
             location_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     schedule.putExtra("num",2);
+
                     startActivity(schedule);
                 }
             });
