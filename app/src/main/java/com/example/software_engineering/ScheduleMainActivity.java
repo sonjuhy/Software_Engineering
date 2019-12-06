@@ -202,7 +202,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     System.out.println(h);
                     System.out.println(mi);
 
-                    calendar.set(y,m,d,h,mi);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
+                  //  calendar.set(y,m,d,h,mi);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
                     //마지막에 new Group()은 임시
                     add_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group());
                     setAlarm();
@@ -294,10 +294,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
         // 알람 시간 설정
 
         // 현재일보다 이전이면 등록 실패
-        if (this.calendar.before(Calendar.getInstance())) {
-            Toast.makeText(this, "알람시간이 현재시간보다 이전일 수 없습니다.", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         // Receiver 설정
         Intent intent = new Intent(this, AlarmReceiver.class);
@@ -320,8 +316,11 @@ public class ScheduleMainActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Button date_button = findViewById(R.id.date_button);
                 y = year;
-                m = month;
+                m = month+1;
                 d = dayOfMonth;
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DATE, dayOfMonth);
                 date_button.setText(y+"년 "+m+"월 "+d+"일");
 
             }
