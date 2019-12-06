@@ -164,8 +164,8 @@ public class MainActivity extends AppCompatActivity
                     intent.putExtra("user",U);
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
-                   // startActivityForResult(intent,REQUEST_CODE);
-
+                    CustomTimeAdapter time_adapter = new CustomTimeAdapter((U.UserTimeSchedule_Output()));
+                    list_time_schedule.setAdapter(time_adapter);
                     break;
                 }
 

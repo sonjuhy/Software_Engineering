@@ -332,8 +332,8 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 Button time_button = findViewById(R.id.time_button);
                 h = hourOfDay;
                 mi = minute;
-                calendar.set(Calendar.HOUR, h);
-                calendar.set(Calendar.MINUTE, mi);
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
                 time_button.setText(h+"시 "+mi+"분");
                 final Calendar calendar = Calendar.getInstance();
             }
