@@ -164,7 +164,7 @@ public class User implements Serializable {//implements Serializable for using i
     public ArrayList<Schedule> UserTimeSchedule_Output(){
         return this.S_Time;
     }
-    public ArrayList<Schedule> UserPlaceSchedule_Outpu(){
+    public ArrayList<Schedule> UserPlaceSchedule_Output(){
         return this.S_Place;
     }
     public ArrayList<Group> UserGroup_Output(){

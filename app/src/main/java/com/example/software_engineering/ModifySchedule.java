@@ -233,18 +233,18 @@ public class ModifySchedule extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
 
-                    Intent intent_schedule = getIntent();
-                    EditText editText = findViewById(R.id.schedule_name_input);
-                    user = (User) getIntent().getSerializableExtra("user");
-                    location_scheduleArrayList = user.UserTimeSchedule_Output();
-                    String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
+                  Intent intent_schedule = getIntent();
+            EditText editText = findViewById(R.id.schedule_name_input);
+            user = (User) getIntent().getSerializableExtra("user");
+            location_scheduleArrayList = user.UserTimeSchedule_Output();
+            String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
 
-                    set_schedule(editText.getText().toString(), content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
-                    intent_schedule.putExtra("location",location_scheduleArrayList);
-                    setResult(1,intent_schedule);
-                    finish();
-                }
-            });
+            set_schedule(editText.getText().toString(), content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
+            intent_schedule.putExtra("location",location_scheduleArrayList);
+            setResult(1,intent_schedule);
+            finish();
+        }
+    });
 
         }
 

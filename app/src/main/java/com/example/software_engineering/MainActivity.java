@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
         U = (User) getIntent().getSerializableExtra("User");
-
+        time_scheduleArrayList = U.UserTimeSchedule_Output();
+        location_scheduleArrayList = U.UserPlaceSchedule_Output();
 
 
 
@@ -78,13 +79,6 @@ public class MainActivity extends AppCompatActivity
 
 // 사이 필요없는값 강제 넣기
 
-        Schedule time1 = new Schedule("첫번째", "", "", "", null,0.0,0,0,0,0);
-        time_scheduleArrayList.add(time1);
-        Schedule time2 = new Schedule("두번째", "", "", "", null,0.0,0,0,0,0);
-        time_scheduleArrayList.add(time2);
-        Schedule time3 = new Schedule("세번째", "", "", "", null,0.0,0,0,0,0);
-        time_scheduleArrayList.add(time3);
-
 //
 
         list_time_schedule = (ListView)findViewById(R.id.list_time_schedule);
@@ -104,12 +98,7 @@ public class MainActivity extends AppCompatActivity
 
 // 사이 필요없는값 강제 넣기
 
-        Schedule location1 = new Schedule("첫번째", "", "", "", null,0.0,0,0,0,0);
-        location_scheduleArrayList.add(location1);
-        Schedule location2 = new Schedule("두번째", "", "", "", null,0.0,0,0,0,0);
-        location_scheduleArrayList.add(location2);
-        Schedule location3 = new Schedule("세번째", "", "", "", null,0.0,0,0,0,0);
-        location_scheduleArrayList.add(location3);
+
 
 //
 
@@ -174,9 +163,6 @@ public class MainActivity extends AppCompatActivity
         switch( item.getItemId() ){
 
             case R.id.modify:
-
-                U.TimeSchedule_set(time_scheduleArrayList);
-                U.TimeSchedule_set(location_scheduleArrayList);
 
                 if(choose_num==1) {
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
@@ -258,8 +244,6 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra("opt","add_schedule");
                 Intent group = intent.putExtra("group", groupArrayList);
                 intent.putExtra("user",U);
-
-
                 startActivityForResult(intent,REQUEST_CODE);
 
             default:
@@ -316,13 +300,17 @@ public class MainActivity extends AppCompatActivity
             else if(resultCode == 0)
             {
                 U.TimeSchedule_set((ArrayList<Schedule>) data.getExtras().getSerializable("time"));
-
+                CustomTimeAdapter time_adapter = new CustomTimeAdapter((U.UserTimeSchedule_Output()));
+                list_time_schedule.setAdapter(time_adapter);
             }
+
             else if(resultCode == 1)
             {
-
                U.PlaceSchedule_set((ArrayList<Schedule>)data.getExtras().getSerializable("location"));
+                CustomLocationAdapter location_adapter = new CustomLocationAdapter((U.UserPlaceSchedule_Output()));
+                list_location_schedule.setAdapter(location_adapter);
             }
+
             else
             {
                 /////실패
