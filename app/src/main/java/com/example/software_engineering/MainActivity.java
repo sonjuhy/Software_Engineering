@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 list_position=position;
                 choose_num = 1;
+
                 return false;
             }
         });
@@ -161,10 +162,10 @@ public class MainActivity extends AppCompatActivity
                     intent.putExtra("group",groupArrayList);
                     intent.putExtra("list_position",list_position);
                     intent.putExtra("user",U);
+                    Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                    // startActivityForResult(intent,REQUEST_CODE);
 
-                    Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
                 }
 

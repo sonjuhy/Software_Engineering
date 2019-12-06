@@ -71,23 +71,22 @@ public class ModifySchedule extends AppCompatActivity {
         group_list= (ArrayList<String>)intent.getSerializableExtra("group");
         user = (User)intent.getSerializableExtra("user");
         int i  = intent.getIntExtra("num", 1);
+
         if(i==1) {
-            time_scheduleArrayList = (ArrayList<Schedule>) intent.getSerializableExtra("list");
-           y=time_scheduleArrayList.get(position).calendar.YEAR;
-            m=time_scheduleArrayList.get(position).calendar.MONTH;
-            d=time_scheduleArrayList.get(position).calendar.DATE;
-            h=time_scheduleArrayList.get(position).calendar.HOUR;
-            mi=time_scheduleArrayList.get(position).calendar.MINUTE;
-            schedule_sound =time_scheduleArrayList.get(position).Sound;
-            schedule_vibration =time_scheduleArrayList.get(position).Vibration;
+            y=user.UserTimeSchedule_Output().get(position).calendar.get(Calendar.YEAR);
+          /*  m=user.UserTimeSchedule_Output().get(position).calendar.MONTH;
+            d=user.UserTimeSchedule_Output().get(position).calendar.DAY_OF_MONTH;
+            h=user.UserTimeSchedule_Output().get(position).calendar.HOUR_OF_DAY;
+            mi=user.UserTimeSchedule_Output().get(position).calendar.MINUTE;
+            schedule_sound =user.UserTimeSchedule_Output().get(position).Sound;
+            schedule_vibration =user.UserTimeSchedule_Output().get(position).Vibration;*/
         }
 
         else if(i==2) {
-            location_scheduleArrayList = (ArrayList<Schedule>) intent.getSerializableExtra("list");
-            location_x = location_scheduleArrayList.get(position).Place_x;
-            location_y = location_scheduleArrayList.get(position).Place_y;
-            schedule_sound =location_scheduleArrayList.get(position).Sound;
-            schedule_vibration =location_scheduleArrayList.get(position).Vibration;
+            location_x = user.UserPlaceSchedule_Output().get(position).Place_x;
+            location_y = user.UserPlaceSchedule_Output().get(position).Place_y;
+            schedule_sound =user.UserPlaceSchedule_Output().get(position).Sound;
+            schedule_vibration =user.UserPlaceSchedule_Output().get(position).Vibration;
         }
 
 
