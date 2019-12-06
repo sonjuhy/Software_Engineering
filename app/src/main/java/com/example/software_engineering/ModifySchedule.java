@@ -58,20 +58,45 @@ public class ModifySchedule extends AppCompatActivity {
     public void set_schedule(String name, String content, double place_x, double place_y, int alarmRepeatCount, int sound, int vibration,Group group,int index) {
         location_scheduleArrayList.set(index,new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
     }
+    public void add_schedule(String name, String content,double place_x,double place_y, int alarmRepeatCount, int sound ,int vibration,Group group)
+    {
+        location_scheduleArrayList.add(new Schedule(name,content,"", "", "", place_x,place_y,alarmRepeatCount,sound,vibration));
+    }
+    public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int sound ,int vibration,Group group)
+    {
 
-    /*public void modified_schedule(String name, String content, double place_x, double place_y,
+        ////////////// 수정할 것 : 시간 순으로 정렬 해야함
+        if(time_scheduleArrayList==null)
+        {
+            time_scheduleArrayList = new ArrayList<Schedule>();
+            time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
+        }
+        else {
+            for (int i = 0; i < time_scheduleArrayList.size(); i++) {
+                if(time_scheduleArrayList.get(i).getCalendar().after(calendar))
+                {
+                    time_scheduleArrayList.add(i,new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
+                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
+                    return;
+                }
+            }
+        }
+        time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
+    }
+
+    public void modified_schedule(String name, String content, double place_x, double place_y,
                                   int alarmRepeatCount, int sound, int vibration, Group group, int index) {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         location_scheduleArrayList.remove(index);
-        location_scheduleArrayList.add(new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
+        add_schedule(name, content,place_x, place_y, alarmRepeatCount, sound, vibration,group);
     }
     public void modified_schedule(String name, String content,Calendar calendar,
                                   int alarmRepeatCount,int sound ,int vibration,Group group,int index)
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         time_scheduleArrayList.remove(index);
-        time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
-    }*/
+        add_schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group);
+    }
 
 
     public void remove_time_schedule(int index)
@@ -176,7 +201,7 @@ public class ModifySchedule extends AppCompatActivity {
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
                     calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
                     //마지막에 new Group()은 임시
-                    set_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
+                    modified_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
                     setAlarm();
                     intent_schedule.putExtra("time",time_scheduleArrayList);
                     setResult(0,intent_schedule);
@@ -239,7 +264,7 @@ public class ModifySchedule extends AppCompatActivity {
             location_scheduleArrayList = user.UserTimeSchedule_Output();
             String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
 
-            set_schedule(editText.getText().toString(), content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
+                    modified_schedule(editText.getText().toString(), content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
             intent_schedule.putExtra("location",location_scheduleArrayList);
             setResult(1,intent_schedule);
             finish();
@@ -292,14 +317,18 @@ public class ModifySchedule extends AppCompatActivity {
                 y = year;
                 m = month+1;
                 d = dayOfMonth;
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 date_button.setText(y+"년 "+m+"월 "+d+"일");
+
+
             }
-        },2019, 1, 11);
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog.setMessage("메시지");
         datePickerDialog.show();
     }
-
     void showTime() {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override

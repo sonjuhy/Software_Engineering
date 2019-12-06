@@ -196,11 +196,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     user = (User) getIntent().getSerializableExtra("user");
                     time_scheduleArrayList = user.UserTimeSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    System.out.println(y);
-                    System.out.println(m);
-                    System.out.println(d);
-                    System.out.println(h);
-                    System.out.println(mi);
 
                   //  calendar.set(y,m,d,h,mi);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
                     //마지막에 new Group()은 임시

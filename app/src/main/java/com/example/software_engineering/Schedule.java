@@ -93,9 +93,12 @@ public class Schedule implements Serializable {
    /*String GroupName_output() {
         return this.Group.name;
     }*/
-    /*int ScheduleTime_output(){
-        return this.Time;
-    }*/
+    String ScheduleName_output(){
+        return this.Name;
+    }
+    Calendar ScheduleTime_output(){
+        return this.calendar;
+    }
     int ScheduleSound_output(){
         return this.Sound;
     }
