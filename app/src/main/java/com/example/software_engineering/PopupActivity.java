@@ -32,7 +32,7 @@ public class PopupActivity extends Activity {
         if(opt.equals("add_member")){
             setContentView(R.layout.popup_add_activity);
 
-            final GroupMember member = new GroupMember("id","name",0);
+            final GroupMember member = new GroupMember("id","name","0");
 
             final EditText editText = findViewById(R.id.search);
             final TextView textView = findViewById(R.id.search_text);

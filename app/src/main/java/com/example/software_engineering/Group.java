@@ -155,7 +155,7 @@ class Group_Network{
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);//JSonArray[i] Data is moved to jsonObject1
                 name_tmp = jsonObject1.getString("userID");
-                GroupMember GM = new GroupMember(name_tmp,G.GroupName_output(),0);
+                GroupMember GM = new GroupMember(name_tmp,G.GroupName_output(),""); // 여기 폰번호 어디감 ?
                 G.GroupMember_input(GM);
             }
         } catch (JSONException e) {

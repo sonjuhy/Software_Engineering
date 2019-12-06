@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,6 @@ public class GroupSubActivity extends AppCompatActivity {
 
     int colorPick;
     TextView colorSample;
-    //실제 구현에서는 new 하면 안되고 그룹 불러와야됨
     ArrayList<GroupMember> list = new ArrayList<>();
     final Intent intent = new Intent();
 
@@ -93,6 +93,9 @@ public class GroupSubActivity extends AppCompatActivity {
 
         }
         else {
+            User U = (User) getIntent().getSerializableExtra("user");
+            list.add(new GroupMember(U.UserID_Output(),U.UserName_Output(),U.UserPhone_num_Output()));
+
             Button button = findViewById(R.id.color_pick);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -128,9 +131,13 @@ public class GroupSubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText name = findViewById(R.id.gName_input);
-                intent.putExtra("name",name.getText().toString());
-                setResult(RESULT_OK,intent);
-                finish();
+                if(name.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(),"그룹명을 입력해주세요.",Toast.LENGTH_LONG).show();
+                }else{
+                    intent.putExtra("name",name.getText().toString());
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }
             }
         });
 
