@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity
     private Group G;
     private ListView list_time_schedule;
     private ListView list_location_schedule;
-    private ArrayList<Schedule> time_scheduleArrayList;
-    private ArrayList<Schedule> location_scheduleArrayList;
     private ArrayList<String> groupArrayList = new ArrayList<>();
     private int choose_num=0;
     private int list_position=0;
@@ -47,13 +45,14 @@ public class MainActivity extends AppCompatActivity
         group_network.Network_DataArrangement(U,0,"DownLoad");//Group Name Load
         group_network.Network_DataArrangement(U,1,"DownLoad");//Group Member Load
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
         U = (User) getIntent().getSerializableExtra("User");
-        time_scheduleArrayList = U.UserTimeSchedule_Output();
-        location_scheduleArrayList = U.UserPlaceSchedule_Output();
+        U.UserTimeSchedule_Output();
+        U.UserPlaceSchedule_Output();
 
 
 
@@ -75,14 +74,14 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        time_scheduleArrayList = new ArrayList<>(); //시간별 리스트
+ //시간별 리스트
 
 // 사이 필요없는값 강제 넣기
 
 //
 
         list_time_schedule = (ListView)findViewById(R.id.list_time_schedule);
-        CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
+        CustomTimeAdapter time_adapter = new CustomTimeAdapter((U.UserTimeSchedule_Output()));
         list_time_schedule.setAdapter(time_adapter);
 
         registerForContextMenu(list_time_schedule);              //<<<<<<<<<<<<<<<<<<
@@ -91,10 +90,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
-
-
-        location_scheduleArrayList = new ArrayList<>(); //장소별 리스트
 
 // 사이 필요없는값 강제 넣기
 
@@ -105,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
 
         list_location_schedule = (ListView)findViewById(R.id.list_location_schedule);
-        CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
+        CustomLocationAdapter location_adapter = new CustomLocationAdapter((U.UserPlaceSchedule_Output()));
         list_location_schedule.setAdapter(location_adapter);
         registerForContextMenu(list_location_schedule);
 
@@ -191,16 +186,16 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.delete:
                 if(choose_num==1) {
-                    time_scheduleArrayList.remove(list_position);
-                    CustomTimeAdapter time_adapter = new CustomTimeAdapter((time_scheduleArrayList));
+                    U.UserTimeSchedule_Output().remove(list_position);
+                    CustomTimeAdapter time_adapter = new CustomTimeAdapter((U.UserTimeSchedule_Output()));
                     list_time_schedule.setAdapter(time_adapter);
                     Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
                 }
 
                 else if(choose_num==2) {
-                    location_scheduleArrayList.remove(list_position);
-                    CustomLocationAdapter location_adapter = new CustomLocationAdapter((location_scheduleArrayList));
+                    U.UserPlaceSchedule_Output().remove(list_position);
+                    CustomLocationAdapter location_adapter = new CustomLocationAdapter((U.UserPlaceSchedule_Output()));
                     list_location_schedule.setAdapter(location_adapter);
                     Toast.makeText(this, "선택된 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
