@@ -134,7 +134,10 @@ public class GroupSubActivity extends AppCompatActivity {
                 EditText name = findViewById(R.id.gName_input);
                 if(name.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"그룹명을 입력해주세요.",Toast.LENGTH_LONG).show();
-                }else{
+                } else if(name.getText().toString().length()>20){
+                    Toast.makeText(getApplicationContext(),"Group Name is Oversize(>20)",Toast.LENGTH_LONG).show();
+                }
+                else{
                     intent.putExtra("name",name.getText().toString());
                     setResult(RESULT_OK,intent);
                     finish();
