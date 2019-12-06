@@ -98,18 +98,30 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this, "Phone Num is Empty", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    SignUp_Network signUp_network = new SignUp_Network();
-                    if(ID_Check) {
-                        result = signUp_network.Network_DataArrangement("UpLoad", Name, ID, PW, Phone_Num);
-                        if(result) {
-                            Toast.makeText(SignUp.this, "Sign Up is Success", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(SignUp.this, "Sign Up is Failed", Toast.LENGTH_SHORT).show();
-                        }
+                    if(ID.length() > 13){
+                        Toast.makeText(SignUp.this, "ID is OverSize", Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        Toast.makeText(SignUp.this, "ID Check isn't Passed", Toast.LENGTH_LONG).show();
+                    else if(Name.length() > 5){
+                        Toast.makeText(SignUp.this, "Name is OverSize", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(PW.length() > 20){
+                        Toast.makeText(SignUp.this, "PW is OverSize", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(Phone_Num.length() > 13){
+                        Toast.makeText(SignUp.this, "PhoneNum is OverSize", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        SignUp_Network signUp_network = new SignUp_Network();
+                        if (ID_Check) {
+                            result = signUp_network.Network_DataArrangement("UpLoad", Name, ID, PW, Phone_Num);
+                            if (result) {
+                                Toast.makeText(SignUp.this, "Sign Up is Success", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUp.this, "Sign Up is Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SignUp.this, "ID Check isn't Passed", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                 }
@@ -173,7 +185,7 @@ class SignUp_Network implements Serializable {
                     break;
                 case "IDCheck":
                     try {
-                        Network_data = URLEncoder.encode("Name","UTF-8") + "=" + URLEncoder.encode(_param[1],"UTF-8");
+                        Network_data = URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(_param[1],"UTF-8");
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
