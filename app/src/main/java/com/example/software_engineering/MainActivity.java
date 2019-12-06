@@ -290,6 +290,9 @@ public class MainActivity extends AppCompatActivity
             else if(resultCode == 0)
             {
                 U.TimeSchedule_set((ArrayList<Schedule>) data.getExtras().getSerializable("time"));
+                System.out.println(U.UserName_Output());
+                System.out.println(U.UserTimeSchedule_Output().get(0).ScheduleTime_output().getTime());
+                System.out.println(U.UserTimeSchedule_Output().get(0).ScheduleName_output());
                 CustomTimeAdapter time_adapter = new CustomTimeAdapter((U.UserTimeSchedule_Output()));
                 list_time_schedule.setAdapter(time_adapter);
             }
@@ -297,6 +300,8 @@ public class MainActivity extends AppCompatActivity
             else if(resultCode == 1)
             {
                U.PlaceSchedule_set((ArrayList<Schedule>)data.getExtras().getSerializable("location"));
+
+
                 CustomLocationAdapter location_adapter = new CustomLocationAdapter((U.UserPlaceSchedule_Output()));
                 list_location_schedule.setAdapter(location_adapter);
             }
