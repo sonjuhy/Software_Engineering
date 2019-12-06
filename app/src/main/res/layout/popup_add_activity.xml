@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:hint="ID 나 연락처 입력"
+            android:hint="ID 입력 후 검색"
             android:inputType="textPersonName" />
 
         <Button
