@@ -60,7 +60,7 @@ public class CustomTimeAdapter extends BaseAdapter {
         TextView name_schedule = (TextView) convertView.findViewById(R.id.name_schedule);
         TextView time_schedule = (TextView) convertView.findViewById(R.id.time_schedule);
 
-        //name_schedule.setText(time_schedule_list.get(position).Name);
+        name_schedule.setText(time_schedule_list.get(position).name());
         time_schedule.setText(time_schedule_list.get(position).time_cal());
 
         /*LinearLayout time_layout = (LinearLayout)convertView.findViewById(R.id.time_list_layout);

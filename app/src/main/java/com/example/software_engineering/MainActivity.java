@@ -51,10 +51,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
         U = (User) getIntent().getSerializableExtra("User");
-        U.UserTimeSchedule_Output();
-        U.UserPlaceSchedule_Output();
-
-
 
         LoginGetData_Schedule();//DownLoad Schedule Data from Server;
         LoginGetData_Group();//DownLoad Group Data from Server;
@@ -164,10 +160,9 @@ public class MainActivity extends AppCompatActivity
                     intent.putExtra("num",choose_num);
                     intent.putExtra("group",groupArrayList);
                     intent.putExtra("list_position",list_position);
-
                     intent.putExtra("user",U);
-
-                    startActivityForResult(intent,REQUEST_CODE);
+                    startActivity(intent);
+                   // startActivityForResult(intent,REQUEST_CODE);
 
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
