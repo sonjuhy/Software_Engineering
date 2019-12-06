@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         group_network.Network_DataArrangement(U,0,"DownLoad");//Group Name Load
         group_network.Network_DataArrangement(U,1,"DownLoad");//Group Member Load
     }
+   // private boolean LoginCheckData_Invite(){ }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
