@@ -22,6 +22,8 @@ public class GroupSubActivity extends AppCompatActivity {
     TextView colorSample;
     ArrayList<GroupMember> list = new ArrayList<>();
     final Intent intent = new Intent();
+    final static int ADD_M = 101;
+    final static int EDIT_M = 102;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -29,12 +31,12 @@ public class GroupSubActivity extends AppCompatActivity {
 
         } else {
             switch (requestCode) {
-                case 1:
+                case ADD_M:
                     GroupMember member = (GroupMember) data.getSerializableExtra("member");
                     list.add(member);
                     intent.putExtra("list",list);
                     break;
-                case 2:
+                case EDIT_M:
                     list = (ArrayList<GroupMember>) data.getSerializableExtra("list");
                     intent.putExtra("list",list);
                     break;
@@ -85,7 +87,7 @@ public class GroupSubActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
                     intent.putExtra("list", list);
                     intent.putExtra("opt", "view");
-                    startActivityForResult(intent, 2);
+                    startActivity(intent);
                 }
             });
 
@@ -111,7 +113,7 @@ public class GroupSubActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
                     intent.putExtra("list", list);
                     intent.putExtra("opt", "delete");
-                    startActivityForResult(intent, 2);
+                    startActivityForResult(intent, EDIT_M);
                 }
             });
 
@@ -123,7 +125,7 @@ public class GroupSubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
                 intent.putExtra("opt", "add_member");
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, ADD_M);
             }
         });
 

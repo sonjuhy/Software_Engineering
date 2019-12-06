@@ -62,11 +62,9 @@ public class GroupMainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(resultCode==RESULT_OK){
             if(requestCode==1){
-                groupArrayList.add(new Group(
-                        data.getStringExtra("name"),
-                        (ArrayList<GroupMember>) data.getSerializableExtra("list"),
-                        data.getIntExtra("color",0)
-                ));
+                ArrayList<GroupMember> list = (ArrayList<GroupMember>) data.getSerializableExtra("list");
+                // 여기에 추가할 멤버들 어레이리스트 형식으로 한번에 가져옴
+                groupArrayList.add(new Group(data.getStringExtra("name"),list,data.getIntExtra("color",0)));
             }
             else if(requestCode==2){
                 if(data.getBooleanExtra("exit",false)){
