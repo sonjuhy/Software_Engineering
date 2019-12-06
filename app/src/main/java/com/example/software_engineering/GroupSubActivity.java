@@ -95,6 +95,7 @@ public class GroupSubActivity extends AppCompatActivity {
         else {
             User U = (User) getIntent().getSerializableExtra("user");
             list.add(new GroupMember(U.UserID_Output(),U.UserName_Output(),U.UserPhone_num_Output()));
+            intent.putExtra("list",list);
 
             Button button = findViewById(R.id.color_pick);
             button.setOnClickListener(new View.OnClickListener() {
