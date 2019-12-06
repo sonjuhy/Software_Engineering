@@ -12,21 +12,21 @@ import java.util.concurrent.ExecutionException;
 
 
 public class Schedule implements Serializable {
-    private  Calendar calendar;
-    private  int Sound;
-    private  int Vibration;
+    public  Calendar calendar;
+    public  int Sound;
+    public  int Vibration;
 
-    private int AlarmRepeatCount;
-    private  double Place_x;
-    private  double Place_y;
-    private  int alarmType;
+    public int AlarmRepeatCount;
+    public  double Place_x;
+    public  double Place_y;
+    public  int alarmType;
 
-    private String content;
-    private String Time;
-    private String Place;
-    private Group group;
-    private String Name;
-    private String ID; //UserID
+    public String content;
+    public String Time;
+    public String Place;
+    public Group group;
+    public String Name;
+    public String ID; //UserID
 
 
     public Schedule(String name, String content, String Time, String Place, String ID, double place_x,double place_y, int alarmRepeatCount, int Sound, int Vibration)
@@ -57,12 +57,14 @@ public class Schedule implements Serializable {
 
     public String time_cal()
     {
-        Calendar cal = Calendar.getInstance();
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int min = cal.get(Calendar.MINUTE);
+        int hour = calendar.get(Calendar.HOUR);
+        int min = calendar.get(Calendar.MINUTE);
         String time = (hour+"시 "+min+"분");
-
         return time;
+    }
+    public String name()
+    {
+        return this.Name;
     }
 
     public String locationXY()
