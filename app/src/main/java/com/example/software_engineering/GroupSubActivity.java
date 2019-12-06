@@ -135,6 +135,7 @@ public class GroupSubActivity extends AppCompatActivity {
                 if(name.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"그룹명을 입력해주세요.",Toast.LENGTH_LONG).show();
                 }else{
+
                     intent.putExtra("name",name.getText().toString());
                     setResult(RESULT_OK,intent);
                     finish();

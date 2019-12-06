@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -23,6 +24,7 @@ public class PopupActivity extends Activity {
 
     private static final int REQUEST_CODE_POPUP =888;
     private boolean result;
+    private ArrayList<GroupMember> tmp_GroupMem;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +49,8 @@ public class PopupActivity extends Activity {
                     if(result){
                         User User_search = new User();
                         User_search.UserInfo_Input("",editText.getText().toString(),"","");
-                        User_search.Network_DataArrangement("Get_Data","");
-                        member.id=User_search.UserID_Output();
+                        User_search.Network_DataArrangement("Get_Name",editText.getText().toString());
+                        member.id=editText.getText().toString();
                         member.name = User_search.UserName_Output();
                         textView.setText("ID: "+member.id+", 이름: "+member.name);
                     }
@@ -195,13 +197,6 @@ public class PopupActivity extends Activity {
         }
 
     }
-
-
-
-
-
-
-
 }
 class PopUp_Network{
     private Network n;

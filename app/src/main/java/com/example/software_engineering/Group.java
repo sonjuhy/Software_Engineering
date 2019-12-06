@@ -85,7 +85,7 @@ class Group_Network{
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
-                        Network_Access("Put_groupdb",Network_data);//Running Network
+                        Network_Access("Put_groupdb", Network_data);//Running Network
                         if (Network_data.equals(false)) { //Upload Failed
                             System.out.println("UpLoad Failed");
                             return false;
@@ -94,39 +94,40 @@ class Group_Network{
                         }
                         break;
                     case "DownLoad"://Download User data part
-                        Network_Access("Get_GroupName","");//Running Network
+                        Network_Access("Get_GroupName", "");//Running Network
                         Get_GroupData(Network_data, U);//translate JSonData from Server to Java and Save Data
                         break;
                 }
             }
         }
-        else{
-            switch ((_param[0])){
-                case "UpLoad":
-                    try {
-                        Network_data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(_param[1], "UTF-8");
-                        Network_data += "&" + URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(_param[2], "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    //Network_Access();
-                    Get_GroupData(Network_data, U);
-                    if (Network_data.equals(false)) { //Upload Failed
-                        System.out.println("UpLoad Failed");
-                        return false;
-                    } else {//Upload Success
-                        System.out.println("UpLoad Success");
-                    }
-                    break;
-                case "DownLoad":
-                    ArrayList<Group> tmp_G = U.UserGroup_Output();
-                    for(int i=0;i<tmp_G.size();i++) {
-                        Network_Access("Get_GroupMember", tmp_G.get(i).GroupName_output());
-                        Get_GroupMemberData(Network_data, tmp_G.get(i));
-                    }
-                    break;
+        else {
+                switch ((_param[0])) {
+                    case "UpLoad":
+                        try {
+                            Network_data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(_param[1], "UTF-8");
+                            Network_data += "&" + URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(_param[2], "UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        //Network_Access();
+                        Get_GroupData(Network_data, U);
+                        if (Network_data.equals(false)) { //Upload Failed
+                            System.out.println("UpLoad Failed");
+                            return false;
+                        } else {//Upload Success
+                            System.out.println("UpLoad Success");
+                        }
+                        break;
+                    case "DownLoad":
+                        ArrayList<Group> tmp_G = U.UserGroup_Output();
+                        for (int i = 0; i < tmp_G.size(); i++) {
+                            Network_Access("Get_GroupMember", tmp_G.get(i).GroupName_output());
+                            Get_GroupMemberData(Network_data, tmp_G.get(i));
+                        }
+                        break;
+                }
             }
-        }
+
         return true;//Working is Success
     }
     private void Get_GroupData(String mJsonString, User U){//Parsing data(JSon to Java)
