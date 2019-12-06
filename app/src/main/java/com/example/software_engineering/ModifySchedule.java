@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -36,7 +37,7 @@ public class ModifySchedule extends AppCompatActivity {
     int schedule_vibration =0;
     private Spinner group_spinner;
     double locatin_x=0, locatin_y=0;
-
+    User user;
     ArrayList<String> group_list;
     ArrayList<String> alarm_count;
     ArrayAdapter<String> arrayAdapter;
@@ -51,42 +52,26 @@ public class ModifySchedule extends AppCompatActivity {
 
     ;
 
-    public void add_schedule(String name, String content, double place_x, double place_y, int alarmRepeatCount, int sound, int vibration) {
-        location_scheduleArrayList.add(new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
+    public void set_schedule(String name, String content, Calendar calendar, int alarmRepeatCount, int sound, int vibration, Group group,int index) {
+        time_scheduleArrayList.set(index , new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
+    }
+    public void set_schedule(String name, String content, double place_x, double place_y, int alarmRepeatCount, int sound, int vibration,Group group,int index) {
+        location_scheduleArrayList.set(index,new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
     }
 
-    public void add_schedule(String name, String content, Calendar calendar, int alarmRepeatCount, int sound, int vibration, Group group) {
-        calendar.set(y, m, d, h, m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
-
-
-        ////////////// 수정할 것 : 시간 순으로 정렬 해야함
-        if (time_scheduleArrayList.size() == 0) {
-            time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
-        } else {
-            for (int i = 0; i < time_scheduleArrayList.size(); i++) {
-                if (time_scheduleArrayList.get(i).getCalendar().after(calendar)) {
-                    time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
-                    return;
-                }
-            }
-        }
-        time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
-    }
-
-    public void modified_schedule(String name, String content, double place_x, double place_y,
+    /*public void modified_schedule(String name, String content, double place_x, double place_y,
                                   int alarmRepeatCount, int sound, int vibration, Group group, int index) {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         location_scheduleArrayList.remove(index);
         location_scheduleArrayList.add(new Schedule(name, content, "", "", "", place_x, place_y, alarmRepeatCount, sound, vibration));
     }
-
     public void modified_schedule(String name, String content,Calendar calendar,
                                   int alarmRepeatCount,int sound ,int vibration,Group group,int index)
     {
         ////////////// index변수는 레이아웃에서 선택했을때 몇번째 인지 가져오기
         time_scheduleArrayList.remove(index);
         time_scheduleArrayList.add(new Schedule(name, content, calendar, alarmRepeatCount, sound, vibration,group));
-    }
+    }*/
 
 
     public void remove_time_schedule(int index)
@@ -103,9 +88,11 @@ public class ModifySchedule extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this.getIntent());
+
+        final Intent intent = getIntent();
 
         int i  = intent.getIntExtra("num", 1);
+
         group_list= (ArrayList<String>)intent.getSerializableExtra("group");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// 벨소리 체크 박스
@@ -132,9 +119,9 @@ public class ModifySchedule extends AppCompatActivity {
             setContentView(R.layout.activity_time_schedule);
 
 
-       //     arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
-       //     group_spinner = findViewById(R.id.spinner_group);
-        //    group_spinner.setAdapter(arrayAdapter);
+          arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
+          group_spinner = findViewById(R.id.spinner_group);
+           group_spinner.setAdapter(arrayAdapter);
 
 
 
@@ -155,7 +142,7 @@ public class ModifySchedule extends AppCompatActivity {
                 }
             });
 
-    /*        group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     //spinner에서 가장 위에가 i= 0번~쭈루룩
@@ -165,7 +152,6 @@ public class ModifySchedule extends AppCompatActivity {
 
                 }
             });
-*/
 
             Button exit_schedule = findViewById(R.id.exit_add_schedule_button); //스케쥴 추가에 취소 버튼
             exit_schedule.setOnClickListener(new View.OnClickListener() {
@@ -184,14 +170,15 @@ public class ModifySchedule extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
                     Intent intent_schedule = getIntent();
-                    Bundle bundle = intent_schedule.getExtras();
-                    time_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("time_scheduleArrayList");
+                    EditText editText = findViewById(R.id.schedule_name_input);
+                    user = (User) getIntent().getSerializableExtra("user");
+                    time_scheduleArrayList = user.UserTimeSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    ///   add_schedule(R.id.schedule_name_input, content, calendar, 1,  schedule_sound , schedule_vibration, group); 그룹 인텐트로좀 넘겨주세요 -> 이걸 왜 그룹으로 넘김 ?
-                 //   setAlarm();
-
-                    bundle.putSerializable("time_scheduleArrayList" , time_scheduleArrayList);
-                    intent_schedule.putExtras( bundle );
+                    calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
+                    //마지막에 new Group()은 임시
+                    set_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
+                    setAlarm();
+                    intent_schedule.putExtra("time",time_scheduleArrayList);
                     setResult(0,intent_schedule);
                     finish();
                 }
@@ -247,15 +234,14 @@ public class ModifySchedule extends AppCompatActivity {
                 public void onClick (View v){
 
                     Intent intent_schedule = getIntent();
-                    Bundle bundle = intent_schedule.getExtras();
-                    location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
+                    EditText editText = findViewById(R.id.schedule_name_input);
+                    user = (User) getIntent().getSerializableExtra("user");
+                    location_scheduleArrayList = user.UserTimeSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요-> 이걸 왜 그룹으로 넘김 ?/// 위치정보 넘겨야됨
-                    setAlarm();
 
-                    bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
-                    intent_schedule.putExtras( bundle );
-                    setResult(0,intent_schedule);
+                    set_schedule(editText.getText().toString(), content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, new Group(),intent.getIntExtra("list_position",1));
+                    intent_schedule.putExtra("location",location_scheduleArrayList);
+                    setResult(1,intent_schedule);
                     finish();
                 }
             });

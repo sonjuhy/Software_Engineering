@@ -21,6 +21,7 @@ package com.example.software_engineering;
         import android.widget.TimePicker;
 
         import java.sql.Array;
+        import java.text.SimpleDateFormat;
         import java.util.Calendar;
         import android.widget.Toast;
 
@@ -253,16 +254,15 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
 
-                   /* Intent intent_schedule = getIntent();
-                    Bundle bundle = intent_schedule.getExtras();
-                    location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
+                    Intent intent_schedule = getIntent();
+                    EditText editText = findViewById(R.id.schedule_name_input);
+                    user = (User) getIntent().getSerializableExtra("user");
+                    location_scheduleArrayList = user.UserTimeSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    //add_schedule(R.id.schedule_name_input, content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, group); //그룹 인텐트로좀 넘겨주세요-> 이걸 왜 그룹으로 넘김 ?/// 위치정보 넘겨야됨
-                    setAlarm();
 
-                    bundle.putSerializable("location_scheduleArrayList" , location_scheduleArrayList);
-                    intent_schedule.putExtras( bundle );
-                    setResult(0,intent_schedule);*/
+                    add_schedule(editText.getText().toString(), content, locatin_x, locatin_y, 1,  schedule_sound , schedule_vibration, new Group());
+                    intent_schedule.putExtra("location",location_scheduleArrayList);
+                    setResult(1,intent_schedule);
                     finish();
                 }
             });
@@ -287,9 +287,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
     private void setAlarm() {
         // 알람 시간 설정
 
-
-
-
         // 현재일보다 이전이면 등록 실패
         if (this.calendar.before(Calendar.getInstance())) {
             Toast.makeText(this, "알람시간이 현재시간보다 이전일 수 없습니다.", Toast.LENGTH_LONG).show();
@@ -297,16 +294,18 @@ public class ScheduleMainActivity extends AppCompatActivity {
         }
 
         // Receiver 설정
-        Intent intent = new Intent(ScheduleMainActivity.this, AlarmReceiver.class);
-        System.out.println("222222222222222222222222222222222");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(ScheduleMainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        System.out.println("22222222233333333333333333333333333333222222222222222222222222");
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         // 알람 설정
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
 
-    }
+        // Toast 보여주기 (알람 시간 표시)
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Toast.makeText(this, "Alarm : " + format.format(calendar.getTime()), Toast.LENGTH_LONG).show();
 
+    }
 
 
     void showDate() {
@@ -318,6 +317,9 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 m = month+1;
                 d = dayOfMonth;
                 date_button.setText(y+"년 "+m+"월 "+d+"일");
+                System.out.println(y);
+                System.out.println(m);
+                System.out.println(d);
             }
         },2019, 1, 11);
 

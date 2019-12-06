@@ -62,10 +62,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
-        System.out.println(U.UserName_Output()+"222222222222222222222222222222222");
-        System.out.println(U.UserID_Output()+"222222222222222222222222222222222");
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -178,12 +174,20 @@ public class MainActivity extends AppCompatActivity
         switch( item.getItemId() ){
 
             case R.id.modify:
+
+                U.TimeSchedule_set(time_scheduleArrayList);
+                U.TimeSchedule_set(location_scheduleArrayList);
+
                 if(choose_num==1) {
-;
                     Intent intent = new Intent(MainActivity.this,ModifySchedule.class);
                     intent.putExtra("num",choose_num);
                     intent.putExtra("group",groupArrayList);
-                    startActivity(intent);
+                    intent.putExtra("list_position",list_position);
+
+                    intent.putExtra("user",U);
+
+                    startActivityForResult(intent,REQUEST_CODE);
+
                     Toast.makeText(this, choose_num+" Modify 선택 리스트: "+list_position, Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -312,12 +316,13 @@ public class MainActivity extends AppCompatActivity
             else if(resultCode == 0)
             {
                 time_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("time");
-                //System.out.println(time_scheduleArrayList.get(0).);
+
             }
             else if(resultCode == 1)
             {
-                Bundle bundle = data.getExtras();
-                location_scheduleArrayList = (ArrayList<Schedule>) bundle.getSerializable("location_scheduleArrayList");
+
+                location_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("location");
+
             }
             else
             {

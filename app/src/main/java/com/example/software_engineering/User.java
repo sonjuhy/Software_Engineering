@@ -127,6 +127,13 @@ public class User implements Serializable {//implements Serializable for using i
         this.PW = PW_input;
         this.Phone_Num = Phone_input;
     }
+    public void TimeSchedule_set(ArrayList<Schedule> S_input){
+        this.S_Time = S_input;
+    }
+    public void PlaceSchedule_set(ArrayList<Schedule> S_input){
+        this.S_Place = S_input;
+    }
+
     public void TimeSchedule_Input(Schedule S_input){
         this.S_Time.add(S_input);
     }
