@@ -320,11 +320,12 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 d = dayOfMonth;
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DATE, dayOfMonth);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 date_button.setText(y+"년 "+m+"월 "+d+"일");
 
+
             }
-        },2019, 1, 11);
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog.setMessage("메시지");
         datePickerDialog.show();
@@ -337,9 +338,12 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 Button time_button = findViewById(R.id.time_button);
                 h = hourOfDay;
                 mi = minute;
+                calendar.set(Calendar.HOUR, h);
+                calendar.set(Calendar.MINUTE, mi);
                 time_button.setText(h+"시 "+mi+"분");
+                final Calendar calendar = Calendar.getInstance();
             }
-        }, 21, 12, true);
+        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
         timePickerDialog.setMessage("메시지");
         timePickerDialog.show();
