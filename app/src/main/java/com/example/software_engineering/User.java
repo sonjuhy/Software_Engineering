@@ -83,6 +83,14 @@ public class User implements Serializable {//implements Serializable for using i
                     na.Network_Access("Get_UserData",Network_data);//Running Network
                     Get_UserData(Network_data, this.ID);//translate JSonData from Server to Java and Save Data
                     break;
+                case "Get_Name":
+                    try{
+                        Network_data = URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(_param[1], "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    this.Name = na.Network_Access("Get_UserName",Network_data);
+                    break;
                 case "Upload_Data"://Upload User data to Server
                     try{//Make and Fit a style data to send Network Class & Server
                         Network_data = URLEncoder.encode("NAME","UTF-8") + "=" + URLEncoder.encode(this.Name,"UTF-8");
