@@ -10,7 +10,7 @@ import android.view.View;
 public class AlarmActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
-    Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +19,7 @@ public class AlarmActivity extends AppCompatActivity {
 
         // 알람음 재생
         //this.mediaPlayer = MediaPlayer.create(this, R.raw.TAEYEON_Spark);/////////// 여기에 음악넣으면 됩니다!
-        this.mediaPlayer.start();
-        long[] pattern = {1000,3000}; // 2000 = x , 1000 = y
-        vibrator.vibrate(pattern,0);
+        //this.mediaPlayer.start();
         findViewById(R.id.btnClose).setOnClickListener(mClickListener);
     }
 
@@ -38,15 +36,11 @@ public class AlarmActivity extends AppCompatActivity {
 
     /* 알람 종료 */
     private void close() {
-        if (this.mediaPlayer.isPlaying()) {
+    /*    if (this.mediaPlayer.isPlaying()) {
             this.mediaPlayer.stop();
             this.mediaPlayer.release();
             this.mediaPlayer = null;
-        }
-        else {
-            vibrator.cancel();
-        }
-
+        }*/
         finish();
     }
 
