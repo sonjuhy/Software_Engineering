@@ -18,8 +18,8 @@ public class AlarmActivity extends AppCompatActivity {
 
 
         // 알람음 재생
-        //this.mediaPlayer = MediaPlayer.create(this, R.raw.TAEYEON_Spark);/////////// 여기에 음악넣으면 됩니다!
-        //this.mediaPlayer.start();
+        this.mediaPlayer = MediaPlayer.create(this, R.raw.alarm);/////////// 여기에 음악넣으면 됩니다!
+        this.mediaPlayer.start();
         findViewById(R.id.btnClose).setOnClickListener(mClickListener);
     }
 
@@ -36,11 +36,11 @@ public class AlarmActivity extends AppCompatActivity {
 
     /* 알람 종료 */
     private void close() {
-    /*    if (this.mediaPlayer.isPlaying()) {
+        if (this.mediaPlayer.isPlaying()) {
             this.mediaPlayer.stop();
             this.mediaPlayer.release();
             this.mediaPlayer = null;
-        }*/
+        }
         finish();
     }
 
