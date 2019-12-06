@@ -229,12 +229,12 @@ class PopUp_Network{
                         e.printStackTrace();
                     }
                     Network_Access("SignUp_IDCheck", Network_data);//Sending Data, kind of command to Network Class &Running Network
-                    if(Network_data.equals(false)){ //Login Failed
+                    if(Network_data.equals("Failed")){ //Login Success
+                        System.out.println("Search Success");
+                    }
+                    else {//Login Failed
                         System.out.println("Search Failed");
                         return false;
-                    }
-                    else {//Login Success
-                        System.out.println("Search Success");
                     }
                     break;
             }

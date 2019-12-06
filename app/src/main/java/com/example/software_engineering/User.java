@@ -23,11 +23,13 @@ public class User implements Serializable {//implements Serializable for using i
     private String Phone_Num;  //User Phone_num
     private String Network_data;  //Data value for communicating Server
     private boolean Login_check;
+    private boolean Invite;
     private double Place_x;  // User X Location
     private double Place_y;  //User Y Location
     private ArrayList<Schedule> S_Time;  //Time Schedule List
     private ArrayList<Schedule> S_Place;  //Place Schedule List
     private ArrayList<Group> G;  //Group List
+    private ArrayList<Group> G_waiting;
     private Network n;  //Network Value for Using Network
     private Network_Access na;
     User(){
@@ -91,6 +93,14 @@ public class User implements Serializable {//implements Serializable for using i
                     }
                     this.Name = na.Network_Access("Get_UserName",Network_data);
                     break;
+                case "Get_Invite":
+                    try {
+                        Network_data = URLEncoder.encode("ID","UTF-8") +"="+URLEncoder.encode(this.ID,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    Network_data = na.Network_Access("Get_InviteGroup",Network_data);
+                    break;
                 case "Upload_Data"://Upload User data to Server
                     try{//Make and Fit a style data to send Network Class & Server
                         Network_data = URLEncoder.encode("NAME","UTF-8") + "=" + URLEncoder.encode(this.Name,"UTF-8");
@@ -141,6 +151,9 @@ public class User implements Serializable {//implements Serializable for using i
     public void PlaceSchedule_set(ArrayList<Schedule> S_input){
         this.S_Place = S_input;
     }
+    public void GroupInvite_set(boolean check){
+        this.Invite = check;
+    }
 
     public void TimeSchedule_Input(Schedule S_input){
         this.S_Time.add(S_input);
@@ -177,5 +190,8 @@ public class User implements Serializable {//implements Serializable for using i
     }
     public ArrayList<Group> UserGroup_Output(){
         return this.G;
+    }
+    public boolean GroupInvite_Ouput(){
+        return this.Invite;
     }
 }
