@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_Group) {
             Intent intentToGroup = new Intent(MainActivity.this, GroupMainActivity.class);
-            intentToGroup.putExtra("Group",G);
+            intentToGroup.putExtra("user",U);
             startActivityForResult(intentToGroup,REQUEST_CODE);
 
 

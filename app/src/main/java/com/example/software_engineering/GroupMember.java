@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class GroupMember implements Serializable {
     public String id;
     public String name;
-    public int PhoneNumber;  //Number of Group people
+    public String PhoneNumber;  //Number of Group people
 
-    public GroupMember(String id, String name, int phoneNumber) {
+    public GroupMember(String id, String name, String phoneNumber) {
         this.id = id;
         this.name = name;
         PhoneNumber = phoneNumber;
@@ -29,11 +29,11 @@ public class GroupMember implements Serializable {
         this.name = name;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return PhoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         PhoneNumber = phoneNumber;
     }
 }

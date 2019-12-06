@@ -95,6 +95,7 @@ public class GroupMainActivity extends AppCompatActivity {
 
             case R.id.add_schedule:
                 Intent intent_add = new Intent(GroupMainActivity.this, GroupSubActivity.class);
+                intent_add.putExtra("user",getIntent().getSerializableExtra("user"));
                 intent_add.putExtra("opt","add");
                 startActivityForResult(intent_add,1);
 
