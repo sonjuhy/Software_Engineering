@@ -315,14 +315,13 @@ public class MainActivity extends AppCompatActivity
 
             else if(resultCode == 0)
             {
-                time_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("time");
+                U.TimeSchedule_set((ArrayList<Schedule>) data.getExtras().getSerializable("time"));
 
             }
             else if(resultCode == 1)
             {
 
-                location_scheduleArrayList = (ArrayList<Schedule>) data.getExtras().getSerializable("location");
-
+               U.PlaceSchedule_set((ArrayList<Schedule>)data.getExtras().getSerializable("location"));
             }
             else
             {

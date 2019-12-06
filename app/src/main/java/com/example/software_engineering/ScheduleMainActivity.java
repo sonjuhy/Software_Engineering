@@ -196,7 +196,13 @@ public class ScheduleMainActivity extends AppCompatActivity {
                     user = (User) getIntent().getSerializableExtra("user");
                     time_scheduleArrayList = user.UserTimeSchedule_Output();
                     String content = null;//////// 이거 나중에 레이아웃에서 추가해줘여ㅑ됨;;
-                    calendar.set(y,m,d,h,m);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
+                    System.out.println(y);
+                    System.out.println(m);
+                    System.out.println(d);
+                    System.out.println(h);
+                    System.out.println(mi);
+
+                    calendar.set(y,m,d,h,mi);////// 날짜 저장 달이 1작다는데 나중에 실험 해보기
                     //마지막에 new Group()은 임시
                     add_schedule(editText.getText().toString(), content, calendar, 1,  schedule_sound , schedule_vibration, new Group());
                     setAlarm();
@@ -303,7 +309,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
         // Toast 보여주기 (알람 시간 표시)
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Toast.makeText(this, "Alarm : " + format.format(calendar.getTime()), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Alarm : " + format.format(this.calendar.getTime()), Toast.LENGTH_LONG).show();
 
     }
 
@@ -314,12 +320,10 @@ public class ScheduleMainActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Button date_button = findViewById(R.id.date_button);
                 y = year;
-                m = month+1;
+                m = month;
                 d = dayOfMonth;
                 date_button.setText(y+"년 "+m+"월 "+d+"일");
-                System.out.println(y);
-                System.out.println(m);
-                System.out.println(d);
+
             }
         },2019, 1, 11);
 
