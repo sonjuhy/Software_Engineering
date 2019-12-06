@@ -60,6 +60,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
     public void add_schedule(String name, String content,Calendar calendar, int alarmRepeatCount, int sound ,int vibration,Group group)
     {
 
+
         ////////////// 수정할 것 : 시간 순으로 정렬 해야함
         if(time_scheduleArrayList==null)
         {
@@ -68,10 +69,9 @@ public class ScheduleMainActivity extends AppCompatActivity {
         }
         else {
             for (int i = 0; i < time_scheduleArrayList.size(); i++) {
-                if(time_scheduleArrayList.get(i).getCalendar().after(calendar))
+                if( this.calendar.before(time_scheduleArrayList.get(i).getCalendar()))
                 {
                     time_scheduleArrayList.add(i,new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
-                    time_scheduleArrayList.add(new Schedule(name, content,calendar ,alarmRepeatCount,sound,vibration,group));
                     return;
                 }
             }
@@ -332,8 +332,8 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 Button time_button = findViewById(R.id.time_button);
                 h = hourOfDay;
                 mi = minute;
-                calendar.set(Calendar.HOUR, h);
-                calendar.set(Calendar.MINUTE, mi);
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
                 time_button.setText(h+"시 "+mi+"분");
                 final Calendar calendar = Calendar.getInstance();
             }
