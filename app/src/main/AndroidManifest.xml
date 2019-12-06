@@ -51,8 +51,15 @@
             android:label="@string/title_activity_maps"/>
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
         <activity android:name=".AlarmActivity"/>
-        <receiver android:name=".AlarmReceiver" android:exported="false" android:enabled="true"/>
+        <receiver android:name=".AlarmReceiver" android:exported="true" android:enabled="true"/>
         <service android:name=".AlarmService" android:enabled="true"/>
+        <service android:name=".NotificationJobFireBaseService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

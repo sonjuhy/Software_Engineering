@@ -75,18 +75,26 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Write ID and PW", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    LoginCheck = U.Network_DataArrangement("Login", ID_Text.getText().toString(), PW_Text.getText().toString());
-                    System.out.println("Login Check : " + LoginCheck);
-                    if (!LoginCheck) {
-                        Toast.makeText(LoginActivity.this, "LoginFailed", Toast.LENGTH_LONG).show();
-                    } else {
-                        System.out.println("U name : " + U.UserName_Output());
-                        System.out.println("U ID : " + U.UserID_Output());
-                        System.out.println("U PW : " + U.UserPW_Output());
-                        Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
-                        intentToMain.putExtra("User", U);
-                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG).show();
-                        startActivity(intentToMain);
+                    if(ID_Text.length() > 13){
+                        Toast.makeText(LoginActivity.this, "ID is OverSize", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(PW_Text.length() > 20){
+                        Toast.makeText(LoginActivity.this, "PW is OverSize", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        LoginCheck = U.Network_DataArrangement("Login", ID_Text.getText().toString(), PW_Text.getText().toString());
+                        System.out.println("Login Check : " + LoginCheck);
+                        if (!LoginCheck) {
+                            Toast.makeText(LoginActivity.this, "LoginFailed", Toast.LENGTH_LONG).show();
+                        } else {
+                            System.out.println("U name : " + U.UserName_Output());
+                            System.out.println("U ID : " + U.UserID_Output());
+                            System.out.println("U PW : " + U.UserPW_Output());
+                            Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
+                            intentToMain.putExtra("User", U);
+                            Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG).show();
+                            startActivity(intentToMain);
+                        }
                     }
                 }
             }
