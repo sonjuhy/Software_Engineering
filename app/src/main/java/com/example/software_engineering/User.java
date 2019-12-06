@@ -29,7 +29,7 @@ public class User implements Serializable {//implements Serializable for using i
     private ArrayList<Schedule> S_Time;  //Time Schedule List
     private ArrayList<Schedule> S_Place;  //Place Schedule List
     private ArrayList<Group> G;  //Group List
-    private ArrayList<Group> G_waiting;
+    private ArrayList<Group> G_waiting; //waiting Group list from invite
     private Network n;  //Network Value for Using Network
     private Network_Access na;
     User(){
@@ -113,6 +113,29 @@ public class User implements Serializable {//implements Serializable for using i
                     }
                    // n.Input_data("UpLoad_UserData",Network_data);//Sending Data & kind of command to Network Class
                     Network_data = na.Network_Access("UpLoad_UserData",Network_data);
+                    break;
+                case "UpLoad_Invite":
+                    if(_param[2].equals(this.Name) == false) {
+                        try {
+                            Network_data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(_param[1], "UTF-8");
+                            Network_data += "&" + URLEncoder.encode("ID", "UTF-8") + "=" + URLEncoder.encode(_param[3], "UTF-8");
+                            Network_data += "&" + URLEncoder.encode("ID_receiver", "UTF-8") + "=" + URLEncoder.encode(_param[2], "UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        na.Network_Access("Put_InviteGroup", Network_data);
+                    }
+                    break;
+                case "Update_Data":
+                    try {
+                        Network_data = URLEncoder.encode("Name","UTF-8") + "=" + URLEncoder.encode(_param[1],"UTF-8");
+                        Network_data += "&" + URLEncoder.encode("ID","UTF-8") + "=" + URLEncoder.encode(_param[2],"UTF-8");
+                        Network_data += "&" + URLEncoder.encode("PW","UTF-8") + "=" + URLEncoder.encode(_param[3],"UTF-8");
+                        Network_data += "&" + URLEncoder.encode("PhoneNum","UTF-8") + "=" + URLEncoder.encode(_param[4],"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    na.Network_Access("Update_UserData", Network_data);
                     break;
             }
         }

@@ -105,12 +105,20 @@ public class UserActivity extends AppCompatActivity{
             else if(Phone_Num.matches("")){
                 Toast.makeText(UserActivity.this, "Phone Num is Empty", Toast.LENGTH_SHORT).show();
             }
-            // signup_network 말고 revise_network로 바꿔야할듯 그리고 수정완료되면 Intent로 name,pW,id,pN다시 mainActivity로 돌려주는 코드 필요
             else{
                 SignUp_Network signUp_network = new SignUp_Network();
                 if(ID_Check) {
                     result = signUp_network.Network_DataArrangement("IDCheck", ID);
                     if(result) {
+                        Name = Name_text.getText().toString();
+                        ID = ID_text.getText().toString();
+                        PW = PW_text.getText().toString();
+                        Phone_Num = PhoneNum_text.getText().toString();
+                        System.out.println("UserActivity name : " + Name);
+                        System.out.println("UserActivity ID : " + ID);
+                        System.out.println("UserActivity PW : " + PW);
+                        System.out.println("UserActivity PN : " + Phone_Num);
+                        User.Network_DataArrangement("Update_Data",Name, ID, PW, Phone_Num);
                         Toast.makeText(UserActivity.this, "Revise is Success", Toast.LENGTH_SHORT).show();
                     }
                     else{

@@ -81,7 +81,8 @@ class Group_Network{
                 switch (_param[0]) {//Frist Parameter(String)
                     case "UpLoad"://Login part
                         try {//Make and Fit a style data to send Network Class & Server
-                            Network_data = URLEncoder.encode("Time", "UTF-8") + "=" + URLEncoder.encode(_param[1], "UTF-8");
+                            Network_data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(_param[1], "UTF-8");
+                            Network_data +="&" + URLEncoder.encode("ID", "UTF-8") + "=" + URLEncoder.encode(_param[2], "UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }

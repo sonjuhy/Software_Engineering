@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
+import com.example.software_engineering.Group_Network;
 
 public class GroupMainActivity extends AppCompatActivity {
 
@@ -65,6 +66,12 @@ public class GroupMainActivity extends AppCompatActivity {
                 ArrayList<GroupMember> list = (ArrayList<GroupMember>) data.getSerializableExtra("list");
                 // 여기에 추가할 멤버들 어레이리스트 형식으로 한번에 가져옴
                 groupArrayList.add(new Group(data.getStringExtra("name"),list,data.getIntExtra("color",0)));
+                Group_Network group_network = new Group_Network();
+                User tmpU = new User();
+                for(int i=0;i<list.size();i++){
+                    group_network.Network_DataArrangement(null,0,"UpLoad", data.getStringExtra("name"), list.get(i).name);
+                    tmpU.Network_DataArrangement("UpLoad_Invite",data.getStringExtra("name"), list.get(i).name, list.get(0).name);
+                }
             }
             else if(requestCode==2){
                 if(data.getBooleanExtra("exit",false)){
