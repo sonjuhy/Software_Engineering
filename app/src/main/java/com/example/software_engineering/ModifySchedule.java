@@ -66,20 +66,20 @@ public class ModifySchedule extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       Intent intent = new Intent(this.getIntent());
-        position  = intent.getIntExtra("position", 1);
+       Intent intent = getIntent();
+        position  = intent.getIntExtra("list_position", 1);
         group_list= (ArrayList<String>)intent.getSerializableExtra("group");
         user = (User)intent.getSerializableExtra("user");
         int i  = intent.getIntExtra("num", 1);
 
         if(i==1) {
             y=user.UserTimeSchedule_Output().get(position).calendar.get(Calendar.YEAR);
-          /*  m=user.UserTimeSchedule_Output().get(position).calendar.MONTH;
+            m=user.UserTimeSchedule_Output().get(position).calendar.MONTH;
             d=user.UserTimeSchedule_Output().get(position).calendar.DAY_OF_MONTH;
             h=user.UserTimeSchedule_Output().get(position).calendar.HOUR_OF_DAY;
             mi=user.UserTimeSchedule_Output().get(position).calendar.MINUTE;
             schedule_sound =user.UserTimeSchedule_Output().get(position).Sound;
-            schedule_vibration =user.UserTimeSchedule_Output().get(position).Vibration;*/
+            schedule_vibration =user.UserTimeSchedule_Output().get(position).Vibration;
         }
 
         else if(i==2) {
@@ -94,7 +94,7 @@ public class ModifySchedule extends AppCompatActivity {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// 벨소리 체크 박스
- /*       class soundSwitchListener implements CompoundButton.OnCheckedChangeListener{
+        class soundSwitchListener implements CompoundButton.OnCheckedChangeListener{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
@@ -111,12 +111,12 @@ public class ModifySchedule extends AppCompatActivity {
                 else
                     schedule_vibration=0;
             }
-        }/////////////////////////////// 문제 있을수 있음!*/
+        }/////////////////////////////// 문제 있을수 있음!
 ///////////////////////////////////////////////////////////////////////////////////////////////////
         if(i == 1) { //날짜별 스케쥴
             setContentView(R.layout.activity_time_schedule);
-        /*    EditText edit_name = findViewById(R.id.schedule_name_input);
-            edit_name.setText(time_scheduleArrayList.get(position).Name);
+            EditText edit_name = findViewById(R.id.schedule_name_input);
+            edit_name.setText(user.UserTimeSchedule_Output().get(position).Name);
 
             arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
             group_spinner = findViewById(R.id.spinner_group);
@@ -179,7 +179,7 @@ public class ModifySchedule extends AppCompatActivity {
 
 
 
-          /*  Button store_time_schedule_button = findViewById(R.id.store_time_schedule_button); //스케쥴 추가 버튼
+            Button store_time_schedule_button = findViewById(R.id.store_time_schedule_button); //스케쥴 추가 버튼
 
             store_time_schedule_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -197,7 +197,7 @@ public class ModifySchedule extends AppCompatActivity {
                     setResult(0,intent_schedule);
                     finish();
                 }
-            });*/
+            });
 
 
 
@@ -206,8 +206,8 @@ public class ModifySchedule extends AppCompatActivity {
 
         else if(i ==2) { //시간별 스케쥴
             setContentView(R.layout.activity_location_schedule);
-           /* EditText edit_name = findViewById(R.id.schedule_name_input);
-            edit_name.setText(location_scheduleArrayList.get(position).Name);
+            EditText edit_name = findViewById(R.id.schedule_name_input);
+            edit_name.setText(user.UserPlaceSchedule_Output().get(position).Name);
             arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, group_list);
             group_spinner = findViewById(R.id.spinner_group);
             group_spinner.setAdapter(arrayAdapter);
@@ -260,7 +260,7 @@ public class ModifySchedule extends AppCompatActivity {
 
 
             Button store_location_schedule_button = findViewById(R.id.store_location_schedule_button); //스케쥴 추가에 취소 버튼
-       /*     store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
+            store_location_schedule_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v){
                     Intent intent_schedule = getIntent();
@@ -274,8 +274,7 @@ public class ModifySchedule extends AppCompatActivity {
                     setResult(1,intent_schedule);
                     finish();
                 }
-            });*/
-
+            });
         }
 
 
